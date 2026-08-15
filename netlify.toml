@@ -1,0 +1,21 @@
+# El sitio vive en rexsite-landing/, no en la raíz del repo.
+# Sin este archivo Netlify publica la raíz y devuelve 404.
+[build]
+  publish = "rexsite-landing"
+
+# Cabeceras de caché: el HTML siempre fresco, los assets con hash de un año.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
