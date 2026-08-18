@@ -8,7 +8,7 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Enlace de pago (cámbialo aquí una sola vez) ---------- */
-  var CTA_URL = 'https://mpago.la/1qkqP8A';
+  var CTA_URL = 'https://mpago.la/1YYGPtm';
   document.querySelectorAll('[data-cta]').forEach(function (a) {
     a.setAttribute('href', CTA_URL);
     a.setAttribute('target', '_blank');

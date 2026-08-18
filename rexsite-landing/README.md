@@ -33,7 +33,7 @@ El botón "EMPEZAR MIS 14 DÍAS GRATIS" apunta a Mercado Pago. Está en dos luga
 Para cambiarlo en todo el sitio:
 
 ```bash
-cd rexsite-landing && sed -i '' 's|https://mpago.la/1qkqP8A|TU_NUEVO_ENLACE|g' index.html assets/js/main.js
+cd rexsite-landing && sed -i '' 's|https://mpago.la/1YYGPtm|TU_NUEVO_ENLACE|g' index.html assets/js/main.js
 ```
 
 ## Cambiar colores
