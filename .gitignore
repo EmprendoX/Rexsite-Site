@@ -5,3 +5,7 @@
 # Material fuente (imágenes originales, videos y .docx) — 476 MB, no va al repo.
 # Los assets ya optimizados viven en rexsite-landing/assets/img/
 Landing-rex-site-1/
+
+# Capturas fuente de los demos (46 MB). Las optimizadas viven en
+# rexsite-landing/assets/img/demo-*.webp
+Demos-Imagenes/
