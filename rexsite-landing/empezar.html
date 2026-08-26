@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empecemos con tu sitio — RexSite.app</title>
+<meta name="description" content="Tres datos y tu sitio inmobiliario queda en línea hoy mismo.">
+<meta name="theme-color" content="#0A1D36">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '956132630850037');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+/* ══════════ Alta: estilos propios de esta página ══════════
+   El resto lo hereda de styles.css para que se vea parte del sitio. */
+.alta{
+  min-height:100dvh;
+  background:
+    radial-gradient(80% 60% at 50% 0%, var(--sky), transparent 70%),
+    var(--ivory-2);
+  padding:clamp(24px,5vw,56px) 0 64px;
+}
+.alta__logo{ display:block; width:150px; margin:0 auto clamp(28px,5vw,44px); }
+.alta__logo img{ width:100%; }
+
+.alta__head{ text-align:center; max-width:560px; margin:0 auto clamp(26px,4vw,38px); }
+.alta__head h1{ font-size:clamp(1.75rem,3.6vw,2.5rem); margin-bottom:12px; }
+.alta__head p{ color:var(--tx-2); font-size:1.05rem; }
+
+.alta__card{
+  max-width:560px; margin:0 auto;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  box-shadow:var(--sh-md);
+  padding:clamp(24px,4vw,40px);
+}
+
+.campo{ margin-bottom:22px; }
+.campo:last-of-type{ margin-bottom:26px; }
+.campo > label{
+  display:block; font-family:var(--f-display); font-weight:700;
+  font-size:.92rem; color:var(--navy); margin-bottom:8px;
+}
+.campo input[type=text],
+.campo input[type=email]{
+  width:100%; font:inherit; color:var(--tx);
+  padding:15px 17px;
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  background:var(--paper);
+  transition:border-color .18s, box-shadow .18s;
+}
+.campo input::placeholder{ color:var(--tx-3); }
+.campo input:focus{
+  outline:0; border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(24,120,222,.14);
+}
+.campo input:user-invalid{ border-color:#C4402F; }
+
+/* Dos columnas en pantallas cómodas */
+.campo-fila{ display:grid; gap:22px; }
+@media (min-width:560px){ .campo-fila{ grid-template-columns:1fr 1fr; } }
+.campo-fila .campo{ margin-bottom:22px; }
+
+/* Vista previa de la dirección del sitio.
+   El dominio va DENTRO del recuadro, junto al campo editable: así se lee
+   como una sola dirección y nunca se parte en dos renglones. */
+.sitio{
+  margin-top:10px; padding:12px 14px;
+  background:var(--sky); border-radius:var(--r-sm);
+}
+.sitio__et{ display:block; color:var(--tx-2); font-size:.84rem; margin-bottom:7px; }
+.sitio__campo{
+  display:flex; align-items:center;
+  background:var(--paper);
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  padding:9px 12px;
+  transition:border-color .18s, box-shadow .18s;
+}
+.sitio__campo:focus-within{
+  border-color:var(--blue); box-shadow:0 0 0 3px rgba(24,120,222,.14);
+}
+/* Selector largo a propósito: la regla general `.campo input[type=text]`
+   es más específica y le ganaría el borde y el padding, dibujando una
+   caja dentro de la caja. */
+.campo .sitio__campo input[type=text]{
+  font:inherit; font-size:.94rem; font-weight:600; color:var(--blue-deep);
+  background:transparent; border:0; padding:0; border-radius:0;
+  width:auto;
+  /* No crece (así ".rexsite.app" queda pegado al texto y se lee como una
+     sola dirección) pero sí se encoge en pantallas angostas. El min-width:0
+     es lo que permite ese encogimiento dentro de un flex. */
+  flex:0 1 auto; min-width:0;
+}
+.campo .sitio__campo input[type=text]:focus{ outline:0; box-shadow:none; }
+.sitio__dom{
+  flex:none; font-size:.94rem; font-weight:600;
+  color:var(--tx-3); white-space:nowrap;
+}
+
+.nota{ font-size:.86rem; color:var(--tx-3); margin-top:9px; line-height:1.5; }
+
+.alta__envio{ text-align:center; }
+.alta__envio .btn{ width:100%; }
+.alta__paso{ font-size:.88rem; color:var(--tx-3); margin-top:14px; }
+
+.sellos{
+  display:flex; justify-content:center; flex-wrap:wrap; gap:10px 22px;
+  margin-top:24px; font-size:.88rem; color:var(--tx-2);
+}
+.sellos span{ display:inline-flex; align-items:center; gap:7px; }
+.sellos svg{ flex:none; color:var(--green); }
+
+.volver{ display:block; text-align:center; margin-top:26px; font-size:.9rem; color:var(--tx-3); }
+.volver:hover{ color:var(--blue); }
+
+/* Trampa antispam: invisible para personas, visible para bots. */
+.miel{ position:absolute; left:-9999px; opacity:0; }
+</style>
+</head>
+<body>
+
+<main class="alta">
+  <div class="wrap">
+
+    <a class="alta__logo" href="/" aria-label="RexSite.app">
+      <img src="assets/img/logo.png" alt="RexSite.app" width="730" height="220">
+    </a>
+
+    <div class="alta__head">
+      <h1>Empecemos con tu sitio</h1>
+      <p>Tres datos y lo tienes en línea hoy mismo.</p>
+    </div>
+
+    <div class="alta__card">
+      <form name="alta-trial" method="POST" action="/gracias.html"
+            data-netlify="true" netlify-honeypot="bot-field" id="form-alta">
+
+        <!-- Netlify necesita este campo para identificar el formulario. -->
+        <input type="hidden" name="form-name" value="alta-trial">
+        <p class="miel" aria-hidden="true">
+          <label>No llenes esto si eres humano: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <div class="campo">
+          <label for="inmobiliaria">Nombre de tu inmobiliaria</label>
+          <input type="text" id="inmobiliaria" name="inmobiliaria"
+                 placeholder="Inmobiliaria López" required
+                 autocomplete="organization" autofocus>
+
+          <div class="sitio">
+            <span class="sitio__et">La dirección de tu sitio será:</span>
+            <span class="sitio__campo">
+              <input type="text" class="sitio__slug" id="slug" name="subdominio"
+                     aria-label="Dirección de tu sitio" spellcheck="false"
+                     autocomplete="off" placeholder="tu-inmobiliaria">
+              <span class="sitio__dom">.rexsite.app</span>
+            </span>
+          </div>
+          <p class="nota">
+            Puedes editarla. Después vas a poder conectar tu propio dominio
+            si ya tienes uno, o te ayudamos a conseguirlo.
+          </p>
+        </div>
+
+        <div class="campo-fila">
+          <div class="campo">
+            <label for="nombre">Tu nombre</label>
+            <input type="text" id="nombre" name="nombre"
+                   placeholder="Juan López" required autocomplete="name">
+          </div>
+          <div class="campo">
+            <label for="email">Tu correo</label>
+            <input type="email" id="email" name="email"
+                   placeholder="juan@ejemplo.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="alta__envio">
+          <button type="submit" class="btn btn--lg">
+            CONTINUAR <span class="arw" aria-hidden="true">→</span>
+          </button>
+          <p class="alta__paso">Siguiente paso: activas tu prueba de 14 días.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="sellos">
+      <span>
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10.5l4 4 8-8" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        14 días gratis
+      </span>
+      <span>
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10.5l4 4 8-8" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cancelas cuando quieras
+      </span>
+      <span>
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10.5l4 4 8-8" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Sin permanencia
+      </span>
+    </div>
+
+    <a class="volver" href="/">← Volver</a>
+
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var inmo = document.getElementById('inmobiliaria');
+  var slug = document.getElementById('slug');
+
+  /* Convierte "Inmobiliaria López y Asociados" en "inmobiliaria-lopez-y-asociados".
+     El normalize separa la letra de su acento; ACENTOS luego borra ese acento suelto.
+     Se arma con RegExp y códigos de escape para no depender de la codificación
+     del archivo: así "López" da "lopez" y "Peña" da "pena" siempre. */
+  var ACENTOS = new RegExp('[\\u0300-\\u036f]', 'g');
+
+  function aSlug(texto) {
+    return texto
+      .normalize('NFD').replace(ACENTOS, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .slice(0, 40)
+      // El guion sobrante se quita después de recortar, no antes,
+      // para que un corte a los 40 no deje la dirección terminada en "-".
+      .replace(/^-+|-+$/g, '');
+  }
+
+  // Mientras no la toque a mano, la dirección sigue al nombre de la inmobiliaria.
+  var editadoAMano = false;
+
+  /* El ancho del campo sigue al largo del texto: así ".rexsite.app" queda
+     siempre pegado y se lee como una dirección sola, no como dos pedazos. */
+  function ajustarAncho() {
+    slug.size = Math.max(String(slug.value || slug.placeholder).length, 3);
+  }
+
+  function refrescar() {
+    if (!editadoAMano) slug.value = aSlug(inmo.value);
+    ajustarAncho();
+  }
+
+  inmo.addEventListener('input', refrescar);
+
+  slug.addEventListener('input', function () {
+    editadoAMano = true;
+    var limpio = aSlug(slug.value);
+    // Sólo reescribimos si hizo falta, para no mover el cursor de lugar.
+    if (slug.value !== limpio) slug.value = limpio;
+    ajustarAncho();
+  });
+
+  // Si vuelve a dejarla vacía, retomamos el automático.
+  slug.addEventListener('blur', function () {
+    if (slug.value === '') { editadoAMano = false; refrescar(); }
+  });
+
+  refrescar();
+})();
+</script>
+
+</body>
+</html>
