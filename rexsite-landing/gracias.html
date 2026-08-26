@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activando tus 14 días gratis — RexSite.app</title>
+<meta name="theme-color" content="#0A1D36">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Si el visitante tiene JavaScript apagado, lo lleva el navegador. -->
+<noscript><meta http-equiv="refresh" content="0;url=https://mpago.la/1YYGPtm"></noscript>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '956132630850037');
+fbq('track', 'PageView');
+// Llegar hasta aquí sólo es posible si Netlify aceptó el formulario,
+// así que el registro es real: lo contamos como Lead.
+fbq('track', 'Lead');
+// Y en un instante se va al pago.
+fbq('track', 'InitiateCheckout', {
+  content_name: 'Prueba 14 días',
+  content_category: 'Suscripción RexSite'
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+.puente{
+  min-height:100dvh; display:grid; place-items:center;
+  text-align:center; padding:32px;
+  background:
+    radial-gradient(80% 60% at 50% 0%, var(--sky), transparent 70%),
+    var(--ivory-2);
+}
+.puente__logo{ width:150px; margin:0 auto 32px; }
+.puente h1{ font-size:clamp(1.5rem,3vw,2rem); margin-bottom:12px; }
+.puente p{ color:var(--tx-2); margin-bottom:28px; }
+.puente__spin{
+  width:26px; height:26px; margin:0 auto 26px;
+  border:3px solid var(--line); border-top-color:var(--blue);
+  border-radius:50%; animation:girar .8s linear infinite;
+}
+@keyframes girar{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){ .puente__spin{ animation:none; } }
+.puente__rescate{ font-size:.88rem; color:var(--tx-3); margin-top:18px; margin-bottom:0; }
+</style>
+</head>
+<body>
+
+<main class="puente">
+  <div>
+    <img class="puente__logo" src="assets/img/logo.png" alt="RexSite.app" width="730" height="220">
+
+    <div class="puente__spin" aria-hidden="true"></div>
+
+    <h1>Listo, ya tenemos tus datos</h1>
+    <p>Te llevamos a activar tu prueba de 14 días…</p>
+
+    <a class="btn" id="ir-a-activar" href="https://mpago.la/1YYGPtm" rel="noopener">
+      ACTIVAR MIS 14 DÍAS GRATIS <span class="arw" aria-hidden="true">→</span>
+    </a>
+
+    <p class="puente__rescate">
+      No se te cobra nada hoy.<br>
+      Si no avanza en unos segundos, toca el botón.
+    </p>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  // El destino se lee del propio botón: un solo lugar donde cambiar el enlace.
+  var destino = document.getElementById('ir-a-activar').href;
+  // 1.5 s le alcanza al pixel para enviar los eventos antes de que se vaya.
+  setTimeout(function () { window.location.href = destino; }, 1500);
+})();
+</script>
+
+</body>
+</html>
