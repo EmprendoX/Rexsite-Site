@@ -13,6 +13,18 @@
     a.setAttribute('href', CTA_URL);
     a.setAttribute('target', '_blank');
     a.setAttribute('rel', 'noopener');
+
+    // Meta Pixel: avisamos que alguien arrancó el checkout. Es la señal que
+    // el algoritmo usa para optimizar campañas; sólo con PageView no puede.
+    // Si un bloqueador impide cargar el pixel, fbq no existe y no hacemos nada:
+    // el click al enlace de pago nunca se ve afectado.
+    a.addEventListener('click', function () {
+      if (typeof window.fbq !== 'function') return;
+      window.fbq('track', 'InitiateCheckout', {
+        content_name: 'Prueba 14 días',
+        content_category: 'Suscripción RexSite'
+      });
+    });
   });
 
   /* ---------- Header: fondo claro al hacer scroll ---------- */
