@@ -707,6 +707,9 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
   <a class="btn" data-cta href="https://mpago.la/1YYGPtm" rel="noopener">EMPEZAR MIS 14 DÍAS GRATIS</a>
 </div>
 
-<script src="assets/js/main.js" defer></script>
+<!-- El ?v= es obligatorio al cambiar main.js: netlify.toml cachea /assets/
+     por un año, así que sin subir este número los visitantes que ya
+     estuvieron en el sitio seguirían con la versión vieja. -->
+<script src="assets/js/main.js?v=2" defer></script>
 </body>
 </html>
