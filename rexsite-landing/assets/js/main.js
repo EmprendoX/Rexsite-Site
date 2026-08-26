@@ -7,24 +7,17 @@
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Enlace de pago (cámbialo aquí una sola vez) ---------- */
-  var CTA_URL = 'https://mpago.la/1YYGPtm';
+  /* ---------- Destino de los CTA (cámbialo aquí una sola vez) ----------
+     Los botones ya no van directo a Mercado Pago: pasan por el alta, donde
+     pedimos inmobiliaria, nombre y correo. El enlace de pago vive ahora en
+     gracias.html, que es el paso siguiente.
+     Los eventos del pixel (Lead e InitiateCheckout) también se disparan allí,
+     que es donde el registro ya quedó confirmado. */
+  var CTA_URL = '/empezar.html';
   document.querySelectorAll('[data-cta]').forEach(function (a) {
     a.setAttribute('href', CTA_URL);
-    a.setAttribute('target', '_blank');
-    a.setAttribute('rel', 'noopener');
-
-    // Meta Pixel: avisamos que alguien arrancó el checkout. Es la señal que
-    // el algoritmo usa para optimizar campañas; sólo con PageView no puede.
-    // Si un bloqueador impide cargar el pixel, fbq no existe y no hacemos nada:
-    // el click al enlace de pago nunca se ve afectado.
-    a.addEventListener('click', function () {
-      if (typeof window.fbq !== 'function') return;
-      window.fbq('track', 'InitiateCheckout', {
-        content_name: 'Prueba 14 días',
-        content_category: 'Suscripción RexSite'
-      });
-    });
+    // Es una página del propio sitio: se abre en la misma pestaña.
+    a.removeAttribute('target');
   });
 
   /* ---------- Header: fondo claro al hacer scroll ---------- */
