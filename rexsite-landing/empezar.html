@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Empecemos con tu sitio — RexSite.app</title>
-<meta name="description" content="Tres datos y tu sitio inmobiliario queda en línea hoy mismo.">
+<meta name="description" content="Cuatro datos y tu sitio inmobiliario queda en línea hoy mismo.">
 <meta name="theme-color" content="#0A1D36">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
@@ -66,7 +66,8 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
   font-size:.92rem; color:var(--navy); margin-bottom:8px;
 }
 .campo input[type=text],
-.campo input[type=email]{
+.campo input[type=email],
+.campo input[type=tel]{
   width:100%; font:inherit; color:var(--tx);
   padding:15px 17px;
   border:1.5px solid var(--line); border-radius:var(--r-sm);
@@ -152,7 +153,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
 
     <div class="alta__head">
       <h1>Empecemos con tu sitio</h1>
-      <p>Tres datos y lo tienes en línea hoy mismo.</p>
+      <p>Cuatro datos y lo tienes en línea hoy mismo.</p>
     </div>
 
     <div class="alta__card">
@@ -197,6 +198,17 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
             <input type="email" id="email" name="email"
                    placeholder="juan@ejemplo.com" required autocomplete="email">
           </div>
+        </div>
+
+        <div class="campo">
+          <label for="whatsapp">Tu WhatsApp</label>
+          <!-- El pattern cuenta dígitos e ignora espacios, guiones o +52:
+               "55 1234 5678" y "+52 55-1234-5678" pasan; "5512345" no. -->
+          <input type="tel" id="whatsapp" name="whatsapp"
+                 placeholder="55 1234 5678" required
+                 autocomplete="tel" inputmode="tel"
+                 pattern="(?:\D*\d){10,}\D*"
+                 title="Escribe tu número con al menos 10 dígitos">
         </div>
 
         <div class="alta__envio">
