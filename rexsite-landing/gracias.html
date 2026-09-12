@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Activando tus 14 días gratis — RexSite.app</title>
+<title>Listo, ya tenemos tus datos — RexSite.app</title>
 <meta name="theme-color" content="#0A1D36">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
@@ -12,9 +12,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
-
-<!-- Si el visitante tiene JavaScript apagado, lo lleva el navegador. -->
-<noscript><meta http-equiv="refresh" content="0;url=https://mpago.la/1YYGPtm"></noscript>
 
 <!-- Meta Pixel Code -->
 <script>
@@ -31,11 +28,8 @@ fbq('track', 'PageView');
 // Llegar hasta aquí sólo es posible si Netlify aceptó el formulario,
 // así que el registro es real: lo contamos como Lead.
 fbq('track', 'Lead');
-// Y en un instante se va al pago.
-fbq('track', 'InitiateCheckout', {
-  content_name: 'Prueba 14 días',
-  content_category: 'Suscripción RexSite'
-});
+// InitiateCheckout ya no se dispara al cargar: la página no redirige sola.
+// Se dispara al hacer clic en el botón de activar (ver script al final).
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
@@ -50,16 +44,24 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
     radial-gradient(80% 60% at 50% 0%, var(--sky), transparent 70%),
     var(--ivory-2);
 }
+.puente > div{ max-width:520px; }
 .puente__logo{ width:150px; margin:0 auto 32px; }
 .puente h1{ font-size:clamp(1.5rem,3vw,2rem); margin-bottom:12px; }
-.puente p{ color:var(--tx-2); margin-bottom:28px; }
-.puente__spin{
-  width:26px; height:26px; margin:0 auto 26px;
-  border:3px solid var(--line); border-top-color:var(--blue);
-  border-radius:50%; animation:girar .8s linear infinite;
+.puente p{ color:var(--tx-2); margin-bottom:24px; }
+
+/* Aviso del correo: resaltado en dorado para que se lea antes de seguir. */
+.aviso{
+  display:flex; gap:14px; align-items:flex-start; text-align:left;
+  background:rgba(233,169,58,.13);
+  border:1.5px solid rgba(233,169,58,.55);
+  border-radius:var(--r-md);
+  padding:16px 18px;
+  margin:0 auto 28px;
 }
-@keyframes girar{ to{ transform:rotate(360deg); } }
-@media (prefers-reduced-motion: reduce){ .puente__spin{ animation:none; } }
+.aviso svg{ flex:none; margin-top:2px; color:var(--gold); }
+.aviso p{ margin:0; color:var(--tx); font-size:.97rem; line-height:1.55; }
+.aviso strong{ color:var(--navy); }
+
 .puente__rescate{ font-size:.88rem; color:var(--tx-3); margin-top:18px; margin-bottom:0; }
 </style>
 </head>
@@ -69,29 +71,44 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
   <div>
     <img class="puente__logo" src="assets/img/logo.png" alt="RexSite.app" width="730" height="220">
 
-    <div class="puente__spin" aria-hidden="true"></div>
-
     <h1>Listo, ya tenemos tus datos</h1>
-    <p>Te llevamos a activar tu prueba de 14 días…</p>
+    <p>Te estamos enviando un correo con los siguientes pasos para tu sitio.</p>
+
+    <div class="aviso" role="status">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M3.5 7l8.5 6 8.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p>
+        <strong>Revisa tu bandeja de entrada.</strong>
+        Si en unos minutos no lo ves, búscalo en la bandeja de
+        <strong>correo no deseado o spam</strong>.
+      </p>
+    </div>
+
+    <p>Mientras tanto, activa tu prueba:</p>
 
     <a class="btn" id="ir-a-activar" href="https://mpago.la/1YYGPtm" rel="noopener">
       ACTIVAR MIS 14 DÍAS GRATIS <span class="arw" aria-hidden="true">→</span>
     </a>
 
-    <p class="puente__rescate">
-      No se te cobra nada hoy.<br>
-      Si no avanza en unos segundos, toca el botón.
-    </p>
+    <p class="puente__rescate">No se te cobra nada hoy.</p>
   </div>
 </main>
 
 <script>
 (function () {
   'use strict';
-  // El destino se lee del propio botón: un solo lugar donde cambiar el enlace.
-  var destino = document.getElementById('ir-a-activar').href;
-  // 1.5 s le alcanza al pixel para enviar los eventos antes de que se vaya.
-  setTimeout(function () { window.location.href = destino; }, 1500);
+  // Meta Pixel: el clic es lo que lleva al checkout de Mercado Pago.
+  // Si un bloqueador impide cargar el pixel, fbq no existe y no hacemos nada:
+  // el enlace de pago nunca se ve afectado.
+  document.getElementById('ir-a-activar').addEventListener('click', function () {
+    if (typeof window.fbq !== 'function') return;
+    window.fbq('track', 'InitiateCheckout', {
+      content_name: 'Prueba 14 días',
+      content_category: 'Suscripción RexSite'
+    });
+  });
 })();
 </script>
 
