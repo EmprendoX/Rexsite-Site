@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Empecemos con tu sitio — RexSite.app</title>
+<title>Empecemos con tu sitio — RexSite</title>
 <meta name="description" content="Cuatro datos y tu sitio inmobiliario queda en línea hoy mismo.">
 <meta name="theme-color" content="#0A1D36">
 <meta name="robots" content="noindex">
@@ -111,7 +111,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
   font:inherit; font-size:.94rem; font-weight:600; color:var(--blue-deep);
   background:transparent; border:0; padding:0; border-radius:0;
   width:auto;
-  /* No crece (así ".rexsite.app" queda pegado al texto y se lee como una
+  /* No crece (así ".rexsite.ai" queda pegado al texto y se lee como una
      sola dirección) pero sí se encoge en pantallas angostas. El min-width:0
      es lo que permite ese encogimiento dentro de un flex. */
   flex:0 1 auto; min-width:0;
@@ -123,6 +123,20 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
 }
 
 .nota{ font-size:.86rem; color:var(--tx-3); margin-top:9px; line-height:1.5; }
+
+/* Si la dirección está libre u ocupada, mientras la persona escribe. */
+.sitio__estado{ display:block; font-size:.84rem; font-weight:600; margin-top:8px; min-height:1.2em; }
+.sitio__estado--ok{ color:var(--green); }
+.sitio__estado--mal{ color:#C4402F; }
+
+/* Lo que no se pudo guardar, junto al dato que hay que corregir. */
+.campo__error{ color:#C4402F; font-size:.86rem; margin-top:8px; line-height:1.45; }
+.campo [aria-invalid="true"]{ border-color:#C4402F; }
+.alta__error{
+  background:rgba(196,64,47,.08); border:1.5px solid rgba(196,64,47,.45);
+  border-radius:var(--r-sm); color:#8E2B1F;
+  padding:12px 14px; margin-bottom:18px; font-size:.95rem; line-height:1.5; text-align:left;
+}
 
 .alta__envio{ text-align:center; }
 .alta__envio .btn{ width:100%; }
@@ -147,8 +161,8 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
 <main class="alta">
   <div class="wrap">
 
-    <a class="alta__logo" href="/" aria-label="RexSite.app">
-      <img src="assets/img/logo.png" alt="RexSite.app" width="730" height="220">
+    <a class="alta__logo" href="/" aria-label="RexSite">
+      <img src="assets/img/logo.png?v=2" alt="RexSite" width="730" height="220">
     </a>
 
     <div class="alta__head">
@@ -169,18 +183,28 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
         <div class="campo">
           <label for="inmobiliaria">Nombre de tu inmobiliaria</label>
           <input type="text" id="inmobiliaria" name="inmobiliaria"
-                 placeholder="Inmobiliaria López" required
-                 autocomplete="organization" autofocus>
+                 placeholder="Inmobiliaria López" required maxlength="120"
+                 autocomplete="organization" autofocus
+                 aria-describedby="error-inmobiliaria">
+          <p class="campo__error" id="error-inmobiliaria" hidden></p>
 
           <div class="sitio">
             <span class="sitio__et">La dirección de tu sitio será:</span>
             <span class="sitio__campo">
+              <!-- Mismas reglas que el dashboard: 3 a 63 letras o números,
+                   con guiones en medio. -->
               <input type="text" class="sitio__slug" id="slug" name="subdominio"
                      aria-label="Dirección de tu sitio" spellcheck="false"
-                     autocomplete="off" placeholder="tu-inmobiliaria">
-              <span class="sitio__dom">.rexsite.app</span>
+                     autocomplete="off" placeholder="tu-inmobiliaria"
+                     required minlength="3" maxlength="63"
+                     pattern="[a-z0-9]([a-z0-9\-]*[a-z0-9])?"
+                     title="De 3 a 63 letras o números, sin acentos ni espacios (puedes separar con guiones)"
+                     aria-describedby="sitio-estado error-subdominio">
+              <span class="sitio__dom">.rexsite.ai</span>
             </span>
+            <span class="sitio__estado" id="sitio-estado" aria-live="polite"></span>
           </div>
+          <p class="campo__error" id="error-subdominio" hidden></p>
           <p class="nota">
             Puedes editarla. Después vas a poder conectar tu propio dominio
             si ya tienes uno, o te ayudamos a conseguirlo.
@@ -191,12 +215,16 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
           <div class="campo">
             <label for="nombre">Tu nombre</label>
             <input type="text" id="nombre" name="nombre"
-                   placeholder="Juan López" required autocomplete="name">
+                   placeholder="Juan López" required maxlength="120" autocomplete="name"
+                   aria-describedby="error-nombre">
+            <p class="campo__error" id="error-nombre" hidden></p>
           </div>
           <div class="campo">
             <label for="email">Tu correo</label>
             <input type="email" id="email" name="email"
-                   placeholder="juan@ejemplo.com" required autocomplete="email">
+                   placeholder="juan@ejemplo.com" required maxlength="254" autocomplete="email"
+                   aria-describedby="error-email">
+            <p class="campo__error" id="error-email" hidden></p>
           </div>
         </div>
 
@@ -208,11 +236,15 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
                  placeholder="55 1234 5678" required
                  autocomplete="tel" inputmode="tel"
                  pattern="(?:\D*\d){10,}\D*"
-                 title="Escribe tu número con al menos 10 dígitos">
+                 title="Escribe tu número con al menos 10 dígitos"
+                 aria-describedby="error-whatsapp">
+          <p class="campo__error" id="error-whatsapp" hidden></p>
         </div>
 
+        <div class="alta__error" id="alta-error" role="alert" hidden></div>
+
         <div class="alta__envio">
-          <button type="submit" class="btn btn--lg">
+          <button type="submit" class="btn btn--lg" id="alta-boton">
             CONTINUAR <span class="arw" aria-hidden="true">→</span>
           </button>
           <p class="alta__paso">Siguiente paso: activas tu prueba de 14 días.</p>
@@ -249,6 +281,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
   </div>
 </main>
 
+<script src="assets/js/rastreo.js?v=1"></script>
 <script>
 (function () {
   'use strict';
@@ -276,7 +309,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
   // Mientras no la toque a mano, la dirección sigue al nombre de la inmobiliaria.
   var editadoAMano = false;
 
-  /* El ancho del campo sigue al largo del texto: así ".rexsite.app" queda
+  /* El ancho del campo sigue al largo del texto: así ".rexsite.ai" queda
      siempre pegado y se lee como una dirección sola, no como dos pedazos. */
   function ajustarAncho() {
     slug.size = Math.max(String(slug.value || slug.placeholder).length, 3);
@@ -303,6 +336,205 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
   });
 
   refrescar();
+
+  /* ══════════ Envío al sistema ══════════
+     Los datos van al dashboard de RexSite, que los guarda y avisa. Además se
+     manda una copia a los formularios de Netlify como respaldo: si el
+     dashboard no respondiera, el registro no se pierde.
+     Sin fetch (navegador muy viejo) el formulario se envía como antes,
+     directo a Netlify. */
+  // En la Mac (localhost) se prueba contra el dashboard local; en internet,
+  // siempre el dashboard en línea.
+  var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+  var API = LOCAL ? 'http://localhost:3000/api/publico' : 'https://rexsite-dash.netlify.app/api/publico';
+  var form = document.getElementById('form-alta');
+  var boton = document.getElementById('alta-boton');
+  var textoBoton = boton.innerHTML;
+  var errorGeneral = document.getElementById('alta-error');
+  var estadoSitio = document.getElementById('sitio-estado');
+  var CAMPOS = ['inmobiliaria', 'subdominio', 'nombre', 'email', 'whatsapp'];
+  var enviando = false;
+
+  function campoInput(campo) {
+    return campo === 'subdominio' ? slug : document.getElementById(campo);
+  }
+
+  function mostrarError(campo, texto) {
+    var p = document.getElementById('error-' + campo);
+    if (!p) return mostrarErrorGeneral(texto);
+    p.textContent = texto;
+    p.hidden = false;
+    var input = campoInput(campo);
+    input.setAttribute('aria-invalid', 'true');
+    input.focus();
+  }
+
+  function mostrarErrorGeneral(texto) {
+    errorGeneral.textContent = texto;
+    errorGeneral.hidden = false;
+  }
+
+  function limpiarErrores() {
+    CAMPOS.forEach(function (c) {
+      var p = document.getElementById('error-' + c);
+      p.hidden = true;
+      p.textContent = '';
+      campoInput(c).removeAttribute('aria-invalid');
+    });
+    errorGeneral.hidden = true;
+    errorGeneral.textContent = '';
+  }
+
+  // Al corregir un dato, su aviso se quita.
+  CAMPOS.forEach(function (c) {
+    campoInput(c).addEventListener('input', function () {
+      var p = document.getElementById('error-' + c);
+      if (!p.hidden) { p.hidden = true; campoInput(c).removeAttribute('aria-invalid'); }
+    });
+  });
+
+  /** fetch con límite de tiempo (sin .finally: no existe en navegadores viejos). */
+  function pedir(url, opciones, ms) {
+    var control = window.AbortController ? new AbortController() : null;
+    var reloj = control ? setTimeout(function () { control.abort(); }, ms) : null;
+    if (control) opciones.signal = control.signal;
+    return fetch(url, opciones).then(
+      function (r) { if (reloj) clearTimeout(reloj); return r; },
+      function (e) { if (reloj) clearTimeout(reloj); throw e; }
+    );
+  }
+
+  /* ── ¿Está libre la dirección? ──
+     Se pregunta medio segundo después de dejar de escribir. Solo informa:
+     al enviar, el sistema lo vuelve a revisar. Si no responde, no se dice nada. */
+  var consulta = 0;
+  var esperaConsulta = null;
+
+  function pintarEstado(texto, clase) {
+    estadoSitio.textContent = texto;
+    estadoSitio.className = 'sitio__estado' + (clase ? ' sitio__estado--' + clase : '');
+  }
+
+  function revisarDireccion() {
+    var valor = slug.value;
+    var miConsulta = ++consulta;
+    if (valor.length < 3) { pintarEstado('', ''); return; }
+    pedir(API + '/disponible?subdominio=' + encodeURIComponent(valor), { method: 'GET' }, 8000)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (miConsulta !== consulta || !d || !d.ok) return;
+        if (d.disponible) pintarEstado('✓ Disponible', 'ok');
+        else pintarEstado(d.error || 'Esa dirección ya está ocupada. Prueba con otra.', 'mal');
+      })
+      .catch(function () { if (miConsulta === consulta) pintarEstado('', ''); });
+  }
+
+  function programarRevision() {
+    clearTimeout(esperaConsulta);
+    pintarEstado('', '');
+    esperaConsulta = setTimeout(revisarDireccion, 500);
+  }
+
+  inmo.addEventListener('input', function () { if (!editadoAMano) programarRevision(); });
+  slug.addEventListener('input', programarRevision);
+  if (slug.value) programarRevision();
+
+  /* ── Enviar ── */
+  function datosDelFormulario() {
+    var datos = {};
+    var fd = new FormData(form);
+    fd.forEach(function (v, k) { datos[k] = String(v); });
+    return datos;
+  }
+
+  function respaldoEnNetlify() {
+    var partes = [];
+    new FormData(form).forEach(function (v, k) {
+      partes.push(encodeURIComponent(k) + '=' + encodeURIComponent(String(v)));
+    });
+    return pedir('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: partes.join('&')
+    }, 15000).then(function (r) { return r.ok; }, function () { return false; });
+  }
+
+  function irAGracias(direccion, deRespaldo) {
+    var q = [];
+    if (direccion) q.push('dir=' + encodeURIComponent(direccion));
+    if (deRespaldo) q.push('respaldo=1');
+    window.location.href = '/gracias.html' + (q.length ? '?' + q.join('&') : '');
+  }
+
+  function terminarEnvio() {
+    enviando = false;
+    boton.disabled = false;
+    boton.innerHTML = textoBoton;
+  }
+
+  if (window.fetch && window.FormData && window.Promise) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (enviando) return;
+      try {
+        enviar();
+      } catch (err) {
+        // Red de seguridad: si algo de aquí falla, el formulario se manda
+        // como antes, directo a Netlify (que lleva a /gracias.html).
+        form.submit();
+      }
+    });
+  }
+
+  function enviar() {
+    enviando = true;
+    boton.disabled = true;
+    boton.textContent = 'ENVIANDO…';
+    limpiarErrores();
+
+    var datos = datosDelFormulario();
+    var rastreo = window.rexsiteRastreo ? window.rexsiteRastreo() : {};
+    Object.keys(rastreo).forEach(function (k) { datos[k] = rastreo[k]; });
+
+    // La copia de respaldo sale siempre, al mismo tiempo.
+    var respaldo = respaldoEnNetlify();
+
+    // text/plain: así el navegador no hace una consulta previa (CORS).
+    pedir(API + '/alta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(datos)
+    }, 20000)
+      .then(function (r) {
+        return r.json().then(
+          function (d) { return { status: r.status, d: d }; },
+          function () { return { status: r.status, d: null }; }
+        );
+      })
+      .then(function (res) {
+        var d = res.d || {};
+        if (res.status === 200 && d.ok) return irAGracias(d.direccion, false);
+        // Un dato que corregir, o demasiados intentos: se dice y se queda aquí.
+        // Cualquier otra respuesta se trata como que el sistema no respondió.
+        if (d.error && [400, 409, 413, 429].indexOf(res.status) !== -1) {
+          terminarEnvio();
+          if (d.campo) mostrarError(d.campo, d.error);
+          else mostrarErrorGeneral(d.error);
+          if (d.campo === 'subdominio') { editadoAMano = true; pintarEstado('', ''); }
+          return;
+        }
+        throw new Error('El sistema no pudo guardar (' + res.status + ')');
+      })
+      .catch(function () {
+        // El sistema no respondió: si la copia de respaldo llegó, el
+        // registro está a salvo y seguimos; si no, se pide intentar otra vez.
+        respaldo.then(function (ok) {
+          if (ok) return irAGracias('', true);
+          terminarEnvio();
+          mostrarErrorGeneral('No pudimos enviar tus datos. Revisa tu conexión a internet e intenta de nuevo.');
+        });
+      });
+  }
 })();
 </script>
 

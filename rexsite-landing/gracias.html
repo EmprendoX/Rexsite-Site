@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Listo, ya tenemos tus datos — RexSite.app</title>
+<title>Listo, ya tenemos tus datos — RexSite</title>
 <meta name="theme-color" content="#0A1D36">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
@@ -63,16 +63,39 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
 .aviso strong{ color:var(--navy); }
 
 .puente__rescate{ font-size:.88rem; color:var(--tx-3); margin-top:18px; margin-bottom:0; }
+
+/* La dirección que tendrá su sitio. */
+.puente__dir{
+  display:inline-block; margin:2px 0 0;
+  padding:8px 14px; border-radius:var(--r-sm);
+  background:var(--sky); color:var(--blue-deep);
+  font-weight:700; overflow-wrap:anywhere;
+}
 </style>
 </head>
 <body>
 
 <main class="puente">
   <div>
-    <img class="puente__logo" src="assets/img/logo.png" alt="RexSite.app" width="730" height="220">
+    <img class="puente__logo" src="assets/img/logo.png?v=2" alt="RexSite" width="730" height="220">
 
     <h1>Listo, ya tenemos tus datos</h1>
-    <p>Te estamos enviando un correo con los siguientes pasos para tu sitio.</p>
+    <!-- El texto cambia con lo que diga la dirección (ver el script de abajo):
+         ?dir=nombre.rexsite.ai muestra la dirección; ?respaldo=1 es cuando
+         el sistema no respondió y los datos quedaron en la copia de respaldo. -->
+    <p id="msg-sitio">
+      Estamos preparando tu sitio. Cuando esté listo te llega un correo con el
+      enlace a tu sitio y a tu panel para administrarlo.
+    </p>
+    <p id="msg-dir" hidden>
+      Tu sitio va a estar en:<br>
+      <span class="puente__dir" id="dir"></span><br>
+      Cuando esté listo te llega un correo con el enlace a tu sitio y a tu
+      panel para administrarlo.
+    </p>
+    <p id="msg-respaldo" hidden>
+      Te vamos a escribir por correo o WhatsApp para terminar tu sitio.
+    </p>
 
     <div class="aviso" role="status">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -81,7 +104,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
       </svg>
       <p>
         <strong>Revisa tu bandeja de entrada.</strong>
-        Si en unos minutos no lo ves, búscalo en la bandeja de
+        Si no ves nuestro correo, búscalo en la bandeja de
         <strong>correo no deseado o spam</strong>.
       </p>
     </div>
@@ -97,6 +120,29 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
 </main>
 
 <script>
+(function () {
+  'use strict';
+  // Qué mensaje mostrar. La dirección solo se muestra si tiene la forma
+  // nombre.rexsite.ai, y como texto (nunca como HTML).
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var dir = (params.get('dir') || '').toLowerCase();
+    if (params.get('respaldo') === '1') {
+      document.getElementById('msg-sitio').hidden = true;
+      document.getElementById('msg-respaldo').hidden = false;
+    } else if (/^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?\.rexsite\.ai$/.test(dir)) {
+      // En pantallas angostas, que corte antes de ".rexsite.ai".
+      var el = document.getElementById('dir');
+      var corte = dir.lastIndexOf('.rexsite.ai');
+      el.appendChild(document.createTextNode(dir.slice(0, corte)));
+      el.appendChild(document.createElement('wbr'));
+      el.appendChild(document.createTextNode(dir.slice(corte)));
+      document.getElementById('msg-sitio').hidden = true;
+      document.getElementById('msg-dir').hidden = false;
+    }
+  } catch (e) { /* navegador muy viejo: queda el mensaje general */ }
+})();
+
 (function () {
   'use strict';
   // Meta Pixel: el clic es lo que lleva al checkout de Mercado Pago.
