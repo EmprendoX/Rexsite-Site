@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Empecemos con tu sitio — RexSite</title>
-<meta name="description" content="Cuatro datos y tu sitio inmobiliario queda en línea hoy mismo.">
+<meta name="description" content="Elige tu diseño, llena cuatro datos y tu sitio inmobiliario queda en línea en minutos.">
 <meta name="theme-color" content="#0A1D36">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
@@ -152,6 +152,31 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
 .volver{ display:block; text-align:center; margin-top:26px; font-size:.9rem; color:var(--tx-3); }
 .volver:hover{ color:var(--blue); }
 
+/* Elegir el diseño del sitio. El radio se ve siempre (así se nota cuál está
+   elegido aunque el navegador sea viejo); el borde azul lo pone el script. */
+.diseno{ border:0; padding:0; margin:0 0 22px; min-width:0; }
+.diseno > legend{
+  display:block; padding:0; font-family:var(--f-display); font-weight:700;
+  font-size:.92rem; color:var(--navy); margin-bottom:8px;
+}
+.diseno__ops{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.diseno__op{
+  display:block; cursor:pointer; padding:8px;
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  background:var(--paper);
+  transition:border-color .18s, box-shadow .18s;
+}
+.diseno__op:hover{ border-color:#BBD3F2; }
+.diseno__op.is-on{ border-color:var(--blue); box-shadow:0 0 0 3px rgba(24,120,222,.14); }
+.diseno__op img{ display:block; width:100%; height:auto; border-radius:6px; }
+.diseno__fila{
+  display:flex; align-items:center; gap:7px; margin-top:9px;
+  font-family:var(--f-display); font-weight:700; font-size:.95rem; color:var(--navy);
+}
+.diseno__fila input{ margin:0; accent-color:var(--blue); flex:none; }
+.diseno__desc{ display:block; font-size:.82rem; color:var(--tx-2); margin-top:2px; line-height:1.35; }
+.diseno .nota a{ color:var(--blue-deep); font-weight:600; }
+
 /* Trampa antispam: invisible para personas, visible para bots. */
 .miel{ position:absolute; left:-9999px; opacity:0; }
 </style>
@@ -167,7 +192,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
 
     <div class="alta__head">
       <h1>Empecemos con tu sitio</h1>
-      <p>Cuatro datos y lo tienes en línea hoy mismo.</p>
+      <p>Elige tu diseño, llena cuatro datos y en minutos lo tienes en línea.</p>
     </div>
 
     <div class="alta__card">
@@ -180,11 +205,42 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
           <label>No llenes esto si eres humano: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
         </p>
 
+        <!-- Diseño del sitio. Signature va marcado; si la persona llega desde
+             "Elegir Clásica" en la portada (?diseno=clasica), el script lo cambia.
+             Viaja como "tema" al dashboard y a la copia de respaldo. -->
+        <fieldset class="diseno">
+          <legend>Elige el diseño de tu sitio</legend>
+          <div class="diseno__ops">
+            <label class="diseno__op is-on">
+              <img src="assets/img/demo-signature-sm.webp" width="640" height="326" alt="">
+              <span class="diseno__fila">
+                <input type="radio" name="tema" value="signature" checked>
+                Signature
+              </span>
+              <span class="diseno__desc">Sobria y elegante</span>
+            </label>
+            <label class="diseno__op">
+              <img src="assets/img/demo-clasica-sm.webp" width="640" height="326" alt="">
+              <span class="diseno__fila">
+                <input type="radio" name="tema" value="clasica">
+                Clásica
+              </span>
+              <span class="diseno__desc">Con los colores de tu marca</span>
+            </label>
+          </div>
+          <p class="nota">
+            Los dos traen lo mismo y puedes cambiarlo después sin costo.
+            Ver ejemplos:
+            <a href="https://demo-tres-rexsite.rexsite.ai" target="_blank" rel="noopener" aria-label="Ver ejemplo de Signature, se abre en otra pestaña">Signature</a> ·
+            <a href="https://demo-1.rexsite.ai" target="_blank" rel="noopener" aria-label="Ver ejemplo de Clásica, se abre en otra pestaña">Clásica</a>
+          </p>
+        </fieldset>
+
         <div class="campo">
           <label for="inmobiliaria">Nombre de tu inmobiliaria</label>
           <input type="text" id="inmobiliaria" name="inmobiliaria"
                  placeholder="Inmobiliaria López" required maxlength="120"
-                 autocomplete="organization" autofocus
+                 autocomplete="organization"
                  aria-describedby="error-inmobiliaria">
           <p class="campo__error" id="error-inmobiliaria" hidden></p>
 
@@ -337,6 +393,28 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
 
   refrescar();
 
+  /* ── Diseño del sitio ──
+     Llega marcado desde la portada (?diseno=clasica o ?diseno=signature);
+     sin eso queda Signature. El borde azul sigue al que esté elegido. */
+  // Todo va en try: si algo de aquí fallara, el formulario se sigue enviando.
+  try {
+    var radiosDiseno = document.querySelectorAll('input[name="tema"]');
+    var pintarDiseno = function () {
+      radiosDiseno.forEach(function (r) {
+        var op = r.closest('.diseno__op');
+        if (op) op.classList.toggle('is-on', r.checked);
+      });
+    };
+    var pedido = new URLSearchParams(window.location.search).get('diseno');
+    radiosDiseno.forEach(function (r) {
+      if (r.value === pedido) r.checked = true;
+      r.addEventListener('change', pintarDiseno);
+    });
+    // Al volver con "atrás", el navegador restaura la elección después de cargar.
+    window.addEventListener('pageshow', pintarDiseno);
+    pintarDiseno();
+  } catch (e) { /* navegador muy viejo: queda Signature y se ve el radio */ }
+
   /* ══════════ Envío al sistema ══════════
      Los datos van al dashboard de RexSite, que los guarda y avisa. Además se
      manda una copia a los formularios de Netlify como respaldo: si el
@@ -354,6 +432,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
   var estadoSitio = document.getElementById('sitio-estado');
   var CAMPOS = ['inmobiliaria', 'subdominio', 'nombre', 'email', 'whatsapp'];
   var enviando = false;
+  var temaEnviado = '';
 
   function campoInput(campo) {
     return campo === 'subdominio' ? slug : document.getElementById(campo);
@@ -463,6 +542,8 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
     var q = [];
     if (direccion) q.push('dir=' + encodeURIComponent(direccion));
     if (deRespaldo) q.push('respaldo=1');
+    // El diseño que se mandó (aunque después hayan movido la elección).
+    if (temaEnviado) q.push('diseno=' + encodeURIComponent(temaEnviado));
     window.location.href = '/gracias.html' + (q.length ? '?' + q.join('&') : '');
   }
 
@@ -493,6 +574,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
     limpiarErrores();
 
     var datos = datosDelFormulario();
+    temaEnviado = datos.tema || '';
     var rastreo = window.rexsiteRastreo ? window.rexsiteRastreo() : {};
     Object.keys(rastreo).forEach(function (k) { datos[k] = rastreo[k]; });
 
