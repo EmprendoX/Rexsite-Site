@@ -84,18 +84,21 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
          ?dir=nombre.rexsite.ai muestra la dirección; ?respaldo=1 es cuando
          el sistema no respondió y los datos quedaron en la copia de respaldo. -->
     <p id="msg-sitio">
-      Estamos preparando tu sitio. Cuando esté listo te llega un correo con el
-      enlace a tu sitio y a tu panel para administrarlo.
+      Estamos preparando tu sitio. En cuanto confirmemos tus datos queda en
+      línea en unos minutos y te llega un correo con el enlace a tu sitio y a
+      tu panel para administrarlo.
     </p>
     <p id="msg-dir" hidden>
       Tu sitio va a estar en:<br>
       <span class="puente__dir" id="dir"></span><br>
-      Cuando esté listo te llega un correo con el enlace a tu sitio y a tu
-      panel para administrarlo.
+      En cuanto confirmemos tus datos queda en línea en unos minutos y te llega
+      un correo con el enlace a tu sitio y a tu panel para administrarlo.
     </p>
     <p id="msg-respaldo" hidden>
       Te vamos a escribir por correo o WhatsApp para terminar tu sitio.
     </p>
+    <!-- ?diseno=signature|clasica: el diseño que eligió en el formulario. -->
+    <p id="msg-diseno" hidden>Diseño elegido: <strong id="diseno"></strong></p>
 
     <div class="aviso" role="status">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -139,6 +142,13 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=Lead&noscript=1"
       el.appendChild(document.createTextNode(dir.slice(corte)));
       document.getElementById('msg-sitio').hidden = true;
       document.getElementById('msg-dir').hidden = false;
+    }
+    // Solo los dos nombres conocidos; cualquier otra cosa no se muestra.
+    var NOMBRES_DISENO = { signature: 'Signature', clasica: 'Clásica' };
+    var diseno = params.get('diseno');
+    if (Object.prototype.hasOwnProperty.call(NOMBRES_DISENO, diseno)) {
+      document.getElementById('diseno').textContent = NOMBRES_DISENO[diseno];
+      document.getElementById('msg-diseno').hidden = false;
     }
   } catch (e) { /* navegador muy viejo: queda el mensaje general */ }
 })();
