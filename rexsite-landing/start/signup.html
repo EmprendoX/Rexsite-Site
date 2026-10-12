@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Alta de la landing de Estados Unidos. Copia de /empezar.html traducida.
+     Diferencias: el teléfono de 10 dígitos se manda con +1 (el dashboard toma
+     10 dígitos como México), los errores del dashboard se muestran en inglés,
+     el formulario de respaldo en Netlify se llama "alta-usa" y el registro
+     lleva pagina=/start para saber que vino de esta landing. -->
+<title>Let's Start Your Website — RexSite</title>
+<meta name="description" content="Choose your design, fill in four details, and your real estate website will be live in minutes.">
+<meta name="theme-color" content="#0A1D36">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/start/assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/start/assets/img/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
+
+<!-- Meta Pixel de Estados Unidos (PageView): va aquí cuando esté el ID nuevo.
+     No usar el pixel de la landing en español. -->
+
+<style>
+/* ══════════ Alta: estilos propios de esta página ══════════
+   Iguales a los de /empezar.html. El resto lo hereda de styles.css. */
+.alta{
+  min-height:100dvh;
+  background:
+    radial-gradient(80% 60% at 50% 0%, var(--sky), transparent 70%),
+    var(--ivory-2);
+  padding:clamp(24px,5vw,56px) 0 64px;
+}
+.alta__logo{ display:block; width:150px; margin:0 auto clamp(28px,5vw,44px); }
+.alta__logo img{ width:100%; }
+
+.alta__head{ text-align:center; max-width:560px; margin:0 auto clamp(26px,4vw,38px); }
+.alta__head h1{ font-size:clamp(1.75rem,3.6vw,2.5rem); margin-bottom:12px; }
+.alta__head p{ color:var(--tx-2); font-size:1.05rem; }
+
+.alta__card{
+  max-width:560px; margin:0 auto;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  box-shadow:var(--sh-md);
+  padding:clamp(24px,4vw,40px);
+}
+
+.campo{ margin-bottom:22px; }
+.campo:last-of-type{ margin-bottom:26px; }
+.campo > label{
+  display:block; font-family:var(--f-display); font-weight:700;
+  font-size:.92rem; color:var(--navy); margin-bottom:8px;
+}
+.campo input[type=text],
+.campo input[type=email],
+.campo input[type=tel]{
+  width:100%; font:inherit; color:var(--tx);
+  padding:15px 17px;
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  background:var(--paper);
+  transition:border-color .18s, box-shadow .18s;
+}
+.campo input::placeholder{ color:var(--tx-3); }
+.campo input:focus{
+  outline:0; border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(24,120,222,.14);
+}
+.campo input:user-invalid{ border-color:#C4402F; }
+
+/* Dos columnas en pantallas cómodas */
+.campo-fila{ display:grid; gap:22px; }
+@media (min-width:560px){ .campo-fila{ grid-template-columns:1fr 1fr; } }
+.campo-fila .campo{ margin-bottom:22px; }
+
+/* Vista previa de la dirección del sitio.
+   El dominio va DENTRO del recuadro, junto al campo editable: así se lee
+   como una sola dirección y nunca se parte en dos renglones. */
+.sitio{
+  margin-top:10px; padding:12px 14px;
+  background:var(--sky); border-radius:var(--r-sm);
+}
+.sitio__et{ display:block; color:var(--tx-2); font-size:.84rem; margin-bottom:7px; }
+.sitio__campo{
+  display:flex; align-items:center;
+  background:var(--paper);
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  padding:9px 12px;
+  transition:border-color .18s, box-shadow .18s;
+}
+.sitio__campo:focus-within{
+  border-color:var(--blue); box-shadow:0 0 0 3px rgba(24,120,222,.14);
+}
+/* Selector largo a propósito: la regla general `.campo input[type=text]`
+   es más específica y le ganaría el borde y el padding, dibujando una
+   caja dentro de la caja. */
+.campo .sitio__campo input[type=text]{
+  font:inherit; font-size:.94rem; font-weight:600; color:var(--blue-deep);
+  background:transparent; border:0; padding:0; border-radius:0;
+  width:auto;
+  /* No crece (así ".rexsite.ai" queda pegado al texto y se lee como una
+     sola dirección) pero sí se encoge en pantallas angostas. El min-width:0
+     es lo que permite ese encogimiento dentro de un flex. */
+  flex:0 1 auto; min-width:0;
+}
+.campo .sitio__campo input[type=text]:focus{ outline:0; box-shadow:none; }
+.sitio__dom{
+  flex:none; font-size:.94rem; font-weight:600;
+  color:var(--tx-3); white-space:nowrap;
+}
+
+.nota{ font-size:.86rem; color:var(--tx-3); margin-top:9px; line-height:1.5; }
+
+/* Si la dirección está libre u ocupada, mientras la persona escribe. */
+.sitio__estado{ display:block; font-size:.84rem; font-weight:600; margin-top:8px; min-height:1.2em; }
+.sitio__estado--ok{ color:var(--green); }
+.sitio__estado--mal{ color:#C4402F; }
+
+/* Lo que no se pudo guardar, junto al dato que hay que corregir. */
+.campo__error{ color:#C4402F; font-size:.86rem; margin-top:8px; line-height:1.45; }
+.campo [aria-invalid="true"]{ border-color:#C4402F; }
+.alta__error{
+  background:rgba(196,64,47,.08); border:1.5px solid rgba(196,64,47,.45);
+  border-radius:var(--r-sm); color:#8E2B1F;
+  padding:12px 14px; margin-bottom:18px; font-size:.95rem; line-height:1.5; text-align:left;
+}
+
+.alta__envio{ text-align:center; }
+.alta__envio .btn{ width:100%; }
+.alta__paso{ font-size:.88rem; color:var(--tx-3); margin-top:14px; }
+
+.sellos{
+  display:flex; justify-content:center; flex-wrap:wrap; gap:10px 22px;
+  margin-top:24px; font-size:.88rem; color:var(--tx-2);
+}
+.sellos span{ display:inline-flex; align-items:center; gap:7px; }
+.sellos svg{ flex:none; color:var(--green); }
+
+.volver{ display:block; text-align:center; margin-top:26px; font-size:.9rem; color:var(--tx-3); }
+.volver:hover{ color:var(--blue); }
+
+/* Elegir el diseño del sitio. El radio se ve siempre (así se nota cuál está
+   elegido aunque el navegador sea viejo); el borde azul lo pone el script. */
+.diseno{ border:0; padding:0; margin:0 0 22px; min-width:0; }
+.diseno > legend{
+  display:block; padding:0; font-family:var(--f-display); font-weight:700;
+  font-size:.92rem; color:var(--navy); margin-bottom:8px;
+}
+.diseno__ops{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.diseno__op{
+  display:block; cursor:pointer; padding:8px;
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  background:var(--paper);
+  transition:border-color .18s, box-shadow .18s;
+}
+.diseno__op:hover{ border-color:#BBD3F2; }
+.diseno__op.is-on{ border-color:var(--blue); box-shadow:0 0 0 3px rgba(24,120,222,.14); }
+.diseno__op img{ display:block; width:100%; height:auto; border-radius:6px; }
+.diseno__fila{
+  display:flex; align-items:center; gap:7px; margin-top:9px;
+  font-family:var(--f-display); font-weight:700; font-size:.95rem; color:var(--navy);
+}
+.diseno__fila input{ margin:0; accent-color:var(--blue); flex:none; }
+.diseno__desc{ display:block; font-size:.82rem; color:var(--tx-2); margin-top:2px; line-height:1.35; }
+.diseno .nota a{ color:var(--blue-deep); font-weight:600; }
+
+/* Trampa antispam: invisible para personas, visible para bots. */
+.miel{ position:absolute; left:-9999px; opacity:0; }
+</style>
+</head>
+<body>
+
+<main class="alta">
+  <div class="wrap">
+
+    <a class="alta__logo" href="/start/" aria-label="RexSite">
+      <img src="/start/assets/img/logo.png" alt="RexSite" width="730" height="220">
+    </a>
+
+    <div class="alta__head">
+      <h1>Let's start your website</h1>
+      <p>Choose your design, fill in four details, and your website will be live in minutes.</p>
+    </div>
+
+    <div class="alta__card">
+      <form name="alta-usa" method="POST" action="/start/thanks.html"
+            data-netlify="true" netlify-honeypot="bot-field" id="form-alta">
+
+        <!-- Netlify necesita este campo para identificar el formulario.
+             Nombre propio para no mezclarse con "alta-trial" (español). -->
+        <input type="hidden" name="form-name" value="alta-usa">
+        <p class="miel" aria-hidden="true">
+          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <!-- Diseño del sitio. Signature va marcado; con ?diseno=clasica el
+             script lo cambia. Viaja como "tema" al dashboard y a la copia de
+             respaldo (los valores son los mismos que en español). -->
+        <fieldset class="diseno">
+          <legend>Choose your website design</legend>
+          <div class="diseno__ops">
+            <label class="diseno__op is-on">
+              <img src="/start/assets/img/demo-signature-sm.webp" width="640" height="326" alt="">
+              <span class="diseno__fila">
+                <input type="radio" name="tema" value="signature" checked>
+                Signature
+              </span>
+              <span class="diseno__desc">Refined and elegant</span>
+            </label>
+            <label class="diseno__op">
+              <img src="/start/assets/img/demo-clasica-sm.webp" width="640" height="326" alt="">
+              <span class="diseno__fila">
+                <input type="radio" name="tema" value="clasica">
+                Classic
+              </span>
+              <span class="diseno__desc">In your brand colors</span>
+            </label>
+          </div>
+          <p class="nota">
+            Both include the same features, and you can switch later at no cost.
+            See examples:
+            <a href="https://demo-tres-rexsite.rexsite.ai/en" target="_blank" rel="noopener" aria-label="See a Signature example (opens in a new tab)">Signature</a> ·
+            <a href="https://demo-1.rexsite.ai/en" target="_blank" rel="noopener" aria-label="See a Classic example (opens in a new tab)">Classic</a>
+          </p>
+        </fieldset>
+
+        <div class="campo">
+          <label for="inmobiliaria">Your real estate business name</label>
+          <input type="text" id="inmobiliaria" name="inmobiliaria"
+                 placeholder="Smith Realty" required maxlength="120"
+                 autocomplete="organization"
+                 aria-describedby="error-inmobiliaria">
+          <p class="campo__error" id="error-inmobiliaria" hidden></p>
+
+          <div class="sitio">
+            <span class="sitio__et">Your website address will be:</span>
+            <span class="sitio__campo">
+              <!-- Mismas reglas que el dashboard: 3 a 63 letras o números,
+                   con guiones en medio. -->
+              <input type="text" class="sitio__slug" id="slug" name="subdominio"
+                     aria-label="Your website address" spellcheck="false"
+                     autocomplete="off" placeholder="your-business"
+                     required minlength="3" maxlength="63"
+                     pattern="[a-z0-9]([a-z0-9\-]*[a-z0-9])?"
+                     title="3 to 63 letters or numbers, no spaces or accents (you can use hyphens)"
+                     aria-describedby="sitio-estado error-subdominio">
+              <span class="sitio__dom">.rexsite.ai</span>
+            </span>
+            <span class="sitio__estado" id="sitio-estado" aria-live="polite"></span>
+          </div>
+          <p class="campo__error" id="error-subdominio" hidden></p>
+          <p class="nota">
+            You can edit it. Later you can connect your own domain if you
+            already have one, or we can help you get one.
+          </p>
+        </div>
+
+        <div class="campo-fila">
+          <div class="campo">
+            <label for="nombre">Your name</label>
+            <input type="text" id="nombre" name="nombre"
+                   placeholder="John Smith" required maxlength="120" autocomplete="name"
+                   aria-describedby="error-nombre">
+            <p class="campo__error" id="error-nombre" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="email">Your email</label>
+            <input type="email" id="email" name="email"
+                   placeholder="john@example.com" required maxlength="254" autocomplete="email"
+                   aria-describedby="error-email">
+            <p class="campo__error" id="error-email" hidden></p>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="whatsapp">Your mobile number</label>
+          <!-- El pattern cuenta dígitos e ignora espacios, guiones, paréntesis
+               o +1: "(305) 555-1234" y "+1 305-555-1234" pasan; "5551234" no. -->
+          <input type="tel" id="whatsapp" name="whatsapp"
+                 placeholder="(305) 555-1234" required
+                 autocomplete="tel" inputmode="tel"
+                 pattern="(?:\D*\d){10,}\D*"
+                 title="Enter your number with at least 10 digits"
+                 aria-describedby="error-whatsapp">
+          <p class="campo__error" id="error-whatsapp" hidden></p>
+        </div>
+
+        <div class="alta__error" id="alta-error" role="alert" hidden></div>
+
+        <div class="alta__envio">
+          <button type="submit" class="btn btn--lg" id="alta-boton">
+            CONTINUE <span class="arw" aria-hidden="true">→</span>
+          </button>
+          <p class="alta__paso">Next step: activate your 14-day free trial.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="sellos">
+      <span>
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10.5l4 4 8-8" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        14 days free
+      </span>
+      <span>
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10.5l4 4 8-8" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cancel anytime
+      </span>
+      <span>
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10.5l4 4 8-8" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        No long-term contract
+      </span>
+    </div>
+
+    <a class="volver" href="/start/">← Back</a>
+
+  </div>
+</main>
+
+<script src="/start/assets/js/rastreo.js?v=1"></script>
+<script>
+(function () {
+  'use strict';
+
+  var inmo = document.getElementById('inmobiliaria');
+  var slug = document.getElementById('slug');
+
+  /* Convierte "Smith & López Realty" en "smith-lopez-realty".
+     El normalize separa la letra de su acento; ACENTOS luego borra ese acento suelto.
+     Se arma con RegExp y códigos de escape para no depender de la codificación
+     del archivo: así "López" da "lopez" y "Peña" da "pena" siempre. */
+  var ACENTOS = new RegExp('[\\u0300-\\u036f]', 'g');
+
+  function aSlug(texto) {
+    return texto
+      .normalize('NFD').replace(ACENTOS, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .slice(0, 40)
+      // El guion sobrante se quita después de recortar, no antes,
+      // para que un corte a los 40 no deje la dirección terminada en "-".
+      .replace(/^-+|-+$/g, '');
+  }
+
+  // Mientras no la toque a mano, la dirección sigue al nombre de la inmobiliaria.
+  var editadoAMano = false;
+
+  /* El ancho del campo sigue al largo del texto: así ".rexsite.ai" queda
+     siempre pegado y se lee como una dirección sola, no como dos pedazos. */
+  function ajustarAncho() {
+    slug.size = Math.max(String(slug.value || slug.placeholder).length, 3);
+  }
+
+  function refrescar() {
+    if (!editadoAMano) slug.value = aSlug(inmo.value);
+    ajustarAncho();
+  }
+
+  inmo.addEventListener('input', refrescar);
+
+  slug.addEventListener('input', function () {
+    editadoAMano = true;
+    var limpio = aSlug(slug.value);
+    // Sólo reescribimos si hizo falta, para no mover el cursor de lugar.
+    if (slug.value !== limpio) slug.value = limpio;
+    ajustarAncho();
+  });
+
+  // Si vuelve a dejarla vacía, retomamos el automático.
+  slug.addEventListener('blur', function () {
+    if (slug.value === '') { editadoAMano = false; refrescar(); }
+  });
+
+  refrescar();
+
+  /* ── Diseño del sitio ──
+     Llega marcado con ?diseno=clasica o ?diseno=signature; sin eso queda
+     Signature. El borde azul sigue al que esté elegido. */
+  // Todo va en try: si algo de aquí fallara, el formulario se sigue enviando.
+  try {
+    var radiosDiseno = document.querySelectorAll('input[name="tema"]');
+    var pintarDiseno = function () {
+      radiosDiseno.forEach(function (r) {
+        var op = r.closest('.diseno__op');
+        if (op) op.classList.toggle('is-on', r.checked);
+      });
+    };
+    var pedido = new URLSearchParams(window.location.search).get('diseno');
+    radiosDiseno.forEach(function (r) {
+      if (r.value === pedido) r.checked = true;
+      r.addEventListener('change', pintarDiseno);
+    });
+    // Al volver con "atrás", el navegador restaura la elección después de cargar.
+    window.addEventListener('pageshow', pintarDiseno);
+    pintarDiseno();
+  } catch (e) { /* navegador muy viejo: queda Signature y se ve el radio */ }
+
+  /* ══════════ Mensajes en inglés ══════════
+     El dashboard contesta en español. Aquí no se muestra su texto: se usa
+     el campo y el código de la respuesta para elegir el mensaje en inglés. */
+  // La misma regla que el dashboard (SUBDOMINIO_RE en src/lib/sitios/dominio.ts).
+  var FORMATO_DIRECCION = /^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$/;
+  var MENSAJES = {
+    inmobiliaria: 'Enter the name of your real estate business.',
+    direccionFormato: 'Your address must have 3 to 63 letters or numbers, with no spaces or accents (you can use hyphens).',
+    direccionOcupada: 'That address is already taken. Try another one.',
+    nombre: 'Enter your name.',
+    email: "Check your email address. It doesn't look right.",
+    whatsapp: 'Enter your mobile number with 10 digits (or with your country code).',
+    leer: "We couldn't read your information. Reload the page and try again.",
+    largo: 'Some of your information is too long. Please shorten it and try again.',
+    muchos: 'We received several sign-ups in a row. Please wait a few minutes and try again.',
+    red: "We couldn't send your information. Check your internet connection and try again."
+  };
+
+  function mensajeDireccion(valor) {
+    return FORMATO_DIRECCION.test(valor) ? MENSAJES.direccionOcupada : MENSAJES.direccionFormato;
+  }
+
+  /** Mensaje en inglés para una respuesta del dashboard que pide corregir algo. */
+  function mensajeDe(campo, status) {
+    if (campo === 'subdominio') return status === 409 ? MENSAJES.direccionOcupada : mensajeDireccion(slug.value);
+    if (campo && MENSAJES[campo]) return MENSAJES[campo];
+    if (status === 413) return MENSAJES.largo;
+    if (status === 429) return MENSAJES.muchos;
+    return MENSAJES.leer;
+  }
+
+  /* El dashboard toma un número de 10 dígitos como de México y le pone el 52.
+     En esta página 10 dígitos son de Estados Unidos o Canadá: se manda con +1.
+     Con código de país (11 dígitos o más) se manda como lo escribió. */
+  function telefonoUsa(valor) {
+    var texto = String(valor || '');
+    var digitos = texto.replace(/\D/g, '');
+    return digitos.length === 10 ? '+1' + digitos : texto;
+  }
+
+  /* ══════════ Envío al sistema ══════════
+     Los datos van al dashboard de RexSite, que los guarda y avisa. Además se
+     manda una copia a los formularios de Netlify como respaldo: si el
+     dashboard no respondiera, el registro no se pierde.
+     Sin fetch (navegador muy viejo) el formulario se envía como antes,
+     directo a Netlify. */
+  // En la Mac (localhost) se prueba contra el dashboard local; en internet,
+  // siempre el dashboard en línea.
+  var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+  var API = LOCAL ? 'http://localhost:3000/api/publico' : 'https://rexsite-dash.netlify.app/api/publico';
+  var form = document.getElementById('form-alta');
+  var boton = document.getElementById('alta-boton');
+  var textoBoton = boton.innerHTML;
+  var errorGeneral = document.getElementById('alta-error');
+  var estadoSitio = document.getElementById('sitio-estado');
+  var CAMPOS = ['inmobiliaria', 'subdominio', 'nombre', 'email', 'whatsapp'];
+  var enviando = false;
+  var temaEnviado = '';
+
+  function campoInput(campo) {
+    return campo === 'subdominio' ? slug : document.getElementById(campo);
+  }
+
+  function mostrarError(campo, texto) {
+    var p = document.getElementById('error-' + campo);
+    if (!p) return mostrarErrorGeneral(texto);
+    p.textContent = texto;
+    p.hidden = false;
+    var input = campoInput(campo);
+    input.setAttribute('aria-invalid', 'true');
+    input.focus();
+  }
+
+  function mostrarErrorGeneral(texto) {
+    errorGeneral.textContent = texto;
+    errorGeneral.hidden = false;
+  }
+
+  function limpiarErrores() {
+    CAMPOS.forEach(function (c) {
+      var p = document.getElementById('error-' + c);
+      p.hidden = true;
+      p.textContent = '';
+      campoInput(c).removeAttribute('aria-invalid');
+    });
+    errorGeneral.hidden = true;
+    errorGeneral.textContent = '';
+  }
+
+  // Al corregir un dato, su aviso se quita.
+  CAMPOS.forEach(function (c) {
+    campoInput(c).addEventListener('input', function () {
+      var p = document.getElementById('error-' + c);
+      if (!p.hidden) { p.hidden = true; campoInput(c).removeAttribute('aria-invalid'); }
+    });
+  });
+
+  /** fetch con límite de tiempo (sin .finally: no existe en navegadores viejos). */
+  function pedir(url, opciones, ms) {
+    var control = window.AbortController ? new AbortController() : null;
+    var reloj = control ? setTimeout(function () { control.abort(); }, ms) : null;
+    if (control) opciones.signal = control.signal;
+    return fetch(url, opciones).then(
+      function (r) { if (reloj) clearTimeout(reloj); return r; },
+      function (e) { if (reloj) clearTimeout(reloj); throw e; }
+    );
+  }
+
+  /* ── ¿Está libre la dirección? ──
+     Se pregunta medio segundo después de dejar de escribir. Solo informa:
+     al enviar, el sistema lo vuelve a revisar. Si no responde, no se dice nada. */
+  var consulta = 0;
+  var esperaConsulta = null;
+
+  function pintarEstado(texto, clase) {
+    estadoSitio.textContent = texto;
+    estadoSitio.className = 'sitio__estado' + (clase ? ' sitio__estado--' + clase : '');
+  }
+
+  function revisarDireccion() {
+    var valor = slug.value;
+    var miConsulta = ++consulta;
+    if (valor.length < 3) { pintarEstado('', ''); return; }
+    pedir(API + '/disponible?subdominio=' + encodeURIComponent(valor), { method: 'GET' }, 8000)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (miConsulta !== consulta || !d || !d.ok) return;
+        if (d.disponible) pintarEstado('✓ Available', 'ok');
+        else pintarEstado(mensajeDireccion(valor), 'mal');
+      })
+      .catch(function () { if (miConsulta === consulta) pintarEstado('', ''); });
+  }
+
+  function programarRevision() {
+    clearTimeout(esperaConsulta);
+    pintarEstado('', '');
+    esperaConsulta = setTimeout(revisarDireccion, 500);
+  }
+
+  inmo.addEventListener('input', function () { if (!editadoAMano) programarRevision(); });
+  slug.addEventListener('input', programarRevision);
+  if (slug.value) programarRevision();
+
+  /* ── Enviar ── */
+  function datosDelFormulario() {
+    var datos = {};
+    var fd = new FormData(form);
+    fd.forEach(function (v, k) { datos[k] = String(v); });
+    return datos;
+  }
+
+  // La copia lleva el mismo teléfono que el dashboard (con +1).
+  function respaldoEnNetlify(telefono) {
+    var partes = [];
+    new FormData(form).forEach(function (v, k) {
+      var valor = k === 'whatsapp' ? telefono : String(v);
+      partes.push(encodeURIComponent(k) + '=' + encodeURIComponent(valor));
+    });
+    return pedir('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: partes.join('&')
+    }, 15000).then(function (r) { return r.ok; }, function () { return false; });
+  }
+
+  function irAGracias(direccion, deRespaldo) {
+    var q = [];
+    if (direccion) q.push('dir=' + encodeURIComponent(direccion));
+    if (deRespaldo) q.push('respaldo=1');
+    // El diseño que se mandó (aunque después hayan movido la elección).
+    if (temaEnviado) q.push('diseno=' + encodeURIComponent(temaEnviado));
+    window.location.href = '/start/thanks.html' + (q.length ? '?' + q.join('&') : '');
+  }
+
+  function terminarEnvio() {
+    enviando = false;
+    boton.disabled = false;
+    boton.innerHTML = textoBoton;
+  }
+
+  if (window.fetch && window.FormData && window.Promise) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (enviando) return;
+      try {
+        enviar();
+      } catch (err) {
+        // Red de seguridad: si algo de aquí falla, el formulario se manda
+        // como antes, directo a Netlify (que lleva a /start/thanks.html).
+        form.submit();
+      }
+    });
+  }
+
+  function enviar() {
+    enviando = true;
+    boton.disabled = true;
+    boton.textContent = 'SENDING…';
+    limpiarErrores();
+
+    var datos = datosDelFormulario();
+    temaEnviado = datos.tema || '';
+    datos.whatsapp = telefonoUsa(datos.whatsapp);
+    var rastreo = window.rexsiteRastreo ? window.rexsiteRastreo() : {};
+    Object.keys(rastreo).forEach(function (k) { datos[k] = rastreo[k]; });
+    // Para saber en el dashboard que el registro vino de esta landing,
+    // aunque no haya llegado desde un anuncio.
+    if (!datos.pagina) datos.pagina = '/start';
+
+    // La copia de respaldo sale siempre, al mismo tiempo.
+    var respaldo = respaldoEnNetlify(datos.whatsapp);
+
+    // text/plain: así el navegador no hace una consulta previa (CORS).
+    pedir(API + '/alta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(datos)
+    }, 20000)
+      .then(function (r) {
+        return r.json().then(
+          function (d) { return { status: r.status, d: d }; },
+          function () { return { status: r.status, d: null }; }
+        );
+      })
+      .then(function (res) {
+        var d = res.d || {};
+        if (res.status === 200 && d.ok) return irAGracias(d.direccion, false);
+        // Un dato que corregir, o demasiados intentos: se dice y se queda aquí.
+        // Cualquier otra respuesta se trata como que el sistema no respondió.
+        if (d.error && [400, 409, 413, 429].indexOf(res.status) !== -1) {
+          terminarEnvio();
+          var texto = mensajeDe(d.campo, res.status);
+          if (d.campo) mostrarError(d.campo, texto);
+          else mostrarErrorGeneral(texto);
+          if (d.campo === 'subdominio') { editadoAMano = true; pintarEstado('', ''); }
+          return;
+        }
+        throw new Error('El sistema no pudo guardar (' + res.status + ')');
+      })
+      .catch(function () {
+        // El sistema no respondió: si la copia de respaldo llegó, el
+        // registro está a salvo y seguimos; si no, se pide intentar otra vez.
+        respaldo.then(function (ok) {
+          if (ok) return irAGracias('', true);
+          terminarEnvio();
+          mostrarErrorGeneral(MENSAJES.red);
+        });
+      });
+  }
+})();
+</script>
+
+</body>
+</html>
