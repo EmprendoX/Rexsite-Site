@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Gracias de la landing de Estados Unidos. Copia de /gracias.html traducida.
+     El botón de pago queda escondido hasta tener el link de pago en dólares. -->
+<title>You're All Set — RexSite</title>
+<meta name="theme-color" content="#0A1D36">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/start/assets/img/favicon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
+
+<!-- Meta Pixel Code: pixel "Rexsite.ai USA", solo para la landing de
+     Estados Unidos (la de español usa otro pixel). -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1737083810729024');
+fbq('track', 'PageView');
+// Llegar hasta aquí sólo es posible si el registro se guardó (en el
+// dashboard o en la copia de respaldo), así que lo contamos como Lead.
+fbq('track', 'Lead');
+// InitiateCheckout se dispara al hacer clic en el botón de pago (ver el
+// script al final), no al cargar.
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+.puente{
+  min-height:100dvh; display:grid; place-items:center;
+  text-align:center; padding:32px;
+  background:
+    radial-gradient(80% 60% at 50% 0%, var(--sky), transparent 70%),
+    var(--ivory-2);
+}
+.puente > div{ max-width:520px; }
+.puente__logo{ width:150px; margin:0 auto 32px; }
+.puente h1{ font-size:clamp(1.5rem,3vw,2rem); margin-bottom:12px; }
+.puente p{ color:var(--tx-2); margin-bottom:24px; }
+
+/* Aviso del correo: resaltado en dorado para que se lea antes de seguir. */
+.aviso{
+  display:flex; gap:14px; align-items:flex-start; text-align:left;
+  background:rgba(233,169,58,.13);
+  border:1.5px solid rgba(233,169,58,.55);
+  border-radius:var(--r-md);
+  padding:16px 18px;
+  margin:0 auto 28px;
+}
+.aviso svg{ flex:none; margin-top:2px; color:var(--gold); }
+.aviso p{ margin:0; color:var(--tx); font-size:.97rem; line-height:1.55; }
+.aviso strong{ color:var(--navy); }
+
+.puente__rescate{ font-size:.88rem; color:var(--tx-3); margin-top:18px; margin-bottom:0; }
+
+/* La dirección que tendrá su sitio. */
+.puente__dir{
+  display:inline-block; margin:2px 0 0;
+  padding:8px 14px; border-radius:var(--r-sm);
+  background:var(--sky); color:var(--blue-deep);
+  font-weight:700; overflow-wrap:anywhere;
+}
+</style>
+</head>
+<body>
+
+<main class="puente">
+  <div>
+    <img class="puente__logo" src="/start/assets/img/logo.png" alt="RexSite" width="730" height="220">
+
+    <h1>You're all set. We have your information.</h1>
+    <!-- El texto cambia con lo que diga la dirección (ver el script de abajo):
+         ?dir=nombre.rexsite.ai muestra la dirección; ?respaldo=1 es cuando
+         el sistema no respondió y los datos quedaron en la copia de respaldo. -->
+    <p id="msg-sitio">
+      We're preparing your website. Once we confirm your details, it will be
+      live in a few minutes, and you'll get an email with the links to your
+      website and to your dashboard.
+    </p>
+    <p id="msg-dir" hidden>
+      Your website will be at:<br>
+      <span class="puente__dir" id="dir"></span><br>
+      Once we confirm your details, it will be live in a few minutes, and
+      you'll get an email with the links to your website and to your dashboard.
+    </p>
+    <p id="msg-respaldo" hidden>
+      We'll contact you by email or phone to finish your website.
+    </p>
+    <!-- ?diseno=signature|clasica: el diseño que eligió en el formulario. -->
+    <p id="msg-diseno" hidden>Design selected: <strong id="diseno"></strong></p>
+
+    <div class="aviso" role="status">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M3.5 7l8.5 6 8.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p>
+        <strong>Check your inbox.</strong>
+        If you don't see our email, look in your
+        <strong>junk or spam folder</strong>.
+      </p>
+    </div>
+
+    <!-- PAGO: link de pago de Stripe en dólares (14 días gratis, después
+         $49 al mes; Stripe cobra $0 hoy). -->
+    <div id="pago">
+      <p>In the meantime, activate your trial:</p>
+      <a class="btn" id="ir-a-activar" href="https://buy.stripe.com/8x27sEePYft3e59adt6sw03" rel="noopener">
+        <span>ACTIVATE MY <span style="white-space:nowrap">14-DAY</span> FREE TRIAL</span> <span class="arw" aria-hidden="true">→</span>
+      </a>
+      <p class="puente__rescate">You won't be charged today.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  // Qué mensaje mostrar. La dirección solo se muestra si tiene la forma
+  // nombre.rexsite.ai, y como texto (nunca como HTML).
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var dir = (params.get('dir') || '').toLowerCase();
+    if (params.get('respaldo') === '1') {
+      document.getElementById('msg-sitio').hidden = true;
+      document.getElementById('msg-respaldo').hidden = false;
+    } else if (/^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?\.rexsite\.ai$/.test(dir)) {
+      // En pantallas angostas, que corte antes de ".rexsite.ai".
+      var el = document.getElementById('dir');
+      var corte = dir.lastIndexOf('.rexsite.ai');
+      el.appendChild(document.createTextNode(dir.slice(0, corte)));
+      el.appendChild(document.createElement('wbr'));
+      el.appendChild(document.createTextNode(dir.slice(corte)));
+      document.getElementById('msg-sitio').hidden = true;
+      document.getElementById('msg-dir').hidden = false;
+    }
+    // Solo los dos nombres conocidos; cualquier otra cosa no se muestra.
+    var NOMBRES_DISENO = { signature: 'Signature', clasica: 'Classic' };
+    var diseno = params.get('diseno');
+    if (Object.prototype.hasOwnProperty.call(NOMBRES_DISENO, diseno)) {
+      document.getElementById('diseno').textContent = NOMBRES_DISENO[diseno];
+      document.getElementById('msg-diseno').hidden = false;
+    }
+  } catch (e) { /* navegador muy viejo: queda el mensaje general */ }
+})();
+
+(function () {
+  'use strict';
+  // Meta Pixel: el clic es lo que lleva al pago.
+  // Si un bloqueador impide cargar el pixel, fbq no existe y no hacemos nada:
+  // el enlace de pago nunca se ve afectado.
+  document.getElementById('ir-a-activar').addEventListener('click', function () {
+    if (typeof window.fbq !== 'function') return;
+    window.fbq('track', 'InitiateCheckout', {
+      content_name: '14-day trial',
+      content_category: 'RexSite subscription'
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
