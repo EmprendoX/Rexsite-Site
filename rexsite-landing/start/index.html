@@ -27,8 +27,24 @@
 <link rel="preload" as="image" href="/start/assets/img/hero.webp">
 <link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
 
-<!-- Meta Pixel de Estados Unidos (PageView): va aquí cuando esté el ID nuevo.
-     No usar el pixel de la landing en español. -->
+<!-- Meta Pixel Code: pixel "Rexsite.ai USA", solo para la landing de
+     Estados Unidos (la de español usa otro pixel). -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1737083810729024');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>

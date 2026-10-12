@@ -15,9 +15,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
 
-<!-- Meta Pixel de Estados Unidos (PageView y Lead): va aquí cuando esté el
-     ID nuevo. Llegar hasta aquí sólo es posible si el registro se guardó,
-     así que se cuenta como Lead. No usar el pixel de la landing en español. -->
+<!-- Meta Pixel Code: pixel "Rexsite.ai USA", solo para la landing de
+     Estados Unidos (la de español usa otro pixel). -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1737083810729024');
+fbq('track', 'PageView');
+// Llegar hasta aquí sólo es posible si el registro se guardó (en el
+// dashboard o en la copia de respaldo), así que lo contamos como Lead.
+fbq('track', 'Lead');
+// InitiateCheckout se dispara al hacer clic en el botón de pago (ver el
+// script al final), no al cargar.
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 
 <style>
 .puente{
