@@ -65,6 +65,8 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
 .aviso p{ margin:0; color:var(--tx); font-size:.97rem; line-height:1.55; }
 .aviso strong{ color:var(--navy); }
 
+.puente__rescate{ font-size:.88rem; color:var(--tx-3); margin-top:18px; margin-bottom:0; }
+
 /* La dirección que tendrá su sitio. */
 .puente__dir{
   display:inline-block; margin:2px 0 0;
@@ -113,13 +115,14 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
       </p>
     </div>
 
-    <!-- PAGO: escondido hasta tener el link de pago en dólares. Para
-         encenderlo: poner el link en el href y quitar "hidden". -->
-    <div id="pago" hidden>
+    <!-- PAGO: link de pago de Stripe en dólares (14 días gratis, después
+         $49 al mes; Stripe cobra $0 hoy). -->
+    <div id="pago">
       <p>In the meantime, activate your trial:</p>
-      <a class="btn" id="ir-a-activar" href="#" rel="noopener">
-        ACTIVATE MY 14-DAY FREE TRIAL <span class="arw" aria-hidden="true">→</span>
+      <a class="btn" id="ir-a-activar" href="https://buy.stripe.com/8x27sEePYft3e59adt6sw03" rel="noopener">
+        <span>ACTIVATE MY <span style="white-space:nowrap">14-DAY</span> FREE TRIAL</span> <span class="arw" aria-hidden="true">→</span>
       </a>
+      <p class="puente__rescate">You won't be charged today.</p>
     </div>
   </div>
 </main>
