@@ -102,7 +102,8 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
 
     <!-- PAGO: link de pago de Stripe en dólares (14 días gratis, después
          $49 al mes; Stripe cobra $0 hoy). Al terminar, Stripe manda a
-         /start/welcome.html. -->
+         /start/welcome.html. Con ?dir= el script le agrega
+         ?client_reference_id=<dirección> (ver abajo). -->
     <div class="puente__pago">
       <a class="btn btn--lg" id="ir-a-activar" href="https://buy.stripe.com/8x27sEePYft3e59adt6sw03" rel="noopener">
         <span>Activate My <span style="white-space:nowrap">14-Day</span> Free Trial</span> <span class="arw" aria-hidden="true">→</span>
@@ -132,6 +133,12 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
       el.appendChild(document.createTextNode(dir.slice(corte)));
       document.getElementById('msg-recibido').hidden = true;
       document.getElementById('msg-dir').hidden = false;
+      // El botón de Stripe lleva la dirección apartada (sin ".rexsite.ai"):
+      // al activar la prueba, Stripe se la pasa al dashboard y su sitio se
+      // reconoce aunque escriba otro correo. Stripe solo acepta letras,
+      // números y guiones, que es justo lo que permite la regla de arriba.
+      var activar = document.getElementById('ir-a-activar');
+      activar.href = activar.href.split('?')[0] + '?client_reference_id=' + encodeURIComponent(dir.slice(0, corte));
       // Para mostrarla en welcome.html cuando vuelva de Stripe.
       try {
         window.localStorage.setItem('rexsite_usa_dir', JSON.stringify({ dir: dir, t: Date.now() }));
