@@ -132,6 +132,8 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
 /* Lo que no se pudo guardar, junto al dato que hay que corregir. */
 .campo__error{ color:#C4402F; font-size:.86rem; margin-top:8px; line-height:1.45; }
 .campo [aria-invalid="true"]{ border-color:#C4402F; }
+/* Casilla de Cloudflare: el alto reserva su lugar para que el botón no brinque. */
+.casilla{ margin-bottom:18px; min-height:65px; }
 .alta__error{
   background:rgba(196,64,47,.08); border:1.5px solid rgba(196,64,47,.45);
   border-radius:var(--r-sm); color:#8E2B1F;
@@ -297,6 +299,11 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
           <p class="campo__error" id="error-whatsapp" hidden></p>
         </div>
 
+        <!-- Casilla "no soy robot" de Cloudflare (Turnstile). La dibuja el
+             script de Cloudflare del final de la página; ver "Casilla de
+             Cloudflare" en el script. -->
+        <div class="casilla" id="casilla"></div>
+
         <div class="alta__error" id="alta-error" role="alert" hidden></div>
 
         <div class="alta__envio">
@@ -415,6 +422,50 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
     pintarDiseno();
   } catch (e) { /* navegador muy viejo: queda Signature y se ve el radio */ }
 
+  /* ══════════ Casilla de Cloudflare ("no soy robot") ══════════
+     La dibuja el script de Cloudflare (al final de la página) dentro del
+     formulario, y su token viaja solo con los datos (campo
+     cf-turnstile-response). El dashboard solo la exige si está marcada como
+     obligatoria; si falta, contesta con el aviso en español. Cada token
+     sirve una sola vez: si el envío no pasa, se pide uno nuevo. En
+     rexsite.ai va la casilla real. En copias de prueba y en la Mac va la de
+     prueba de Cloudflare: en pantalla siempre pasa, pero el dashboard no la
+     acepta (solo acepta la de rexsite.ai), así que con la casilla
+     obligatoria solo se puede probar en www.rexsite.ai. Si Cloudflare no
+     carga, el formulario se manda igual y el dashboard decide. */
+  var CASILLA_REAL = '0x4AAAAAAFY6lsrijN-yLj1r';
+  var CASILLA_PRUEBA = '1x00000000000000000000AA';
+  var idCasilla = null;
+
+  window.rexsiteCasilla = function () {
+    try {
+      var enRexsite = /(^|\.)rexsite\.ai$/.test(window.location.hostname);
+      // La normal mide al menos 300 px; en celulares angostos va la compacta.
+      var cabe = document.getElementById('casilla').offsetWidth >= 300;
+      var id = window.turnstile.render('#casilla', {
+        sitekey: enRexsite ? CASILLA_REAL : CASILLA_PRUEBA,
+        language: 'es',
+        theme: 'light',
+        size: cabe ? 'flexible' : 'compact'
+      });
+      idCasilla = id === undefined ? null : id;
+    } catch (e) { idCasilla = null; }
+  };
+
+  function reiniciarCasilla() {
+    try {
+      if (window.turnstile && idCasilla !== null) window.turnstile.reset(idCasilla);
+    } catch (e) { /* nada: el siguiente envío lo decide el dashboard */ }
+  }
+
+  // Al regresar con "Atrás" desde la página de gracias, el navegador puede
+  // mostrar la página tal como quedó (botón en "ENVIANDO…" y token ya usado).
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    terminarEnvio();
+    reiniciarCasilla();
+  });
+
   /* ══════════ Envío al sistema ══════════
      Los datos van al dashboard de RexSite, que los guarda y avisa. Además se
      manda una copia a los formularios de Netlify como respaldo: si el
@@ -526,9 +577,11 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
     return datos;
   }
 
+  // El token de la casilla de Cloudflare no va en la copia: solo le sirve al dashboard.
   function respaldoEnNetlify() {
     var partes = [];
     new FormData(form).forEach(function (v, k) {
+      if (k === 'cf-turnstile-response') return;
       partes.push(encodeURIComponent(k) + '=' + encodeURIComponent(String(v)));
     });
     return pedir('/', {
@@ -600,6 +653,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
         // Cualquier otra respuesta se trata como que el sistema no respondió.
         if (d.error && [400, 409, 413, 429].indexOf(res.status) !== -1) {
           terminarEnvio();
+          reiniciarCasilla();
           if (d.campo) mostrarError(d.campo, d.error);
           else mostrarErrorGeneral(d.error);
           if (d.campo === 'subdominio') { editadoAMano = true; pintarEstado('', ''); }
@@ -613,12 +667,15 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
         respaldo.then(function (ok) {
           if (ok) return irAGracias('', true);
           terminarEnvio();
+          reiniciarCasilla();
           mostrarErrorGeneral('No pudimos enviar tus datos. Revisa tu conexión a internet e intenta de nuevo.');
         });
       });
   }
 })();
 </script>
+<!-- Casilla de Cloudflare: se carga al final y llama a rexsiteCasilla (arriba). -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=rexsiteCasilla" async defer></script>
 
 </body>
 </html>
