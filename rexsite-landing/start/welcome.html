@@ -32,6 +32,9 @@ fbq('track', 'PageView');
 // StartTrial solo cuando la persona llega desde Stripe con un pago real
 // (?session_id=cs_live_…), y una sola vez por sesión de pago: quien abra la
 // página directo, la recargue o pruebe en modo test de Stripe no cuenta.
+// El dashboard le manda a Meta el mismo StartTrial cuando Stripe le avisa (API
+// de conversiones) con la sesión de pago como número: con el mismo eventID
+// aquí, Meta junta los dos y cuenta uno solo.
 (function () {
   var clave;
   try {
@@ -40,7 +43,7 @@ fbq('track', 'PageView');
     clave = 'rexsite_usa_prueba_' + sesion.slice(-24);
   } catch (e) { return; /* navegador muy viejo: no se cuenta */ }
   try { if (window.localStorage.getItem(clave)) return; } catch (e) { /* sin almacenamiento: se cuenta */ }
-  fbq('track', 'StartTrial', { value: 0, currency: 'USD' });
+  fbq('track', 'StartTrial', { value: 0, currency: 'USD' }, { eventID: sesion });
   try { window.localStorage.setItem(clave, '1'); } catch (e) { /* nada */ }
 })();
 </script>

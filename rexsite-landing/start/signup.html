@@ -624,6 +624,24 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
     return datos;
   }
 
+  // Cookies del píxel de Meta (_fbp, _fbc). Van con el registro para que el
+  // dashboard le diga a Meta que es la misma persona que vio el anuncio (API
+  // de conversiones). Si no hay o no se pueden leer, el registro sale igual.
+  function cookiesDeMeta() {
+    var r = {};
+    try {
+      document.cookie.split(';').forEach(function (c) {
+        var i = c.indexOf('=');
+        if (i < 0) return;
+        var k = c.slice(0, i).trim();
+        if (k !== '_fbp' && k !== '_fbc') return;
+        var v = decodeURIComponent(c.slice(i + 1).trim());
+        if (v && v.length <= 300) r[k.slice(1)] = v;
+      });
+    } catch (e) { /* sin cookies: no pasa nada */ }
+    return r;
+  }
+
   // La copia lleva el mismo teléfono que el dashboard (con +1). El token de
   // la casilla de Cloudflare no va: solo le sirve al dashboard.
   function respaldoEnNetlify(telefono) {
@@ -683,6 +701,9 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
     // Para saber en el dashboard que el registro vino de esta landing,
     // aunque no haya llegado desde un anuncio.
     if (!datos.pagina) datos.pagina = '/start';
+    var meta = cookiesDeMeta();
+    if (meta.fbp) datos.fbp = meta.fbp;
+    if (meta.fbc) datos.fbc = meta.fbc;
 
     // La copia de respaldo sale siempre, al mismo tiempo.
     var respaldo = respaldoEnNetlify(datos.whatsapp);
