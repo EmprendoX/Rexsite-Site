@@ -34,14 +34,21 @@ fbq('track', 'PageView');
 // dashboard o en la copia de respaldo), así que lo contamos como Lead.
 // Una sola vez por dirección: quien regresa de Stripe con "Atrás" o
 // recarga la página no cuenta como otro registro.
+// El dashboard le manda a Meta el mismo Lead desde el servidor (API de
+// conversiones) con el número "lead_<dirección>": con el mismo eventID aquí,
+// Meta junta los dos y cuenta uno solo.
 (function () {
   var clave = '';
+  var opciones = null;
   try {
     var dir = (new URLSearchParams(window.location.search).get('dir') || '').toLowerCase();
     if (dir) clave = 'rexsite_usa_lead_' + dir.slice(0, 80);
+    var sub = /^([a-z0-9][a-z0-9-]{1,61}[a-z0-9])\.rexsite\.ai$/.exec(dir);
+    if (sub) opciones = { eventID: 'lead_' + sub[1] };
     if (clave && window.sessionStorage.getItem(clave)) return;
   } catch (e) { /* sin almacenamiento: se cuenta */ }
-  fbq('track', 'Lead');
+  if (opciones) fbq('track', 'Lead', {}, opciones);
+  else fbq('track', 'Lead');
   try { if (clave) window.sessionStorage.setItem(clave, '1'); } catch (e) { /* nada */ }
 })();
 // InitiateCheckout se dispara al hacer clic en el botón de pago (ver el
