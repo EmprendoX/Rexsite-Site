@@ -26,6 +26,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="/start/assets/img/hero.webp">
 <link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
+<style>
+/* Sección "Choose your website design" (igual que en la landing en español).
+   Va aquí y no en styles.css: ese archivo se guarda un año en caché y los
+   visitantes de antes no verían el cambio. */
+.dcard__acciones{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.dcard__body .dcard__acciones .btn{ margin-top:0; align-self:stretch; }
+.dtag--sig{ background:#EAE3D8; color:#292723; }
+</style>
 
 <!-- Meta Pixel Code: pixel "Rexsite.ai USA", solo para la landing de
      Estados Unidos (la de español usa otro pixel). -->
@@ -144,6 +152,92 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ DISEÑOS (demos) ══════════════════
+     Igual que "Elige el diseño de tu sitio" de la landing en español: un
+     sitio de ejemplo por diseño. "Choose" lleva al formulario con ese diseño
+     ya marcado (?diseno=). Textos aprobados por Agustín el 20 oct 2026. -->
+<section class="section s-ivory" id="demos">
+  <div class="wrap wrap--wide">
+    <div class="shead shead--center">
+      <span class="eyebrow rv">Two designs, the same complete website</span>
+      <h2 class="rv rv-d1">Choose your website design. <span class="grad">You can switch anytime.</span></h2>
+      <p class="lead rv rv-d2">Both include everything: property search, listing pages, PDF flyers, a mortgage calculator, and a "Text us" button. Only the look changes. Open them and browse like a buyer would: they're live websites, not screenshots.</p>
+    </div>
+
+    <div class="dgrid">
+
+      <article class="dcard rv rv-d1">
+        <div class="frame">
+          <div class="frame__bar" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="frame__url">demo-tres-rexsite.rexsite.ai</span>
+          </div>
+          <img src="/start/assets/img/demo-signature.webp" width="1400" height="713" alt="Home page of Atelier Residencial, a demo website with the Signature design." loading="lazy">
+        </div>
+        <div class="dcard__body">
+          <span class="dtag dtag--sig">Signature · New</span>
+          <h3>Refined and elegant</h3>
+          <p>Ivory background, charcoal details, and editorial-style headings. Ideal for upscale residential properties.</p>
+          <div class="dcard__acciones">
+            <a class="btn btn--sm" href="/start/signup.html?diseno=signature">
+              Choose Signature
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--sm btn--ghost" href="https://demo-tres-rexsite.rexsite.ai/en" target="_blank" rel="noopener" aria-label="View the Signature demo (opens in a new tab)">
+              View Demo
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="dcard rv rv-d2">
+        <div class="frame">
+          <div class="frame__bar" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="frame__url">demo-1.rexsite.ai</span>
+          </div>
+          <img src="/start/assets/img/demo-clasica.webp" width="1400" height="713" alt="Home page of Brisa Caribe Propiedades, a demo website with the Classic design." loading="lazy">
+        </div>
+        <div class="dcard__body">
+          <span class="dtag">Classic</span>
+          <h3>In your brand colors</h3>
+          <p>Your logo and your colors on buttons, prices, and details. Clean, fresh, and straightforward.</p>
+          <div class="dcard__acciones">
+            <a class="btn btn--sm" href="/start/signup.html?diseno=clasica">
+              Choose Classic
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--sm btn--ghost" href="https://demo-1.rexsite.ai/en" target="_blank" rel="noopener" aria-label="View the Classic demo (opens in a new tab)">
+              View Demo
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="cta-block cta-block--center dcta rv rv-d3">
+      <p class="lead">Yours can be live in minutes, with your properties and your brand.</p>
+      <a class="btn btn--lg" data-cta href="/start/signup.html">
+        Start My Free Trial
+        <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="cta-note">
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Secure payment with Stripe.
+        </span>
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Cancel anytime.
+        </span>
+      </div>
     </div>
   </div>
 </section>
