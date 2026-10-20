@@ -630,6 +630,9 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
     temaEnviado = datos.tema || '';
     var rastreo = window.rexsiteRastreo ? window.rexsiteRastreo() : {};
     Object.keys(rastreo).forEach(function (k) { datos[k] = rastreo[k]; });
+    // Este formulario lleva a la prueba gratis en Stripe (en pesos): con esto
+    // el dashboard sabe que su registro entra a lo automático de México.
+    datos.pago = 'stripe';
 
     // La copia de respaldo sale siempre, al mismo tiempo.
     var respaldo = respaldoEnNetlify();
