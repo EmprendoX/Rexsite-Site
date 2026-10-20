@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bienvenida de la landing de México: a esta página manda Stripe después
+     de activar la prueba. Link de Stripe en pesos → "Después del pago" →
+     https://www.rexsite.ai/bienvenida.html?session_id={CHECKOUT_SESSION_ID} -->
+<title>Tu prueba gratis está activa — RexSite</title>
+<meta name="theme-color" content="#0A1D36">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '956132630850037');
+fbq('track', 'PageView');
+// StartTrial solo cuando la persona llega desde Stripe con un pago real
+// (?session_id=cs_live_…), y una sola vez por sesión de pago: quien abra la
+// página directo, la recargue o pruebe en modo test de Stripe no cuenta. El
+// número es la sesión de pago, igual que en la landing de Estados Unidos.
+(function () {
+  var clave;
+  try {
+    var sesion = new URLSearchParams(window.location.search).get('session_id') || '';
+    if (!/^cs_live_[A-Za-z0-9]+$/.test(sesion)) return;
+    clave = 'rexsite_mx_prueba_' + sesion.slice(-24);
+  } catch (e) { return; /* navegador muy viejo: no se cuenta */ }
+  try { if (window.localStorage.getItem(clave)) return; } catch (e) { /* sin almacenamiento: se cuenta */ }
+  fbq('track', 'StartTrial', { value: 0, currency: 'MXN' }, { eventID: sesion });
+  try { window.localStorage.setItem(clave, '1'); } catch (e) { /* nada */ }
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+.puente{
+  min-height:100dvh; display:grid; place-items:center;
+  text-align:center; padding:32px;
+  background:
+    radial-gradient(80% 60% at 50% 0%, var(--sky), transparent 70%),
+    var(--ivory-2);
+}
+.puente > div{ max-width:520px; }
+.puente__logo{ width:150px; margin:0 auto 28px; }
+.puente__ok{
+  width:56px; height:56px; border-radius:50%; margin:0 auto 18px;
+  display:grid; place-items:center;
+  background:var(--green-soft); color:var(--green);
+}
+.puente h1{ font-size:clamp(1.6rem,3.4vw,2.2rem); margin-bottom:18px; }
+.puente p{ color:var(--tx-2); margin-bottom:24px; }
+
+/* La dirección de su sitio (la guarda gracias.html antes de ir a Stripe). */
+.puente__dir{
+  display:inline-block; margin:6px 0 0;
+  padding:8px 14px; border-radius:var(--r-sm);
+  background:var(--sky); color:var(--blue-deep);
+  font-weight:700; overflow-wrap:anywhere;
+}
+
+/* Aviso del correo: resaltado en dorado para que se lea. */
+.aviso{
+  display:flex; gap:14px; align-items:flex-start; text-align:left;
+  background:rgba(233,169,58,.13);
+  border:1.5px solid rgba(233,169,58,.55);
+  border-radius:var(--r-md);
+  padding:16px 18px;
+  margin:0 auto;
+}
+.aviso svg{ flex:none; margin-top:2px; color:var(--gold); }
+.aviso p{ margin:0; color:var(--tx); font-size:.97rem; line-height:1.55; }
+.aviso strong{ color:var(--navy); }
+</style>
+</head>
+<body>
+
+<main class="puente">
+  <div>
+    <img class="puente__logo" src="assets/img/logo.png?v=2" alt="RexSite" width="730" height="220">
+
+    <div class="puente__ok" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+
+    <h1>¡Listo! Tu prueba gratis está activa.</h1>
+
+    <p id="msg-dir" hidden>
+      Tu sitio:<br>
+      <span class="puente__dir" id="dir"></span>
+    </p>
+
+    <p>
+      Estamos confirmando tus datos. Tu sitio queda en línea en unos minutos
+      y te llega un correo con el enlace a tu sitio y a tu panel para
+      administrarlo.
+    </p>
+
+    <div class="aviso" role="status">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M3.5 7l8.5 6 8.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p>
+        <strong>Revisa tu bandeja de entrada.</strong>
+        Si no ves nuestro correo, búscalo en la bandeja de
+        <strong>correo no deseado o spam</strong>.
+      </p>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  // La dirección que guardó gracias.html (de las últimas 24 horas), como
+  // texto y solo si tiene la forma nombre.rexsite.ai. Si no hay, no se muestra.
+  try {
+    var guardado = JSON.parse(window.localStorage.getItem('rexsite_mx_dir') || 'null');
+    if (!guardado || Date.now() - guardado.t > 864e5) return;
+    var dir = String(guardado.dir || '');
+    if (!/^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?\.rexsite\.ai$/.test(dir)) return;
+    var el = document.getElementById('dir');
+    var corte = dir.lastIndexOf('.rexsite.ai');
+    el.appendChild(document.createTextNode(dir.slice(0, corte)));
+    el.appendChild(document.createElement('wbr'));
+    el.appendChild(document.createTextNode(dir.slice(corte)));
+    document.getElementById('msg-dir').hidden = false;
+  } catch (e) { /* sin almacenamiento: no se muestra la dirección */ }
+})();
+</script>
+
+</body>
+</html>
