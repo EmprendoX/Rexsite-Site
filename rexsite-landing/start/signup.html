@@ -7,7 +7,9 @@
      Diferencias: el teléfono de 10 dígitos se manda con +1 (el dashboard toma
      10 dígitos como México), los errores del dashboard se muestran en inglés,
      el formulario de respaldo en Netlify se llama "alta-usa" y el registro
-     lleva pagina=/start para saber que vino de esta landing. -->
+     lleva pagina=/start para saber que vino de esta landing.
+     Prueba de 14 días sin tarjeta: el registro lleva prueba=sin_tarjeta y la
+     página de gracias muestra lo que contestó el dashboard (ver irAGracias). -->
 <title>Let's Start Your Website — RexSite</title>
 <meta name="description" content="Choose your design, fill in four details, and your real estate website will be live in minutes.">
 <meta name="theme-color" content="#0A1D36">
@@ -317,7 +319,7 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
           <button type="submit" class="btn btn--lg" id="alta-boton">
             CONTINUE <span class="arw" aria-hidden="true">→</span>
           </button>
-          <p class="alta__paso">Next step: activate your 14-day free trial.</p>
+          <p class="alta__paso">No credit card required. Your website will be ready in minutes.</p>
         </div>
       </form>
     </div>
@@ -658,10 +660,15 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
     }, 15000).then(function (r) { return r.ok; }, function () { return false; });
   }
 
-  function irAGracias(direccion, deRespaldo) {
+  // prueba: lo que contestó el dashboard. "sin_tarjeta": su prueba empezó
+  // (gracias sin Stripe); "anterior": un registro de antes, que sigue con su
+  // link de Stripe. Sin dato (p. ej. el dashboard no pudo empezarla), la
+  // página de activar en Stripe, como antes.
+  function irAGracias(direccion, deRespaldo, prueba) {
     var q = [];
     if (direccion) q.push('dir=' + encodeURIComponent(direccion));
     if (deRespaldo) q.push('respaldo=1');
+    if (prueba === 'sin_tarjeta' || prueba === 'anterior') q.push('prueba=' + prueba);
     // El diseño que se mandó (aunque después hayan movido la elección).
     if (temaEnviado) q.push('diseno=' + encodeURIComponent(temaEnviado));
     window.location.href = '/start/thanks.html' + (q.length ? '?' + q.join('&') : '');
@@ -701,6 +708,9 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
     // Para saber en el dashboard que el registro vino de esta landing,
     // aunque no haya llegado desde un anuncio.
     if (!datos.pagina) datos.pagina = '/start';
+    // Prueba de 14 días sin tarjeta: con la casilla comprobada, el dashboard
+    // crea el sitio solo.
+    datos.prueba = 'sin_tarjeta';
     var meta = cookiesDeMeta();
     if (meta.fbp) datos.fbp = meta.fbp;
     if (meta.fbc) datos.fbc = meta.fbc;
@@ -722,7 +732,7 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
       })
       .then(function (res) {
         var d = res.d || {};
-        if (res.status === 200 && d.ok) return irAGracias(d.direccion, false);
+        if (res.status === 200 && d.ok) return irAGracias(d.direccion, false, d.prueba);
         // Un dato que corregir, o demasiados intentos: se dice y se queda aquí.
         // Cualquier otra respuesta se trata como que el sistema no respondió.
         if (d.error && [400, 409, 413, 429].indexOf(res.status) !== -1) {
@@ -740,7 +750,7 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
         // El sistema no respondió: si la copia de respaldo llegó, el
         // registro está a salvo y seguimos; si no, se pide intentar otra vez.
         respaldo.then(function (ok) {
-          if (ok) return irAGracias('', true);
+          if (ok) return irAGracias('', true, 'sin_tarjeta');
           terminarEnvio();
           reiniciarCasilla();
           mostrarErrorGeneral(MENSAJES.red);
