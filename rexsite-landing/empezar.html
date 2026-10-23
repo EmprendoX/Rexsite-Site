@@ -310,7 +310,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
           <button type="submit" class="btn btn--lg" id="alta-boton">
             CONTINUAR <span class="arw" aria-hidden="true">→</span>
           </button>
-          <p class="alta__paso">Siguiente paso: activas tu prueba de 14 días.</p>
+          <p class="alta__paso">No necesitas tarjeta. Tu sitio queda listo en minutos.</p>
         </div>
       </form>
     </div>
@@ -591,10 +591,15 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
     }, 15000).then(function (r) { return r.ok; }, function () { return false; });
   }
 
-  function irAGracias(direccion, deRespaldo) {
+  // prueba: lo que contestó el dashboard. "sin_tarjeta": su prueba empezó
+  // (gracias sin Stripe); "anterior": un registro de antes, que sigue con su
+  // link de Stripe. Sin dato (p. ej. el dashboard no pudo empezarla), la
+  // página de activar en Stripe, como antes.
+  function irAGracias(direccion, deRespaldo, prueba) {
     var q = [];
     if (direccion) q.push('dir=' + encodeURIComponent(direccion));
     if (deRespaldo) q.push('respaldo=1');
+    if (prueba === 'sin_tarjeta' || prueba === 'anterior') q.push('prueba=' + prueba);
     // El diseño que se mandó (aunque después hayan movido la elección).
     if (temaEnviado) q.push('diseno=' + encodeURIComponent(temaEnviado));
     window.location.href = '/gracias.html' + (q.length ? '?' + q.join('&') : '');
@@ -630,9 +635,12 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
     temaEnviado = datos.tema || '';
     var rastreo = window.rexsiteRastreo ? window.rexsiteRastreo() : {};
     Object.keys(rastreo).forEach(function (k) { datos[k] = rastreo[k]; });
-    // Este formulario lleva a la prueba gratis en Stripe (en pesos): con esto
-    // el dashboard sabe que su registro entra a lo automático de México.
+    // Registro del formulario de México: con esto el dashboard sabe que entra
+    // a lo automático de México (no quitarlo).
     datos.pago = 'stripe';
+    // Prueba de 14 días sin tarjeta: con la casilla comprobada, el dashboard
+    // crea el sitio solo.
+    datos.prueba = 'sin_tarjeta';
 
     // La copia de respaldo sale siempre, al mismo tiempo.
     var respaldo = respaldoEnNetlify();
@@ -651,7 +659,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
       })
       .then(function (res) {
         var d = res.d || {};
-        if (res.status === 200 && d.ok) return irAGracias(d.direccion, false);
+        if (res.status === 200 && d.ok) return irAGracias(d.direccion, false, d.prueba);
         // Un dato que corregir, o demasiados intentos: se dice y se queda aquí.
         // Cualquier otra respuesta se trata como que el sistema no respondió.
         if (d.error && [400, 409, 413, 429].indexOf(res.status) !== -1) {
@@ -668,7 +676,7 @@ src="https://www.facebook.com/tr?id=956132630850037&ev=PageView&noscript=1"
         // El sistema no respondió: si la copia de respaldo llegó, el
         // registro está a salvo y seguimos; si no, se pide intentar otra vez.
         respaldo.then(function (ok) {
-          if (ok) return irAGracias('', true);
+          if (ok) return irAGracias('', true, 'sin_tarjeta');
           terminarEnvio();
           reiniciarCasilla();
           mostrarErrorGeneral('No pudimos enviar tus datos. Revisa tu conexión a internet e intenta de nuevo.');
