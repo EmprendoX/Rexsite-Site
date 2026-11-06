@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Cuestionario de Rexsite Growth (www.rexsite.ai/start/call).
+     Los botones de Growth de /start/plan llegan aquí con ?b=<botón>.
+     6 preguntas en 3 pantallas; luego TODOS ven la agenda de Google Calendar
+     de Agustín (lo pidió él el 6 nov: "que todas puedan generar una cita").
+     El color (VERDE / AMARILLO / ROJO + motivo) es solo para que Agustín
+     sepa antes de la llamada con quién va a hablar: el cliente no lo ve.
+     Las respuestas se guardan en los formularios de Netlify ("llamada-growth"),
+     igual que la copia de respaldo de signup.html. Si guardar falla, el cliente
+     sigue igual (Google también guarda su nombre y correo al agendar).
+     Va dentro de /start, como las demás páginas de Estados Unidos.
+     Píxel: PageView, y "SubmitApplication" al terminar el cuestionario. A
+     propósito NO se usa "Lead": ese ya lo manda el registro del sitio. -->
+<title>Book a Strategy Call — Rexsite Growth</title>
+<meta name="description" content="Answer a few quick questions and book a free 30-minute strategy call about Rexsite Growth.">
+<meta name="theme-color" content="#0A1D36">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/start/assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/start/assets/img/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
+
+<!-- Meta Pixel Code: pixel "Rexsite.ai USA", el mismo de /start
+     (la de español usa otro pixel). -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1737083810729024');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+/* ══════════ Cuestionario: estilos propios de esta página ══════════
+   La base (.alta, .campo, errores, volver) es igual a signup.html.
+   El resto lo hereda de styles.css. */
+.alta{
+  min-height:100dvh;
+  background:
+    radial-gradient(80% 60% at 50% 0%, var(--sky), transparent 70%),
+    var(--ivory-2);
+  padding:clamp(24px,5vw,56px) 0 64px;
+}
+.alta__logo{ display:block; width:150px; margin:0 auto clamp(28px,5vw,44px); }
+.alta__logo img{ width:100%; }
+
+.alta__head{ text-align:center; max-width:600px; margin:0 auto clamp(26px,4vw,38px); }
+.alta__head h1{ font-size:clamp(1.75rem,3.6vw,2.5rem); margin-bottom:12px; }
+.alta__head p{ color:var(--tx-2); font-size:1.05rem; }
+
+.alta__card{
+  max-width:600px; margin:0 auto;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  box-shadow:var(--sh-md);
+  padding:clamp(24px,4vw,40px);
+}
+
+/* Avance: "Step 1 of 3" y una barrita. Solo con JavaScript. */
+.avance{ display:none; margin-bottom:26px; }
+.con-pasos .avance{ display:block; }
+.avance__txt{ display:flex; justify-content:space-between; gap:12px; font-size:.86rem; color:var(--tx-3); margin-bottom:9px; }
+.avance__txt b{ color:var(--navy); font-family:var(--f-display); }
+.avance__riel{ height:6px; border-radius:var(--r-pill); background:var(--sky); overflow:hidden; }
+.avance__barra{ height:100%; width:33.4%; border-radius:inherit; background:var(--blue); transition:width .3s ease; }
+
+/* Pantallas. Sin JavaScript se ven todas, una tras otra. */
+.paso + .paso{ margin-top:34px; }
+.con-pasos .paso{ display:none; }
+.con-pasos .paso.is-on{ display:block; margin-top:0; }
+.paso__t{ font-size:1.3rem; margin-bottom:22px; }
+.paso__t:focus{ outline:0; }
+
+/* Una pregunta = un grupo con su título. */
+.preg{ border:0; padding:0; margin:0 0 26px; min-width:0; }
+.preg > legend, .preg > label{
+  display:block; padding:0; font-family:var(--f-display); font-weight:700;
+  font-size:.98rem; color:var(--navy); margin-bottom:10px; line-height:1.4;
+}
+.ayuda{ font-size:.86rem; color:var(--tx-3); margin:-4px 0 10px; line-height:1.5; }
+.ops{ display:grid; gap:8px; }
+.op{
+  display:flex; align-items:flex-start; gap:10px;
+  padding:12px 14px; cursor:pointer; line-height:1.4;
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  background:var(--paper); color:var(--tx);
+  transition:border-color .18s, box-shadow .18s, background .18s;
+}
+.op:hover{ border-color:#BBD3F2; }
+.op:has(input:checked){ border-color:var(--blue); box-shadow:0 0 0 3px rgba(24,120,222,.14); background:#F6FAFF; }
+.op input{ margin:3px 0 0; accent-color:var(--blue); flex:none; }
+
+.preg input[type=text],
+.preg input[type=email],
+.preg input[type=tel]{
+  width:100%; font:inherit; color:var(--tx);
+  padding:15px 17px;
+  border:1.5px solid var(--line); border-radius:var(--r-sm);
+  background:var(--paper);
+  transition:border-color .18s, box-shadow .18s;
+}
+.preg input::placeholder{ color:var(--tx-3); }
+.preg input:focus{ outline:0; border-color:var(--blue); box-shadow:0 0 0 4px rgba(24,120,222,.14); }
+/* Igual de específica que la regla de arriba y va después: así gana. */
+.preg input[aria-invalid="true"]{ border-color:#C4402F; }
+.otra{ margin-top:10px; }
+
+.campo__error{ color:#C4402F; font-size:.86rem; margin-top:8px; line-height:1.45; }
+
+/* Botones de cada pantalla: "Back" a la izquierda, "Next" a la derecha. */
+.acciones{ display:flex; align-items:center; justify-content:flex-end; gap:16px; margin-top:8px; }
+.acciones .btn{ margin-left:auto; }
+.atras{
+  font:inherit; font-size:.95rem; color:var(--tx-3); background:none; border:0;
+  padding:10px 4px; cursor:pointer;
+}
+.atras:hover{ color:var(--blue); }
+/* Sin JavaScript no hay pantallas: "Next" y "Back" no sirven y se esconden. */
+form:not(.con-pasos) .no-js-oculto{ display:none; }
+.privado{ font-size:.86rem; color:var(--tx-3); margin-top:16px; line-height:1.5; }
+
+/* Resultado (lo pinta el script). */
+.res{ max-width:760px; margin:0 auto; text-align:center; }
+.res[hidden]{ display:none; }
+.res h1{ font-size:clamp(1.75rem,3.6vw,2.5rem); margin-bottom:12px; }
+.res h1:focus{ outline:0; }
+.res > p{ color:var(--tx-2); font-size:1.05rem; max-width:600px; margin:0 auto; }
+.agenda{
+  margin-top:clamp(22px,3vw,30px);
+  background:var(--paper); border:1px solid var(--line);
+  border-radius:var(--r-lg); box-shadow:var(--sh-md);
+  overflow:hidden;
+}
+.agenda iframe{ display:block; width:100%; height:720px; border:0; }
+.agenda__link{ display:inline-block; margin-top:16px; font-size:.92rem; color:var(--blue-deep); font-weight:600; }
+
+.volver{ display:block; text-align:center; margin-top:26px; font-size:.9rem; color:var(--tx-3); }
+.volver:hover{ color:var(--blue); }
+
+/* Trampa antispam: invisible para personas, visible para bots. */
+.miel{ position:absolute; left:-9999px; opacity:0; }
+</style>
+</head>
+<body>
+
+<main class="alta">
+  <div class="wrap">
+
+    <a class="alta__logo" href="/start/plan.html" aria-label="RexSite">
+      <img src="/start/assets/img/logo.png" alt="RexSite" width="730" height="220">
+    </a>
+
+    <div id="cuestionario">
+      <div class="alta__head">
+        <h1>Let's See If Rexsite Growth Is Right for You</h1>
+        <p>Answer a few quick questions, then pick a time for your free 30-minute strategy call.</p>
+      </div>
+
+      <div class="alta__card">
+        <form name="llamada-growth" method="POST" action="/start/call.html"
+              data-netlify="true" netlify-honeypot="bot-field" id="form-llamada">
+
+          <!-- Netlify necesita este campo para identificar el formulario. -->
+          <input type="hidden" name="form-name" value="llamada-growth">
+          <p class="miel" aria-hidden="true">
+            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+          <!-- Los llena el script. "resultado" es el color; "boton", el botón
+               de /start/plan que tocó; lo demás, de qué anuncio llegó. -->
+          <input type="hidden" name="resultado" value="">
+          <input type="hidden" name="boton" value="">
+          <input type="hidden" name="utm_source" value="">
+          <input type="hidden" name="utm_medium" value="">
+          <input type="hidden" name="utm_campaign" value="">
+          <input type="hidden" name="utm_content" value="">
+          <input type="hidden" name="utm_term" value="">
+          <input type="hidden" name="fbclid" value="">
+          <input type="hidden" name="gclid" value="">
+          <input type="hidden" name="pagina" value="">
+
+          <div class="avance" aria-live="polite">
+            <div class="avance__txt"><b id="avance-txt">Step 1 of 3</b><span>About 1 minute</span></div>
+            <div class="avance__riel"><div class="avance__barra" id="avance-barra"></div></div>
+          </div>
+
+          <!-- ══════ Pantalla 1: el negocio ══════ -->
+          <div class="paso is-on">
+            <h2 class="paso__t" tabindex="-1">Your Business</h2>
+
+            <fieldset class="preg" data-preg="necesidad" data-msg="Please choose an option.">
+              <legend>What do you need most right now?</legend>
+              <div class="ops">
+                <label class="op"><input type="radio" name="necesidad" value="Conseguir compradores con anuncios" required> Start getting buyers through advertising</label>
+                <label class="op"><input type="radio" name="necesidad" value="Contactos mas calificados"> Get more qualified leads</label>
+                <label class="op"><input type="radio" name="necesidad" value="Mejores resultados de sus campanas"> Get better results from my current campaigns</label>
+                <label class="op"><input type="radio" name="necesidad" value="Mejor atencion y seguimiento"> Improve how I respond to and follow up with leads</label>
+                <label class="op"><input type="radio" name="necesidad" value="Solo el sitio web"> I only need the website and its tools</label>
+                <label class="op"><input type="radio" name="necesidad" value="Otra cosa"> Something else</label>
+              </div>
+              <div class="otra" id="otra">
+                <input type="text" name="necesidad_otra" maxlength="300"
+                       aria-label="What are you looking for?"
+                       placeholder="What are you looking for?">
+              </div>
+              <p class="campo__error" hidden></p>
+            </fieldset>
+
+            <div class="preg" data-preg="zona" data-msg="Please tell us your city or area.">
+              <label for="zona">Which city or area do you work in?</label>
+              <p class="ayuda" id="zona-ayuda">Choose the main market you'd like to start with.</p>
+              <input type="text" id="zona" name="zona" maxlength="120" required
+                     placeholder="Austin, TX" autocomplete="address-level2"
+                     aria-describedby="zona-ayuda">
+              <p class="campo__error" hidden></p>
+            </div>
+
+            <fieldset class="preg" data-preg="propiedades" data-msg="Please choose an option.">
+              <legend>Do you have properties you can advertise?</legend>
+              <div class="ops">
+                <label class="op"><input type="radio" name="propiedades" value="Si" required> Yes, I have listings I'm allowed to advertise</label>
+                <label class="op"><input type="radio" name="propiedades" value="En los proximos 30 dias"> I'll have them within the next 30 days</label>
+                <label class="op"><input type="radio" name="propiedades" value="Todavia no"> Not yet</label>
+              </div>
+              <p class="campo__error" hidden></p>
+            </fieldset>
+
+            <div class="acciones">
+              <button type="button" class="btn no-js-oculto" data-sig>Next <span class="arw" aria-hidden="true">→</span></button>
+            </div>
+          </div>
+
+          <!-- ══════ Pantalla 2: la inversión ══════ -->
+          <div class="paso">
+            <h2 class="paso__t" tabindex="-1">Your Investment</h2>
+
+            <fieldset class="preg" data-preg="presupuesto" data-msg="Please choose an option.">
+              <legend>Rexsite Growth is US$999/month, plus your ad budget. If it's a good fit for you, does that work for your budget?</legend>
+              <div class="ops">
+                <label class="op"><input type="radio" name="presupuesto" value="Si" required> Yes, it fits my budget</label>
+                <label class="op"><input type="radio" name="presupuesto" value="Si, con dudas"> Possibly, but I have a few questions</label>
+                <label class="op"><input type="radio" name="presupuesto" value="No tiene ese presupuesto"> Not right now</label>
+                <label class="op"><input type="radio" name="presupuesto" value="Busca pagar solo al cerrar"> I'm looking for a model where I only pay after closing a sale</label>
+              </div>
+              <p class="campo__error" hidden></p>
+            </fieldset>
+
+            <fieldset class="preg" data-preg="anuncios" data-msg="Please choose an option.">
+              <legend>How much could you invest per month in ads alone?</legend>
+              <p class="ayuda">This is paid directly to Google and Meta, on top of the US$999/month service.</p>
+              <div class="ops">
+                <label class="op"><input type="radio" name="anuncios" value="Menos de $500" required> Less than $500</label>
+                <label class="op"><input type="radio" name="anuncios" value="$500 a $999"> $500 – $999</label>
+                <label class="op"><input type="radio" name="anuncios" value="$1,000 a $2,499"> $1,000 – $2,499</label>
+                <label class="op"><input type="radio" name="anuncios" value="$2,500 o mas"> $2,500 or more</label>
+                <label class="op"><input type="radio" name="anuncios" value="Quiere una recomendacion"> I'd like a recommendation</label>
+              </div>
+              <p class="campo__error" hidden></p>
+            </fieldset>
+
+            <fieldset class="preg" data-preg="cuando" data-msg="Please choose an option.">
+              <legend>When could you get started?</legend>
+              <div class="ops">
+                <label class="op"><input type="radio" name="cuando" value="De inmediato" required> Right away</label>
+                <label class="op"><input type="radio" name="cuando" value="En 2 semanas"> Within the next 2 weeks</label>
+                <label class="op"><input type="radio" name="cuando" value="En 30 dias"> Within 30 days</label>
+                <label class="op"><input type="radio" name="cuando" value="En 1 a 3 meses"> In 1 to 3 months</label>
+                <label class="op"><input type="radio" name="cuando" value="Solo investigando"> I'm just researching for now</label>
+              </div>
+              <p class="campo__error" hidden></p>
+            </fieldset>
+
+            <div class="acciones">
+              <button type="button" class="atras no-js-oculto" data-atras>← Back</button>
+              <button type="button" class="btn no-js-oculto" data-sig>Next <span class="arw" aria-hidden="true">→</span></button>
+            </div>
+          </div>
+
+          <!-- ══════ Pantalla 3: contacto ══════ -->
+          <div class="paso">
+            <h2 class="paso__t" tabindex="-1">How Can We Reach You?</h2>
+
+            <div class="preg" data-preg="nombre" data-msg="Please enter your name.">
+              <label for="nombre">Your name</label>
+              <input type="text" id="nombre" name="nombre" maxlength="120" required
+                     placeholder="John Smith" autocomplete="name">
+              <p class="campo__error" hidden></p>
+            </div>
+
+            <div class="preg" data-preg="email" data-msg="Please enter a valid email.">
+              <label for="email">Your email</label>
+              <input type="email" id="email" name="email" maxlength="254" required
+                     placeholder="john@example.com" autocomplete="email">
+              <p class="campo__error" hidden></p>
+            </div>
+
+            <div class="preg" data-preg="telefono" data-msg="Please enter your number with at least 10 digits.">
+              <label for="telefono">Your mobile number</label>
+              <!-- Mismo pattern que signup.html: cuenta dígitos e ignora
+                   espacios, guiones, paréntesis o +1. -->
+              <input type="tel" id="telefono" name="telefono" required
+                     placeholder="(305) 555-1234" autocomplete="tel" inputmode="tel"
+                     maxlength="40" pattern="(?:\D*\d){10,}\D*">
+              <p class="campo__error" hidden></p>
+            </div>
+
+            <div class="acciones">
+              <button type="button" class="atras no-js-oculto" data-atras>← Back</button>
+              <button type="submit" class="btn" id="enviar">Continue <span class="arw" aria-hidden="true">→</span></button>
+            </div>
+            <p class="privado">We'll only use your details to contact you about your request.</p>
+            <!-- Sin JavaScript, Netlify regresa a esta misma página al enviar:
+                 aquí queda el link para agendar. -->
+            <noscript><p class="privado">After you send your answers, you can book your call here:
+              <a href="https://calendar.app.google/HLb9Z6e5oZm5k3AU6">open our calendar</a>.</p></noscript>
+          </div>
+        </form>
+      </div>
+
+      <a class="volver" href="/start/plan.html">← Back to Rexsite Growth</a>
+    </div>
+
+    <!-- ══════ Resultado: agendar la llamada (todos) ══════ -->
+    <section class="res" id="res-cita" hidden>
+      <h1 tabindex="-1">Great — Let's Talk.</h1>
+      <p>Pick a time for your free 30-minute strategy call. Please use the same email you just entered, so we can prepare with your answers.</p>
+      <div class="agenda">
+        <!-- La agenda de Google se carga hasta este momento, al terminar
+             el cuestionario. -->
+        <iframe id="agenda" title="Choose a time for your strategy call" loading="lazy"></iframe>
+      </div>
+      <a class="agenda__link" href="https://calendar.app.google/HLb9Z6e5oZm5k3AU6" target="_blank" rel="noopener">Open the calendar in a new tab</a>
+    </section>
+
+  </div>
+</main>
+
+<script src="/start/assets/js/rastreo.js?v=1"></script>
+<script>
+(function () {
+  'use strict';
+  if (!window.URLSearchParams || !document.querySelector || !window.FormData) return;
+
+  var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+  var AGENDA = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0dt-HOBGSUfHRiQsy0rBiqPJbCDRg9KJfvGCuFIL6hucT3s_d4pE_jEXM5u3-hl3QPNoaTc3a-?gv=true';
+
+  var form = document.getElementById('form-llamada');
+  var pasos = [].slice.call(form.querySelectorAll('.paso'));
+  var actual = 0;
+  var enviando = false;
+  form.classList.add('con-pasos');
+  // Los avisos los pone este script (en inglés y junto a cada pregunta), no
+  // las burbujas del navegador. Sin JavaScript, el navegador sigue revisando.
+  form.noValidate = true;
+
+  /* ── Qué botón de /start/plan lo trajo (?b=). Se guarda en palabras
+     para que Agustín lo lea en Netlify. ── */
+  var BOTONES = {
+    header: 'Get Started (arriba)',
+    hero: 'Get Started — US$999/month (inicio)',
+    mejorar: 'Improve My Campaigns (ya anuncia)',
+    lanzar: 'Launch My Marketing System (empieza de cero)',
+    precio: 'Get Started With Rexsite Growth (precio)',
+    cierre: 'Start Growing With Rexsite (final)',
+    barra: 'Get Started (barra del celular)'
+  };
+  var b = new URLSearchParams(window.location.search).get('b');
+  form.elements.boton.value = Object.prototype.hasOwnProperty.call(BOTONES, b) ? BOTONES[b] : 'Directo (sin botón)';
+
+  // Cada aviso queda ligado a su pregunta, para que el lector de pantalla
+  // lo lea al llegar el foco ahí.
+  [].slice.call(form.querySelectorAll('[data-preg]')).forEach(function (q) {
+    var err = q.querySelector('.campo__error');
+    err.id = 'error-' + q.getAttribute('data-preg');
+    var destino = q.querySelector('input[type=text]:not([name=necesidad_otra]),input[type=email],input[type=tel]') || q;
+    var antes = destino.getAttribute('aria-describedby');
+    destino.setAttribute('aria-describedby', (antes ? antes + ' ' : '') + err.id);
+  });
+
+  // De qué anuncio llegó (lo guardó rastreo.js en /start/plan).
+  var rastreo = window.rexsiteRastreo ? window.rexsiteRastreo() : {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid', 'pagina']
+    .forEach(function (n) { if (rastreo[n]) form.elements[n].value = String(rastreo[n]).slice(0, 300); });
+
+  function valor(nombre) {
+    var el = form.elements[nombre];
+    if (!el) return '';
+    if (el.length !== undefined && !el.tagName) {   // grupo de radios
+      for (var i = 0; i < el.length; i++) if (el[i].checked) return el[i].value;
+      return '';
+    }
+    return el.value.trim();
+  }
+
+  // "Something else": la cajita de texto solo aparece si la eligen.
+  var otra = document.getElementById('otra');
+  // Escondida también va apagada: así no se guarda un texto que ya no aplica.
+  function refrescarOtra() {
+    otra.hidden = valor('necesidad') !== 'Otra cosa';
+    otra.querySelector('input').disabled = otra.hidden;
+  }
+  refrescarOtra();
+
+  // Al contestar, el aviso de esa pregunta se quita.
+  form.addEventListener('change', function (e) {
+    if (e.target.name === 'necesidad') refrescarOtra();
+    quitarAviso(e.target);
+  });
+  form.addEventListener('input', function (e) { quitarAviso(e.target); });
+  function quitarAviso(el) {
+    var q = el.closest ? el.closest('[data-preg]') : null;
+    if (!q) return;
+    var err = q.querySelector('.campo__error');
+    if (err && !err.hidden && preguntaBien(q)) {
+      err.hidden = true;
+      var campo = q.querySelector('input[type=text],input[type=email],input[type=tel]');
+      if (campo) campo.removeAttribute('aria-invalid');
+    }
+  }
+
+  function preguntaBien(q) {
+    var nombre = q.getAttribute('data-preg');
+    var el = form.elements[nombre];
+    if (el.length !== undefined && !el.tagName) return valor(nombre) !== '';
+    return el.value.trim() !== '' && el.checkValidity();
+  }
+
+  /** Revisa la pantalla i; marca lo que falta y pone el foco en lo primero. */
+  function pasoBien(i) {
+    var primero = null;
+    [].slice.call(pasos[i].querySelectorAll('[data-preg]')).forEach(function (q) {
+      var bien = preguntaBien(q);
+      var err = q.querySelector('.campo__error');
+      var campo = q.querySelector('input[type=text]:not([name=necesidad_otra]),input[type=email],input[type=tel]');
+      err.hidden = bien;
+      if (!bien) err.textContent = q.getAttribute('data-msg');
+      if (campo) { if (bien) campo.removeAttribute('aria-invalid'); else campo.setAttribute('aria-invalid', 'true'); }
+      if (!bien && !primero) primero = campo || q.querySelector('input');
+    });
+    if (primero) primero.focus();
+    return !primero;
+  }
+
+  function mostrar(i) {
+    pasos[actual].classList.remove('is-on');
+    actual = i;
+    pasos[i].classList.add('is-on');
+    // Un doble clic en "Next" o "Back" no debe marcar la respuesta que quedó
+    // debajo del botón en la pantalla nueva: un momento sin clics.
+    var nuevo = pasos[i];
+    nuevo.style.pointerEvents = 'none';
+    setTimeout(function () { nuevo.style.pointerEvents = ''; }, 450);
+    document.getElementById('avance-txt').textContent = 'Step ' + (i + 1) + ' of ' + pasos.length;
+    document.getElementById('avance-barra').style.width = ((i + 1) / pasos.length * 100) + '%';
+    form.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    pasos[i].querySelector('.paso__t').focus({ preventScroll: true });
+  }
+
+  /* ── El color, solo para Agustín (todos agendan, ver arriba):
+     ROJO: algo no encaja, y dice qué (solo quiere el sitio, aún no tiene
+     propiedades, no tiene el presupuesto, quiere pagar al cerrar, menos de
+     $500 en anuncios o solo investiga). AMARILLO: $500–999 en anuncios o
+     empieza en 1 a 3 meses. VERDE: todo lo demás. ── */
+  function clasificar() {
+    var motivos = [];
+    if (valor('necesidad') === 'Solo el sitio web') motivos.push('solo quiere el sitio web');
+    if (valor('propiedades') === 'Todavia no') motivos.push('todavía no tiene propiedades');
+    var p = valor('presupuesto');
+    if (p === 'No tiene ese presupuesto') motivos.push('no tiene el presupuesto de $999');
+    if (p === 'Busca pagar solo al cerrar') motivos.push('quiere pagar solo al cerrar');
+    if (valor('anuncios') === 'Menos de $500') motivos.push('menos de $500 en anuncios');
+    if (valor('cuando') === 'Solo investigando') motivos.push('solo está investigando');
+    if (motivos.length) return 'ROJO - agenda la llamada (revisar: ' + motivos.join(', ') + ')';
+    if (valor('anuncios') === '$500 a $999' || valor('cuando') === 'En 1 a 3 meses') {
+      return 'AMARILLO - agenda la llamada (revisar antes)';
+    }
+    return 'VERDE - agenda la llamada';
+  }
+
+  function siguiente() {
+    if (!pasoBien(actual)) return;
+    if (actual < pasos.length - 1) mostrar(actual + 1);
+  }
+
+  [].slice.call(form.querySelectorAll('[data-sig]')).forEach(function (bt) {
+    bt.addEventListener('click', siguiente);
+  });
+  [].slice.call(form.querySelectorAll('[data-atras]')).forEach(function (bt) {
+    bt.addEventListener('click', function () { if (actual > 0) mostrar(actual - 1); });
+  });
+
+  /** Copia en los formularios de Netlify (como el respaldo de signup.html).
+      Todo va dentro del try: si algo falla, el cliente sigue igual. */
+  function guardarEnNetlify() {
+    try {
+      var partes = [];
+      new FormData(form).forEach(function (v, k) {
+        partes.push(encodeURIComponent(k) + '=' + encodeURIComponent(String(v)));
+      });
+      var cuerpo = partes.join('&');
+      if (LOCAL) { window.__envioDePrueba = cuerpo; return; }   // en la Mac no hay Netlify
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: cuerpo,
+        keepalive: true
+      }).catch(function () { /* el cliente sigue igual */ });
+    } catch (e) { /* el cliente sigue igual */ }
+  }
+
+  function verAgenda() {
+    document.getElementById('cuestionario').hidden = true;
+    var res = document.getElementById('res-cita');
+    document.getElementById('agenda').src = AGENDA;
+    if (window.fbq) window.fbq('track', 'SubmitApplication');
+    res.hidden = false;
+    window.scrollTo(0, 0);
+    res.querySelector('h1').focus({ preventScroll: true });
+  }
+
+  // Enter en un campo de las pantallas 1 y 2 = "Next" (Safari viejo no
+  // siempre lo manda como envío del formulario).
+  form.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' || !e.target || e.target.tagName !== 'INPUT') return;
+    if (actual < pasos.length - 1) { e.preventDefault(); siguiente(); }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    // Enter en una pantalla que no es la última = "Next".
+    if (actual < pasos.length - 1) { siguiente(); return; }
+    if (enviando || !pasoBien(actual)) return;
+    enviando = true;
+    form.elements.resultado.value = clasificar();
+    guardarEnNetlify();
+    verAgenda();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Landing de la promoción "Rexsite Growth" (www.rexsite.ai/start/plan).
+     Copy de "Turn Your Ad Budget Into More Real Estate Deals..pdf" (6 nov 2026),
+     tal cual. Usa el mismo diseño, fotos y scripts de /start sin cambiarlos.
+     Va dentro de /start a propósito: el dashboard y la base reconocen a los
+     registros de Estados Unidos porque su página empieza con /start (prueba
+     automática, correos en inglés y API de Meta). En /start-plan o /promo
+     esos registros entrarían "a mano" y en español.
+     Botones de la prueba del sitio (data-cta): van al formulario que ya
+     existe (/start/signup.html). Botones de Rexsite Growth (data-growth): van
+     al cuestionario de la llamada (/start/call.html?b=<cuál botón>). NO usar
+     data-cta en ellos: main.js los mandaría al formulario del sitio. -->
+<title>RexSite — Turn Your Ad Budget Into More Real Estate Deals.</title>
+<meta name="description" content="Get more qualified buyers with a complete Google, Meta &amp; AI marketing system.">
+<meta name="theme-color" content="#0A1D36">
+<link rel="icon" href="/start/assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/start/assets/img/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="RexSite">
+<meta property="og:title" content="Turn Your Ad Budget Into More Real Estate Deals.">
+<meta property="og:description" content="Get more qualified buyers with a complete Google, Meta &amp; AI marketing system.">
+<meta property="og:image" content="https://www.rexsite.ai/start/assets/img/hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/start/assets/img/hero.webp">
+<link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
+<style>
+/* Lo propio de esta página va aquí y no en styles.css: ese archivo lo
+   comparte la landing de /start y no se toca. */
+
+/* Tarjetas de los dos diseños (igual que en /start/index.html) */
+.dcard__acciones{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.dcard__body .dcard__acciones .btn{ margin-top:0; align-self:stretch; }
+.dtag--sig{ background:#EAE3D8; color:#292723; }
+@media (min-width:700px){ #website .shead h2 .grad{ display:block; } }
+
+/* Portada */
+.hero .badge{ line-height:1.35; text-wrap:balance; }
+.hero__sub strong{ color:#fff; font-weight:600; }
+.offer__top{
+  font-family:var(--f-display); font-weight:800;
+  font-size:clamp(1rem,1.2vw,1.1rem); color:#fff; margin-bottom:18px;
+}
+.offer .cta-note{ margin-top:14px; }
+
+/* Textos */
+.txt p + p{ margin-top:12px; }
+.sub{
+  font-family:var(--f-display); font-weight:800; letter-spacing:-.01em;
+  font-size:clamp(1.05rem,1.4vw,1.22rem); line-height:1.3;
+  color:var(--blue-deep); margin-top:14px;
+}
+.s-dark .sub{ color:var(--blue-2); }
+.fuerte{
+  font-family:var(--f-display); font-weight:800; letter-spacing:-.01em;
+  font-size:1.06rem; line-height:1.45; color:var(--navy);
+}
+.s-dark .fuerte, .s-dark .txt .fuerte{ color:#fff; }
+.shead .txt{ margin-top:20px; }
+.shead--ancho{ max-width:960px; }
+.shead--center .txt{ margin-inline:auto; max-width:64ch; }
+.num{ margin-bottom:22px; }
+.h-sub{
+  margin-top:14px; font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.3;
+  letter-spacing:-.02em; color:var(--navy);
+}
+.s-dark .h-sub{ color:#fff; }
+.puente{ margin-top:clamp(40px,4.5vw,60px); text-align:center; font-size:clamp(1.5rem,2.6vw,2.1rem); }
+
+/* Tarjetas de dos en dos */
+.pgrid{ display:grid; gap:clamp(18px,2.2vw,26px); grid-template-columns:1fr; margin-top:clamp(42px,5vw,62px); }
+@media (min-width:860px){ .pgrid{ grid-template-columns:1fr 1fr; } }
+.pgrid > .fcard{ padding-bottom:var(--cpad); }
+.pgrid > .fcard .txt p{ color:var(--tx-2); font-size:.99rem; }
+.pgrid > .fcard .txt .fuerte{ color:var(--navy); font-size:1.02rem; }
+.pgrid > .fcard h3{ font-size:clamp(1.25rem,1.9vw,1.6rem); line-height:1.2; margin-bottom:0; }
+.pgrid > .fcard .sub{ margin-bottom:16px; }
+/* Gana a ".fcard p" de styles.css, que lo dejaría gris y chico. */
+.fcard p.sub{ color:var(--blue-deep); font-size:clamp(1.05rem,1.4vw,1.22rem); }
+.pgrid > .fcard .fcard__ico + h3{ margin-top:0; }
+
+/* Dos caminos con su botón */
+.camino{ display:flex; flex-direction:column; }
+.camino .txt{ margin-top:16px; }
+.camino .txt p{ color:var(--tx-2); }
+.camino__cta{ margin-top:auto; padding-top:26px; }
+
+/* Lo que pasa con un interesado, paso a paso */
+.flujo{ max-width:880px; margin:clamp(40px,4.5vw,58px) auto 0; padding:0; list-style:none; display:grid; gap:12px; }
+.flujo li{
+  display:flex; align-items:flex-start; gap:18px;
+  padding:20px 24px; border-radius:var(--r-md);
+  background:var(--ivory-2); border:1px solid var(--line-warm); box-shadow:var(--sh-sm);
+  color:var(--tx-2); line-height:1.55;
+}
+.flujo .step__n{ width:44px; height:44px; border-radius:14px; font-size:1.1rem; margin:0; flex:none; }
+.flujo strong{ font-family:var(--f-display); font-weight:800; color:var(--navy); }
+.flujo__fin{ margin-top:clamp(30px,3.4vw,44px); }
+@media (max-width:520px){ .flujo li{ gap:14px; padding:18px; } }
+
+/* Cinco palabras */
+.chips{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:22px; }
+.chips .not{ padding:13px 20px; }
+
+/* Tarjeta oscura sin columna de botón */
+.win--sola{ grid-template-columns:1fr !important; text-align:center; }
+.win--sola .win__body{ max-width:64ch; margin-inline:auto; }
+.win--sola .fuerte{ color:#fff; margin-top:14px; }
+
+/* Garantía */
+.gico{
+  width:60px; height:60px; border-radius:18px; display:grid; place-items:center;
+  margin:0 auto 6px; color:var(--blue-2);
+  background:rgba(63,160,255,.14); border:1px solid rgba(63,160,255,.32);
+}
+
+/* Precio */
+#growth h2 .grad{ display:block; }
+.precio{ max-width:980px; margin:clamp(38px,4.4vw,56px) auto 0; }
+.precio .inc{ margin-top:0; }
+.precio__pie{ margin-top:26px; padding-top:24px; border-top:1px solid var(--line); text-align:center; }
+.precio__pie .muted{ margin-top:6px; }
+.precio__pie h3{ margin-top:22px; }
+.precio__pie .btn{ margin-top:20px; }
+
+/* Cierre */
+.close .h-sub{ margin-top:26px; }
+.close__cta{ margin-top:22px; }
+.close__cta .lead{ margin-bottom:16px; }
+</style>
+
+<!-- Meta Pixel Code: pixel "Rexsite.ai USA", el mismo de /start
+     (la de español usa otro pixel). -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1737083810729024');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="hdr" id="hdr">
+  <div class="wrap wrap--wide hdr__in">
+    <a class="hdr__logo" href="#top" aria-label="RexSite">
+      <img class="l-white" src="/start/assets/img/logo-white.png" alt="RexSite" width="664" height="200">
+      <img class="l-dark" src="/start/assets/img/logo.png" alt="" aria-hidden="true" width="730" height="220">
+    </a>
+    <a class="btn btn--sm hdr__cta" data-growth href="/start/call.html?b=header">
+      Get Started
+    </a>
+  </div>
+</header>
+
+<main id="content">
+<span id="top"></span>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero">
+  <div class="wrap wrap--wide">
+    <div class="hero__grid">
+
+      <div class="hero__txt">
+        <span class="badge rv"><span class="dot"></span>A New Way to Find and Convert Real Estate Buyers.</span>
+
+        <h1 class="rv rv-d1">Turn Your Ad Budget Into <span class="grad">More Real Estate Deals.</span></h1>
+
+        <h2 class="hero__h2 rv rv-d1">Get more qualified buyers with a complete Google, Meta &amp; AI marketing system.</h2>
+
+        <p class="hero__lead rv rv-d2">Your professional real estate website, AI chat, automated email, built-in CRM — connected to the campaigns that bring buyers in.</p>
+
+        <p class="hero__sub rv rv-d2">Already running ads? <strong>We'll help you get more from your current budget.</strong></p>
+
+        <p class="hero__sub rv rv-d2">Starting from scratch? <strong>We'll build and manage your entire marketing system.</strong><br><strong>Your website, chat, and email can be ready in 5 minutes.</strong></p>
+
+        <div class="offer rv rv-d3">
+          <p class="offer__top">Better Campaigns. Smarter Attribution. More Qualified Buyers.</p>
+          <a class="btn btn--lg" data-growth href="/start/call.html?b=hero">
+            Get Started — US$999/month
+            <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <div class="cta-note">
+            <span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Website included.
+            </span>
+            <span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Backed by our results guarantee.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__art rv rv-d2">
+        <img src="/start/assets/img/hero.webp" width="900" height="1435" alt="Real estate agent presenting a RexSite website on a computer and a phone in front of a modern home." fetchpriority="high">
+        <div class="float float--a" aria-hidden="true">
+          <span class="ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </span>
+          Ready in 5 Minutes
+        </div>
+        <div class="float float--b" aria-hidden="true">
+          <span class="ico ico--g">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          Results Guaranteed
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ EL PROBLEMA ══════════════════ -->
+<section class="section s-ivory">
+  <div class="wrap wrap--wide">
+    <div class="shead shead--center">
+      <h2 class="rv">Stop Wasting Money on Ads <span class="grad">That Don't Deliver.</span></h2>
+      <p class="lead rv rv-d1">Agents face one of two problems.</p>
+    </div>
+
+    <div class="pgrid">
+      <article class="fcard rv">
+        <div class="fcard__ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+        </div>
+        <h3>You're already running ads.</h3>
+        <div class="txt" style="margin-top:14px">
+          <p>You're paying for clicks and leads, but which campaigns bring people who are actually interested in your properties?</p>
+          <p>And when an inquiry comes in, does it receive an answer, get recorded, and move into follow-up?</p>
+          <p class="fuerte">Your advertising needs a system that connects those steps.</p>
+        </div>
+      </article>
+
+      <article class="fcard rv rv-d1">
+        <div class="fcard__ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        </div>
+        <h3>Or you're ready to start advertising.</h3>
+        <div class="txt" style="margin-top:14px">
+          <p>You need a professional website, a way to answer inquiries, somewhere to organize your contacts, and campaigns that bring interested buyers into the process.</p>
+          <p class="fuerte">Building and managing those pieces separately takes time.</p>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="puente rv">There's a <span class="grad">Smarter Way.</span></h3>
+  </div>
+</section>
+
+<!-- ══════════════════ REXSITE GROWTH ══════════════════ -->
+<section class="section s-dark">
+  <div class="wrap">
+    <div class="shead shead--center">
+      <h2 class="rv">Meet <span class="grad">Rexsite Growth.</span></h2>
+      <h3 class="h-sub rv rv-d1">Your Complete Real Estate Acquisition System.</h3>
+      <div class="txt rv rv-d2">
+        <p class="lead">Rexsite Growth brings your website, buyer conversations, follow-up, CRM, and advertising together in one connected platform.</p>
+        <p class="lead">We combine Google Ads, Meta Ads, AI-powered lead conversion, and advanced attribution with the tools you use to receive and manage every inquiry.</p>
+        <p class="fuerte" style="margin-top:22px">We attract buyers. Answer their questions. Capture their interest. Keep follow-up moving. And use the results to improve your campaigns.</p>
+        <p style="margin-top:22px">Here's how.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ EL SITIO EN 5 MINUTOS ══════════════════ -->
+<section class="section s-paper">
+  <div class="wrap">
+    <div class="split">
+
+      <div>
+        <h2 class="rv">Your Professional Real Estate Website. <span class="grad">Ready in 5 Minutes.</span></h2>
+        <div class="txt rv rv-d1" style="margin-top:22px">
+          <p class="lead">Upload your logo and cover image. Add your first properties.</p>
+          <p>Your website gives buyers a clear, intuitive way to explore your listings, view photos, ask questions, and contact you.</p>
+          <p>Your chat and email are connected from the start.</p>
+          <p class="fuerte" style="margin-top:20px">Your brand. Your properties. A professional first impression.</p>
+          <p class="muted" style="margin-top:14px">The five-minute setup gets your website, chat, and email ready. Campaign setup follows once your advertising accounts, budget, and campaign plan are agreed.</p>
+        </div>
+      </div>
+
+      <div class="split__art rv rv-d1">
+        <div class="frame">
+          <div class="frame__bar" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="frame__url">demo-usa.rexsite.ai</span>
+          </div>
+          <img src="/start/assets/img/demo-usa.webp" width="1400" height="713" alt="Home page of Coastal Living Realty, a RexSite demo website." loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PRUEBA DEL SITIO + DISEÑOS ══════════════════
+     Las dos tarjetas de diseño son las de /start (textos aprobados por
+     Agustín el 20 oct 2026). Sus botones van al formulario que ya existe. -->
+<section class="section s-ivory" id="website">
+  <div class="wrap wrap--wide">
+    <div class="shead shead--center">
+      <h2 class="rv">Try the Website Free. <span class="grad">Keep It for US$49/Month.</span></h2>
+      <div class="txt rv rv-d1">
+        <p class="lead">Start by exploring what the website can do for your business.</p>
+        <p>When you subscribe to Rexsite Growth, <strong>your website is included and personalized at no additional charge</strong>, along with enhanced AI chat configured for your properties and business, automated follow-up, and your integrated CRM.</p>
+      </div>
+    </div>
+
+    <div class="dgrid">
+
+      <article class="dcard rv rv-d1">
+        <div class="frame">
+          <div class="frame__bar" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="frame__url">demo-usa.rexsite.ai</span>
+          </div>
+          <img src="/start/assets/img/demo-usa.webp" width="1400" height="713" alt="Home page of Coastal Living Realty, a demo website with the Signature design." loading="lazy">
+        </div>
+        <div class="dcard__body">
+          <span class="dtag dtag--sig">Signature · New</span>
+          <h3>Refined and elegant</h3>
+          <p>Ivory background, charcoal details, and editorial-style headings. Ideal for upscale residential properties.</p>
+          <div class="dcard__acciones">
+            <a class="btn btn--sm" href="/start/signup.html?diseno=signature">
+              Choose Signature
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--sm btn--ghost" href="https://demo-usa.rexsite.ai" target="_blank" rel="noopener" aria-label="View the Signature demo (opens in a new tab)">
+              View Demo
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="dcard rv rv-d2">
+        <div class="frame">
+          <div class="frame__bar" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="frame__url">demo-2.rexsite.ai</span>
+          </div>
+          <img src="/start/assets/img/demo-austin.webp" width="1400" height="713" alt="Home page of Live Oak Realty Group, a demo website with the Classic design." loading="lazy">
+        </div>
+        <div class="dcard__body">
+          <span class="dtag">Classic</span>
+          <h3>In your brand colors</h3>
+          <p>Your logo and your colors on buttons, prices, and details. Clean, fresh, and straightforward.</p>
+          <div class="dcard__acciones">
+            <a class="btn btn--sm" href="/start/signup.html?diseno=clasica">
+              Choose Classic
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--sm btn--ghost" href="https://demo-2.rexsite.ai" target="_blank" rel="noopener" aria-label="View the Classic demo (opens in a new tab)">
+              View Demo
+              <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="cta-block cta-block--center dcta rv rv-d3">
+      <a class="btn btn--lg" data-cta href="/start/signup.html">
+        Try the Website Free
+        <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 1 y 2: GOOGLE Y META ══════════════════ -->
+<section class="section s-paper">
+  <div class="wrap wrap--wide">
+    <div class="pgrid" style="margin-top:0">
+
+      <article class="fcard rv">
+        <div class="step__n num">1</div>
+        <h3>Find Buyers Already Looking for Properties.</h3>
+        <p class="sub">Google Ads — Capture Real Buyer Intent.</p>
+        <div class="txt">
+          <p>Every day, people search Google for properties in your market.</p>
+          <p>We build targeted campaigns designed to put your listings in front of those buyers when they're actively searching.</p>
+          <p>Their search brings them to your property information, with a clear way to ask questions and get in touch.</p>
+          <p class="fuerte">Reach buyers when they're already looking.</p>
+        </div>
+      </article>
+
+      <article class="fcard rv rv-d1">
+        <div class="step__n num">2</div>
+        <h3>Reach More Buyers. Bring Interested Visitors Back.</h3>
+        <p class="sub">Meta Ads — Turn Attention Into Opportunity.</p>
+        <div class="txt">
+          <p>Facebook and Instagram help you showcase your properties, reach potential buyers, and reconnect with interested visitors.</p>
+          <p>We create and manage campaigns designed to turn that attention into inquiries.</p>
+          <p>Those inquiries enter the same platform, where your response tools and CRM keep the conversation moving.</p>
+          <p class="fuerte">More than advertising. A coordinated buyer acquisition strategy.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 3: CHAT ══════════════════ -->
+<section class="section s-dark">
+  <div class="wrap">
+    <div class="split split--rev">
+
+      <div>
+        <div class="step__n num rv">3</div>
+        <h2 class="rv">Turn More Visitors Into <span class="grad">Real Conversations.</span></h2>
+        <p class="sub rv rv-d1">Smart Chat &amp; AI-Powered Lead Conversion.</p>
+        <div class="txt rv rv-d1" style="margin-top:18px">
+          <p>A buyer opens a listing and has a question.</p>
+          <p>Your AI chat responds using your property information, helps them explore their options, and gives them a way to request more details.</p>
+          <p>When they leave their contact information, your system captures the inquiry and notifies you.</p>
+          <p>Your automated email confirms receipt, responds, and follows up according to the sequence you configure.</p>
+          <p>Buyers can also reach you through text message, WhatsApp or email.</p>
+          <p class="fuerte" style="margin-top:18px">You receive the opportunity with the context you need to continue the conversation.</p>
+        </div>
+      </div>
+
+      <div class="split__art rv rv-d1">
+        <div class="art-photo">
+          <img src="/start/assets/img/cita.webp" width="900" height="1435" alt="Real estate agent handing keys to a couple, with their website shown on a screen and a phone." loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CRM ══════════════════ -->
+<section class="section s-ivory">
+  <div class="wrap">
+    <div class="split split--wide-txt">
+
+      <div>
+        <h2 class="rv">Your Leads, Clients, and Follow-Up. <span class="grad">In One Place.</span></h2>
+        <div class="txt rv rv-d1" style="margin-top:22px">
+          <p class="lead">Your built-in CRM keeps your leads, clients, and contact history organized inside your Rexsite platform.</p>
+          <p>See the property someone asked about, review their conversation and sent emails, record your last call, and plan the next contact.</p>
+          <p>Configured messages and follow-up sequences run automatically while you focus on personal conversations, showings, and sales.</p>
+          <p class="fuerte" style="margin-top:20px">Don't just pay for traffic. Turn it into opportunities.</p>
+        </div>
+      </div>
+
+      <div class="split__art rv rv-d2">
+        <div class="art-photo">
+          <img src="/start/assets/img/pareja.webp" width="900" height="1435" alt="Real estate agents showing their website and its mobile version in front of a property." loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ UN INTERESADO, PASO A PASO ══════════════════ -->
+<section class="section s-paper">
+  <div class="wrap">
+    <div class="shead shead--center">
+      <h2 class="rv">See What Happens When <span class="grad">a Buyer Gets in Touch.</span></h2>
+      <p class="lead rv rv-d1">Follow one inquiry through your system:</p>
+    </div>
+
+    <ol class="flujo">
+      <li class="rv"><span class="step__n">1</span><span><strong>They explore a property.</strong> The buyer opens a listing and asks a question in the chat.</span></li>
+      <li class="rv"><span class="step__n">2</span><span><strong>Your chat helps them.</strong> It answers from your property information and captures their contact details when they request more information.</span></li>
+      <li class="rv"><span class="step__n">3</span><span><strong>Your email responds.</strong> The buyer receives confirmation, and you receive a new-lead notification.</span></li>
+      <li class="rv"><span class="step__n">4</span><span><strong>The lead appears in your platform.</strong> Open Leads to review the inquiry, property interest, conversation, and sent email.</span></li>
+      <li class="rv"><span class="step__n">5</span><span><strong>Follow-up continues.</strong> Your configured sequence sends the next message. You can review the history, record a call, and update the opportunity as it progresses.</span></li>
+    </ol>
+
+    <div class="cta-block cta-block--center flujo__fin rv">
+      <p class="fuerte">See the inquiry, the response, and the next step in the same platform.</p>
+      <!-- Por ahora lleva al demo de EU (tiene el chat prendido). -->
+      <a class="btn btn--ghost" href="https://demo-usa.rexsite.ai" target="_blank" rel="noopener" aria-label="Watch the System in Action (opens in a new tab)">
+        Watch the System in Action
+        <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 4: MEDICIÓN ══════════════════ -->
+<section class="section s-dark">
+  <div class="wrap">
+    <div class="shead shead--center">
+      <div class="step__n num rv" style="margin-inline:auto">4</div>
+      <h2 class="rv">Know What's Working. <span class="grad">Stop Paying for What Isn't.</span></h2>
+      <p class="sub rv rv-d1">Advanced Tracking &amp; Attribution.</p>
+      <div class="txt rv rv-d2">
+        <p class="lead">Your CRM keeps the commercial context behind your leads.</p>
+        <p>Tracking and attribution connect available campaign data with those inquiries and the progress recorded in your platform.</p>
+        <p>We review which campaigns produce inquiries, which inquiries meet your qualification criteria, and which opportunities move forward.</p>
+        <p>That helps us compare acquisition costs and decide where to adjust your advertising.</p>
+        <p>Before launch, we agree on what a qualified inquiry means for your business — including valid contact information, real property interest, and a search that fits your market and price range.</p>
+        <p class="fuerte" style="margin-top:22px">Less guessing. Less wasted spending. Smarter decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TODO JUNTO ══════════════════ -->
+<section class="section s-ivory">
+  <div class="wrap">
+    <div class="shead shead--center shead--ancho">
+      <h2 class="rv">The Real Advantage? <span class="grad">Everything Works Together.</span></h2>
+      <div class="txt rv rv-d1">
+        <p class="lead">Google reaches buyers who are actively searching.</p>
+        <p class="lead">Meta introduces your properties to more potential buyers.</p>
+        <p>Your website presents the properties. Chat and email answer inquiries. Your CRM keeps contacts and follow-up organized.</p>
+        <p>As you record which opportunities become qualified, book showings, or close, those results give us more information to improve your campaigns.</p>
+        <p>We use that information to refine the ads, messages, and spending that bring the next buyers in.</p>
+      </div>
+    </div>
+
+    <div class="shead shead--center shead--ancho" style="margin-top:clamp(46px,5vw,70px)">
+      <h3 class="h-sub rv">We Don't Just Track Conversions. We Help Create Them.</h3>
+      <ul class="chips rv rv-d1" aria-label="Attract. Respond. Follow Up. Measure. Improve.">
+        <li class="not"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Attract.</li>
+        <li class="not"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Respond.</li>
+        <li class="not"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Follow Up.</li>
+        <li class="not"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Measure.</li>
+        <li class="not"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Improve.</li>
+      </ul>
+    </div>
+
+    <div class="win win--sola rv">
+      <div class="win__body">
+        <h3>A New Way to Make Your Marketing Work Together.</h3>
+        <p>Each round of campaign decisions builds on the results recorded in your system.</p>
+        <p class="fuerte">One system. One strategy. One team managing it all.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ DOS CAMINOS ══════════════════ -->
+<section class="section s-paper">
+  <div class="wrap wrap--wide">
+    <div class="pgrid" style="margin-top:0">
+
+      <article class="vs__new camino rv">
+        <h3>Already Running Google or Meta Ads?</h3>
+        <p class="sub" style="margin-top:6px">Get More From the Budget You're Already Spending.</p>
+        <div class="txt">
+          <p>We'll review your campaigns, tracking, and the process buyers go through after they click.</p>
+          <p>Then we'll connect your campaigns with your response tools and CRM, identify opportunities to reduce wasted spending, and use lead quality to guide improvements.</p>
+          <p class="fuerte" style="margin-top:18px">Make your existing advertising work harder.</p>
+        </div>
+        <div class="camino__cta">
+          <a class="btn" data-growth href="/start/call.html?b=mejorar">
+            Improve My Campaigns
+            <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="vs__new camino rv rv-d1">
+        <h3>New to Real Estate Advertising?</h3>
+        <p class="sub" style="margin-top:6px">Start With a Complete System, Not Trial and Error.</p>
+        <div class="txt">
+          <p>Start with your website, chat, and email in five minutes.</p>
+          <p>Add your branding and first properties. We'll help configure the CRM and follow-up, prepare your campaigns, and verify tracking before launch.</p>
+          <p>You provide your property information, approve the plan and advertising budget, and handle the personal conversations that move opportunities toward a sale.</p>
+          <p>Your platform supports the daily response and follow-up. We manage the campaigns and ongoing optimization.</p>
+          <p class="fuerte" style="margin-top:18px">Start smarter. Grow with confidence.</p>
+        </div>
+        <div class="camino__cta">
+          <a class="btn" data-growth href="/start/call.html?b=lanzar">
+            Launch My Marketing System
+            <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ GARANTÍA ══════════════════ -->
+<section class="section s-dark">
+  <div class="wrap">
+    <div class="shead shead--center">
+      <div class="gico rv" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <h2 class="rv">Results Guaranteed. <span class="grad">Or Your Money Back.</span></h2>
+      <div class="txt rv rv-d1">
+        <p class="lead">We help you get more qualified buyers and turn your ad budget into more opportunities to sell.</p>
+        <p>We’re confident in what we do, and we back it with a simple guarantee:</p>
+        <p class="fuerte" style="margin-top:18px">If we don’t deliver the results we promise, we’ll refund your Rexsite Growth fees. If you prefer, we’ll keep working for free until we do. The choice is yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PRECIO ══════════════════ -->
+<section class="section s-ivory" id="growth">
+  <div class="wrap wrap--wide">
+    <div class="shead shead--center shead--ancho">
+      <h2 class="rv">Your Complete Marketing System. <span class="grad">Just US$999/Month.</span></h2>
+      <p class="lead fuerte rv rv-d1">Your real estate platform, automation, and coordinated advertising strategy in one subscription.</p>
+    </div>
+
+    <div class="vs__new precio rv rv-d2">
+      <ul class="inc">
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Professional real estate website — included at no additional charge</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Enhanced AI chat configured for your properties and business</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Automated email responses, confirmations, and follow-up</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>New-lead notifications</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Built-in CRM for leads, clients, and contact history</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Follow-up reminders and configured automated messages</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Google Ads campaign management</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Facebook &amp; Instagram campaign management</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Campaign strategy, testing, and optimization</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Conversion tracking and attribution</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Performance monitoring and reporting</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Results guarantee under the agreed terms</li>
+      </ul>
+
+      <div class="precio__pie">
+        <p class="price-line" style="margin-top:0">US$999/month + your advertising budget.</p>
+        <p class="muted">One base price worldwide, payable in US dollars or the equivalent in your local currency where supported.</p>
+        <h3>We Build It. We Manage It. We Optimize It.</h3>
+        <a class="btn btn--lg" data-growth href="/start/call.html?b=precio">
+          Get Started With Rexsite Growth
+          <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CIERRE ══════════════════ -->
+<section class="section s-dark close">
+  <div class="wrap">
+    <div class="close__grid">
+
+      <div>
+        <h2 class="rv">Your Properties Deserve <span class="grad">More Than Just Ads.</span></h2>
+        <div class="txt rv rv-d1" style="margin-top:22px">
+          <p class="lead">They deserve a professional place to be discovered, a helpful response when someone asks a question, and follow-up that keeps the opportunity moving.</p>
+          <p class="lead">Rexsite Growth connects that experience with the campaigns that bring buyers in — and the results that guide what happens next.</p>
+        </div>
+        <h3 class="h-sub rv rv-d2">More Qualified Buyers. Smarter Advertising. Better Opportunities.</h3>
+
+        <div class="cta-block close__cta rv rv-d3">
+          <p class="lead">Ready to grow your real estate business?</p>
+          <a class="btn btn--lg" data-growth href="/start/call.html?b=cierre">
+            Start Growing With Rexsite
+            <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="split__art rv rv-d2">
+        <div class="art-photo">
+          <img src="/start/assets/img/agente.webp" width="760" height="1007" alt="Smiling real estate agent holding a tablet and the keys to a property." loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="ftr">
+  <div class="wrap wrap--wide ftr__in">
+    <img src="/start/assets/img/logo-white.png" alt="RexSite" width="664" height="200">
+    <div class="ftr__notes">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Website included.
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Backed by our results guarantee.
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════ BARRA MÓVIL ══════════════════
+     main.js la necesita (id="mbar"): no quitarla. -->
+<div class="mbar" id="mbar">
+  <div class="mbar__p">
+    <b>US$999/month</b>
+    <small>Website included.</small>
+  </div>
+  <a class="btn" data-growth href="/start/call.html?b=barra">Get Started</a>
+</div>
+
+<!-- Los mismos scripts de /start, sin cambios. -->
+<script src="/start/assets/js/rastreo.js?v=1" defer></script>
+<script src="/start/assets/js/main.js?v=1" defer></script>
+</body>
+</html>
