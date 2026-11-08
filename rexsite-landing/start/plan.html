@@ -13,9 +13,11 @@
      Botones de la prueba del sitio (data-cta): van al formulario que ya
      existe (/start/signup.html). Botones de Rexsite Growth (data-growth): van
      al cuestionario de la llamada (/start/call.html?b=<cuál botón>). NO usar
-     data-cta en ellos: main.js los mandaría al formulario del sitio. -->
+     data-cta en ellos: main.js los mandaría al formulario del sitio.
+     8 nov 2026: copy nuevo del hero (portada) que pegó Agustín; el resto
+     de la página no cambió. -->
 <title>RexSite — Turn Your Ad Budget Into More Real Estate Deals.</title>
-<meta name="description" content="Get more qualified buyers with a complete Google, Meta &amp; AI marketing system.">
+<meta name="description" content="Get more buyers with a complete marketing system.">
 <meta name="theme-color" content="#0A1D36">
 <link rel="icon" href="/start/assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/start/assets/img/favicon.png">
@@ -24,7 +26,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="RexSite">
 <meta property="og:title" content="Turn Your Ad Budget Into More Real Estate Deals.">
-<meta property="og:description" content="Get more qualified buyers with a complete Google, Meta &amp; AI marketing system.">
+<meta property="og:description" content="Get more buyers with a complete marketing system.">
 <meta property="og:image" content="https://www.rexsite.ai/start/assets/img/hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -51,6 +53,11 @@
   font-size:clamp(1rem,1.2vw,1.1rem); color:#fff; margin-bottom:18px;
 }
 .offer .cta-note{ margin-top:14px; }
+/* Hero del 8 nov: tres renglones juntos y la nota del botón más clara
+   (es copy, no adorno). */
+.hero__lineas span{ display:block; }
+.hero__lineas span + span{ margin-top:8px; }
+.hero .offer .cta-note{ color:#A8C0DA; }
 
 /* Textos */
 .txt p + p{ margin-top:12px; }
@@ -182,34 +189,27 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
     <div class="hero__grid">
 
       <div class="hero__txt">
-        <span class="badge rv"><span class="dot"></span>A New Way to Find and Convert Real Estate Buyers.</span>
+        <span class="badge rv"><span class="dot"></span>The New Way to Find and Close Real Estate Deals.</span>
 
         <h1 class="rv rv-d1">Turn Your Ad Budget Into <span class="grad">More Real Estate Deals.</span></h1>
 
-        <h2 class="hero__h2 rv rv-d1">Get more qualified buyers with a complete Google, Meta &amp; AI marketing system.</h2>
+        <h2 class="hero__h2 rv rv-d1">Get more buyers with a complete marketing system.</h2>
 
-        <p class="hero__lead rv rv-d2">Your professional real estate website, AI chat, automated email, built-in CRM — connected to the campaigns that bring buyers in.</p>
+        <p class="hero__lead rv rv-d2">Your professional real estate website, AI chat, automated email, and built-in CRM are all connected to the campaigns that bring buyers in.</p>
 
-        <p class="hero__sub rv rv-d2">Already running ads? <strong>We'll help you get more from your current budget.</strong></p>
-
-        <p class="hero__sub rv rv-d2">Starting from scratch? <strong>We'll build and manage your entire marketing system.</strong><br><strong>Your website, chat, and email can be ready in 5 minutes.</strong></p>
+        <p class="hero__sub hero__lineas rv rv-d2">
+          <span><strong>Your website, chat, and email can be ready in 5 minutes.</strong></span>
+          <span>Already running ads? <strong>We’ll help you get more from your current budget.</strong></span>
+          <span>Starting from scratch? <strong>We’ll build and manage your entire marketing system.</strong></span>
+        </p>
 
         <div class="offer rv rv-d3">
-          <p class="offer__top">Better Campaigns. Smarter Attribution. More Qualified Buyers.</p>
+          <p class="offer__top">Results guaranteed or your money back.</p>
           <a class="btn btn--lg" data-growth href="/start/call.html?b=hero">
-            Get Started — US$999/month
+            Book a Call
             <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
           </a>
-          <div class="cta-note">
-            <span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              Website included.
-            </span>
-            <span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Backed by our results guarantee.
-            </span>
-          </div>
+          <p class="cta-note">See how it would work in your market with your ad budget.</p>
         </div>
       </div>
 
