@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía rápida de tu sitio — RexSite</title>
+<meta name="description" content="De tu registro a tu primera propiedad publicada, paso a paso y con fotos.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/img/favicon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Guía rápida de tu sitio RexSite">
+<meta property="og:description" content="De tu registro a tu primera propiedad publicada, paso a paso y con fotos.">
+<meta property="og:image" content="https://www.rexsite.ai/guia/img/compartir.jpg">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="420">
+<meta property="og:url" content="https://www.rexsite.ai/guia/">
+<meta property="og:site_name" content="RexSite">
+<meta property="og:locale" content="es_MX">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#06101F; --navy:#0A1D36; --blue:#1878DE; --blue-2:#3FA0FF; --blue-deep:#0E4FA3; --sky:#E9F2FD;
+  --ivory:#F7F3EC; --ivory-2:#FBF8F3; --paper:#FFFFFF; --green:#12885A; --green-soft:#E6F6EE;
+  --tx:#0C1B2E; --tx-2:#46586E; --tx-3:#6B7C91; --line:#E4E8EE; --amber:#FFF7E6; --amber-line:#F3D08A;
+  --marca:#E11D48;
+  --sh-sm:0 1px 2px rgba(6,16,31,.06),0 2px 8px rgba(6,16,31,.04);
+  --sh-md:0 4px 12px rgba(6,16,31,.06),0 16px 40px rgba(6,16,31,.08);
+  --f-display:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-text:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --maxw:860px; --pad:clamp(16px,4.5vw,32px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--ivory-2);color:var(--tx);font-family:var(--f-text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--blue-deep)}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;margin:0;letter-spacing:-.02em}
+p{margin:0 0 12px}
+.envoltura{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+/* Barra de arriba */
+.barra{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.barra .envoltura{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.barra__logo img{height:30px;width:auto}
+.barra__links{display:flex;align-items:center;gap:8px}
+.barra__indice{font-size:14px;font-weight:600;color:var(--tx-2);text-decoration:none;padding:8px 10px;border-radius:999px}
+.barra__indice:hover{background:var(--sky);color:var(--blue-deep)}
+.boton{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(24,120,222,.25);white-space:nowrap}
+.boton:hover{background:var(--blue-deep)}
+.boton svg{flex:none}
+
+/* Portada */
+.portada{background:var(--navy);color:#fff;padding:56px 0 64px;position:relative;overflow:hidden}
+.portada::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(63,160,255,.35),rgba(63,160,255,0));pointer-events:none}
+.etiqueta{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--blue-2);margin-bottom:14px}
+.portada h1{font-size:clamp(34px,7vw,54px);font-weight:800;margin-bottom:14px}
+.portada p{font-size:clamp(16px,2.6vw,19px);color:#B9CBE0;max-width:560px;margin:0}
+.portada .boton{margin-top:26px;background:#fff;color:var(--navy);box-shadow:none}
+.portada .boton:hover{background:var(--sky)}
+
+.cajas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:-34px;position:relative;z-index:2}
+.caja{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--sh-sm)}
+.caja h3{font-size:17px;margin-bottom:10px}
+.caja ul{margin:0;padding-left:20px}
+.caja li{margin-bottom:6px;color:var(--tx-2)}
+.caja li b{color:var(--tx)}
+
+/* Índice */
+.indice{margin:40px 0 8px}
+.indice h2{font-size:22px;margin-bottom:14px}
+.indice ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.indice a{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px 12px;text-decoration:none;color:var(--tx);font-weight:500;font-size:15px;line-height:1.3;transition:border-color .15s,box-shadow .15s}
+.indice a:hover{border-color:var(--blue);box-shadow:var(--sh-sm)}
+.indice span{flex:none;width:28px;height:28px;border-radius:50%;background:var(--sky);color:var(--blue-deep);font-family:var(--f-display);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+
+/* Pasos */
+.paso{padding:44px 0 8px;border-top:1px solid var(--line);margin-top:36px}
+.paso__cabeza{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
+.paso__num{flex:none;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--f-display);font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(24,120,222,.28)}
+.paso h2{font-size:clamp(23px,4.2vw,30px);font-weight:800;padding-top:4px}
+.paso__sub{display:block;font-family:var(--f-text);font-size:14px;font-weight:500;color:var(--tx-3);letter-spacing:0;margin-top:6px}
+.lead{color:var(--tx-2)}
+ol.pasitos{list-style:none;margin:0 0 18px;padding:0}
+ol.pasitos li{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
+.en{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:#EEF2F7;border:1px solid var(--line);border-radius:5px;padding:1px 5px;white-space:nowrap;color:var(--navy)}
+
+/* Fotos */
+figure{margin:0 0 22px}
+.foto{position:relative;cursor:zoom-in;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:var(--sh-sm)}
+.foto:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.foto img{width:100%;height:auto;border-radius:11px}
+.foto--angosta{max-width:560px;margin-left:auto;margin-right:auto}
+.m{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);pointer-events:none}
+figcaption{font-size:13px;color:var(--tx-3);margin-top:8px;text-align:center}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.aviso-fotos{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--tx-3);margin:18px 0 0}
+
+/* Avisos */
+.nota,.tip{border-radius:12px;padding:14px 16px;margin:0 0 18px;font-size:15px}
+.nota{background:var(--amber);border:1px solid var(--amber-line)}
+.tip{background:var(--sky);border:1px solid #C8DEF8}
+
+table.dic{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px;margin-bottom:18px}
+table.dic td{border-bottom:1px solid var(--line);padding:11px 14px;vertical-align:top}
+table.dic tr:last-child td{border-bottom:0}
+table.dic td:first-child{width:36%;font-weight:500}
+
+.columnas{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.tarjeta{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.tarjeta h3{font-size:17px;margin-bottom:10px}
+.tarjeta ol,.tarjeta ul{margin:0;padding-left:20px}
+.tarjeta li{margin-bottom:6px}
+.tarjeta small{display:block;color:var(--tx-3);margin-top:8px}
+
+/* Final */
+.final{text-align:center;padding:56px 0 64px;margin-top:40px;border-top:1px solid var(--line)}
+.final h2{font-size:28px;margin-bottom:8px}
+.final p{color:var(--tx-2)}
+.final .boton{margin-top:10px}
+.pie{background:var(--navy);color:#B9CBE0;font-size:13px;text-align:center;padding:22px var(--pad)}
+.pie a{color:#fff}
+
+/* Foto en grande */
+.visor{position:fixed;top:0;right:0;bottom:0;left:0;z-index:50;background:rgba(6,16,31,.86);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.visor.abierto{display:flex}
+.visor__caja{width:min(1100px,100%);max-height:100%;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.visor__caja .foto{cursor:zoom-out;box-shadow:none;width:max(100%,760px)}
+.visor__pista{position:sticky;left:0;width:calc(100vw - 20px);margin:10px 0 0;color:#fff;font-size:14px;text-align:center}
+.visor__cerrar{position:fixed;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:var(--navy);font-size:22px;line-height:1;cursor:pointer}
+
+@media (max-width:720px){
+  .cajas,.columnas,.dos{grid-template-columns:1fr}
+  .cajas{margin-top:-28px}
+  .indice ol{grid-template-columns:1fr 1fr}
+  .barra__indice{display:none}
+  .m{width:20px;height:20px;font-size:11px;border-width:1.5px}
+  .visor{padding:56px 10px 10px;align-items:flex-start}
+  .visor__caja .m{width:26px;height:26px;font-size:13px;border-width:2px}
+  .portada{padding:40px 0 58px}
+}
+@media (max-width:380px){ .indice ol{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="envoltura">
+    <a class="barra__logo" href="/" aria-label="RexSite"><img src="/assets/img/logo.png?v=2" alt="RexSite" width="730" height="220"></a>
+    <nav class="barra__links">
+      <a class="barra__indice" href="#indice">Índice</a>
+      <a class="boton" href="/guia/rexsite-guia-rapida.pdf" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        PDF
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="portada">
+  <div class="envoltura">
+    <span class="etiqueta">Guía para clientes</span>
+    <h1>Guía rápida de tu sitio</h1>
+    <p>De tu registro a tu primera propiedad publicada, paso a paso y con fotos.</p>
+    <a class="boton" href="#paso-1">Empezar
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </a>
+  </div>
+</section>
+
+<div class="envoltura">
+  <div class="cajas">
+    <div class="caja">
+      <h3>Lo que vas a lograr</h3>
+      <ul>
+        <li>Tu sitio en línea, con tu logo y tus datos.</li>
+        <li>Tus propiedades publicadas, con fotos y precio.</li>
+        <li>Un asistente con IA que atiende a tus visitantes.</li>
+        <li>Tu propia IA (Claude o ChatGPT) para administrar tu sitio platicando.</li>
+      </ul>
+    </div>
+    <div class="caja">
+      <h3>Antes de empezar</h3>
+      <ul>
+        <li><b>Usa una computadora.</b> En el celular el panel no muestra el menú completo.</li>
+        <li>Ten a la mano tu logo y las fotos de tus propiedades.</li>
+        <li>Algunos botones del panel están en inglés. En esta guía te decimos qué significa cada uno.</li>
+      </ul>
+    </div>
+  </div>
+
+  <nav class="indice" id="indice" aria-label="Índice">
+    <h2>Índice</h2>
+    <ol>
+      <li><a href="#paso-1"><span>1</span>Regístrate</a></li>
+      <li><a href="#paso-2"><span>2</span>Revisa tu correo</a></li>
+      <li><a href="#paso-3"><span>3</span>Crea tu contraseña</a></li>
+      <li><a href="#paso-4"><span>4</span>Entra a tu panel</a></li>
+      <li><a href="#paso-5"><span>5</span>Conoce tu panel</a></li>
+      <li><a href="#paso-6"><span>6</span>Tu logo, colores y datos</a></li>
+      <li><a href="#paso-7"><span>7</span>Tu página "Nosotros"</a></li>
+      <li><a href="#paso-8"><span>8</span>Sube tu primera propiedad</a></li>
+      <li><a href="#paso-9"><span>9</span>Tus interesados (Leads)</a></li>
+      <li><a href="#paso-10"><span>10</span>Tu asistente con IA (chat)</a></li>
+      <li><a href="#paso-11"><span>11</span>Conecta tu IA</a></li>
+      <li><a href="#paso-12"><span>12</span>Comparte tu sitio</a></li>
+    </ol>
+    <p class="aviso-fotos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6M8 11h6"/></svg>Toca cualquier foto para verla en grande.</p>
+  </nav>
+
+  <!-- 1 -->
+  <section class="paso" id="paso-1">
+    <div class="paso__cabeza"><div class="paso__num">1</div><h2>Regístrate<span class="paso__sub">En www.rexsite.ai/empezar · 2 minutos · no necesitas tarjeta</span></h2></div>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span><b>Elige el diseño de tu sitio:</b> Signature (sobria y elegante) o Clásica (con los colores de tu marca). Puedes cambiarlo después sin costo.</span></li>
+      <li><span class="n">2</span><span><b>Escribe el nombre de tu inmobiliaria.</b></span></li>
+      <li><span class="n">3</span><span><b>Revisa la dirección de tu sitio.</b> Se arma sola con el nombre, pero puedes cambiarla.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/registro-1.webp" width="800" height="500" loading="lazy" alt="Formulario de registro: elegir diseño, nombre de la inmobiliaria y dirección del sitio.">
+      <span class="m" style="left:26.3%;top:30.4%">1</span><span class="m" style="left:26.3%;top:78.4%">2</span><span class="m" style="left:27.8%;top:95.6%">3</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">4</span><span><b>Tu nombre.</b></span></li>
+      <li><span class="n">5</span><span><b>Tu correo.</b> Usa uno que revises seguido: ahí te llega tu acceso.</span></li>
+      <li><span class="n">6</span><span><b>Tu WhatsApp.</b></span></li>
+      <li><span class="n">7</span><span>Marca la casilla <b>"Verifique que es un ser humano"</b>.</span></li>
+      <li><span class="n">8</span><span>Da clic en <b>CONTINUAR</b>. Listo: tienes 14 días gratis y tu sitio queda en línea en minutos.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/registro-2.webp" width="800" height="560" loading="lazy" alt="Formulario de registro: nombre, correo, WhatsApp, casilla de verificación y botón Continuar.">
+      <span class="m" style="left:26.6%;top:50.2%">4</span><span class="m" style="left:51.1%;top:50.2%">5</span><span class="m" style="left:26.6%;top:66.1%">6</span><span class="m" style="left:26.6%;top:77.3%">7</span><span class="m" style="left:26.9%;top:90.4%">8</span>
+    </div></figure>
+  </section>
+
+  <!-- 2 -->
+  <section class="paso" id="paso-2">
+    <div class="paso__cabeza"><div class="paso__num">2</div><h2>Revisa tu correo<span class="paso__sub">Te llega en unos minutos</span></h2></div>
+    <p class="lead">Te escribimos desde <b>hola@mail.rexsite.co</b> con el asunto <b>"Tu sitio de [tu inmobiliaria] está listo"</b>.</p>
+    <div class="nota"><b>¿No lo ves?</b> Busca en <b>Spam</b> o en <b>Promociones</b>. Si está ahí, márcalo como "No es spam" para que te lleguen los siguientes.</div>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Da clic en <b>"Crear mi contraseña"</b>. Este botón sirve <b>una sola vez</b> y vence en <b>30 días</b>.</span></li>
+      <li><span class="n">2</span><span>Guarda esta dirección: es la entrada a tu panel, de aquí en adelante.</span></li>
+    </ol>
+    <figure><div class="foto foto--angosta">
+      <img src="/guia/img/correo.webp" width="1280" height="1060" loading="lazy" alt="Correo de bienvenida con el botón Crear mi contraseña y la dirección del panel.">
+      <span class="m" style="left:10.8%;top:45.5%">1</span><span class="m" style="left:10.8%;top:70.8%">2</span>
+    </div><figcaption>Así se ve el correo de bienvenida (con datos de ejemplo).</figcaption></figure>
+  </section>
+
+  <!-- 3 -->
+  <section class="paso" id="paso-3">
+    <div class="paso__cabeza"><div class="paso__num">3</div><h2>Crea tu contraseña</h2></div>
+    <p class="lead">Al dar clic en el botón del correo se abre la página <b>"Crea tu contraseña"</b>.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Escribe una contraseña de <b>al menos 8 caracteres</b>.</span></li>
+      <li><span class="n">2</span><span>En la segunda casilla, <b>escríbela otra vez</b>.</span></li>
+      <li><span class="n">3</span><span>Da clic en <b>"Guardar contraseña"</b>. Verás "Listo" y un botón para entrar a tu sitio.</span></li>
+    </ol>
+    <div class="tip">Si el botón ya no funciona (lo usaste o pasaron 30 días), <b>responde el correo de bienvenida</b> y te mandamos uno nuevo.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="paso" id="paso-4">
+    <div class="paso__cabeza"><div class="paso__num">4</div><h2>Entra a tu panel<span class="paso__sub">tusitio.rexsite.ai/admin</span></h2></div>
+    <p class="lead">Escribe en tu navegador la dirección de tu sitio seguida de <b>/admin</b>. Por ejemplo: <b>inmobiliaria-lopez.rexsite.ai/admin</b>. Guárdala en tus favoritos.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Tu correo.</span></li>
+      <li><span class="n">2</span><span>Tu contraseña (en la casilla dice <span class="en">Password</span>).</span></li>
+      <li><span class="n">3</span><span>Da clic en <b>"Ingresar"</b>.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/entrar.webp" width="800" height="200" loading="lazy" alt="Pantalla para entrar al panel con correo y contraseña.">
+      <span class="m" style="left:32.5%;top:36%">1</span><span class="m" style="left:32.5%;top:53%">2</span><span class="m" style="left:32.5%;top:70%">3</span>
+    </div></figure>
+    <p class="lead" style="font-size:15px">¿Olvidaste tu contraseña? Responde cualquier correo de RexSite y te mandamos un link para poner una nueva.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="paso" id="paso-5">
+    <div class="paso__cabeza"><div class="paso__num">5</div><h2>Conoce tu panel<span class="paso__sub">Desde aquí administras todo tu sitio</span></h2></div>
+    <figure><div class="foto">
+      <img src="/guia/img/panel.webp" width="800" height="440" loading="lazy" alt="Página de inicio del panel con el menú arriba.">
+    </div></figure>
+    <p class="lead">Arriba está el menú. Esto es lo que hace cada botón:</p>
+    <table class="dic">
+      <tr><td><span class="en">Dashboard</span></td><td><b>Inicio.</b> Un resumen de tu sitio: cuántas propiedades tienes y accesos rápidos.</td></tr>
+      <tr><td><span class="en">Settings</span></td><td><b>Configuración.</b> Tu logo, tus colores y tus datos de contacto. <a href="#paso-6">Paso 6</a></td></tr>
+      <tr><td><span class="en">About</span></td><td><b>Nosotros.</b> Tu foto, tu historia y tu equipo. <a href="#paso-7">Paso 7</a></td></tr>
+      <tr><td><span class="en">Properties</span></td><td><b>Propiedades.</b> Subir, editar y borrar propiedades. <a href="#paso-8">Paso 8</a></td></tr>
+      <tr><td><span class="en">Leads</span></td><td><b>Interesados.</b> Las personas que te escribieron desde tu sitio. <a href="#paso-9">Paso 9</a></td></tr>
+      <tr><td>Asistente · Conversaciones</td><td><b>El chat con IA de tu sitio</b> y lo que platicó con tus visitantes. <a href="#paso-10">Paso 10</a></td></tr>
+      <tr><td>Conectar mi IA</td><td><b>Usar Claude o ChatGPT</b> para administrar tu sitio platicando. <a href="#paso-11">Paso 11</a></td></tr>
+      <tr><td><span class="en">View site</span> · <span class="en">Log out</span></td><td><b>Ver mi sitio</b> · <b>Salir</b> del panel.</td></tr>
+    </table>
+  </section>
+
+  <!-- 6 -->
+  <section class="paso" id="paso-6">
+    <div class="paso__cabeza"><div class="paso__num">6</div><h2>Tu logo, colores y datos<span class="paso__sub">Menú <span class="en">Settings</span> (Configuración)</span></h2></div>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span><b>Tu logo:</b> arrástralo al recuadro o da clic para elegirlo de tu computadora (PNG, JPG, SVG o WEBP, máximo 10 MB). Si no tienes logo, tu sitio muestra el nombre de tu inmobiliaria.</span></li>
+      <li><span class="n">2</span><span><b>Tus colores:</b> da clic en el cuadrito de color para elegir tu color principal (<span class="en">Primary</span>) y el secundario (<span class="en">Secondary</span>).</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/settings-1.webp" width="800" height="540" loading="lazy" alt="Configuración del sitio: subir logo y elegir colores.">
+      <span class="m" style="left:5.5%;top:62%">1</span><span class="m" style="left:5.5%;top:89.4%">2</span>
+    </div></figure>
+    <div class="tip">Un poco más abajo está <span class="en">Hero Image</span>: es la <b>foto grande</b> de la página de inicio de tu sitio. Pon tu mejor foto.</div>
+    <p class="lead">Más abajo, en <span class="en">Broker Details</span>, van <b>tus datos de contacto</b>. Son los que ven tus clientes en tu sitio.</p>
+    <ol class="pasitos">
+      <li><span class="n">3</span><span><span class="en">Broker Name</span> es tu nombre. También llena <span class="en">Phone</span> (teléfono), <span class="en">Email</span> (correo), <span class="en">City</span> (ciudad), <span class="en">Address</span> (dirección) y <span class="en">Slogan</span> (una frase sobre ti).</span></li>
+      <li><span class="n">4</span><span><span class="en">WhatsApp</span>: <b>solo números</b>, con el 52 de México al inicio y sin + ni espacios. Ejemplo: <b>525512345678</b>. A este número llegan los mensajes del botón de WhatsApp de tu sitio.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/settings-2.webp" width="800" height="350" loading="lazy" alt="Datos de contacto: nombre, teléfono, WhatsApp, correo, ciudad, dirección y frase.">
+      <span class="m" style="left:5.5%;top:31.4%">3</span><span class="m" style="left:5.5%;top:49.7%">4</span>
+    </div><figcaption>Datos de ejemplo.</figcaption></figure>
+    <ol class="pasitos">
+      <li><span class="n">5</span><span>Hasta abajo, da clic en <b><span class="en">Save Settings</span></b> (Guardar). Tus cambios se ven en tu sitio en unos minutos.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/settings-3.webp" width="800" height="110" loading="lazy" alt="Botón Save Settings para guardar.">
+      <span class="m" style="left:82.3%;top:49.1%">5</span>
+    </div></figure>
+    <p class="lead" style="font-size:15px">Las redes sociales (<span class="en">Social Media</span>) son opcionales: pega el link de tu Facebook, Instagram o TikTok y aparecerán en tu sitio.</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="paso" id="paso-7">
+    <div class="paso__cabeza"><div class="paso__num">7</div><h2>Tu página "Nosotros"<span class="paso__sub">Menú <span class="en">About</span></span></h2></div>
+    <p class="lead">Aquí cuentas quién eres. Es lo que lee un cliente antes de confiarte su casa.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span><b>Tu foto</b> o la de tu oficina (<span class="en">Agency photo</span>): da clic en el recuadro para subirla.</span></li>
+      <li><span class="n">2</span><span><b>Tu cargo</b> (<span class="en">Role</span>). Por ejemplo: "Asesora inmobiliaria".</span></li>
+      <li><span class="n">3</span><span>Más abajo llena <span class="en">Bio</span> (quién eres), <span class="en">How we work</span> (cómo trabajas), <span class="en">Why choose us</span> (por qué elegirte) y <span class="en">Team</span> (tu equipo). Al final da clic en <b><span class="en">Save (ES)</span></b>.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/about.webp" width="800" height="470" loading="lazy" alt="Página Nosotros: foto de la agencia y cargo.">
+      <span class="m" style="left:5.5%;top:50%">1</span><span class="m" style="left:5.5%;top:86.2%">2</span>
+    </div></figure>
+    <div class="tip">Arriba puedes elegir <b>Español</b> o <b>English</b>. Cada idioma se guarda por separado: si quieres tu sitio también en inglés, llena las dos.</div>
+  </section>
+
+  <!-- 8 -->
+  <section class="paso" id="paso-8">
+    <div class="paso__cabeza"><div class="paso__num">8</div><h2>Sube tu primera propiedad<span class="paso__sub">Menú <span class="en">Properties</span> (Propiedades)</span></h2></div>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Da clic en <b><span class="en">+ Create Property</span></b> (Crear propiedad). En esta lista también puedes editar o borrar las que ya tienes.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/propiedades.webp" width="800" height="330" loading="lazy" alt="Lista de propiedades con el botón Create Property.">
+      <span class="m" style="left:79.3%;top:11.2%">1</span>
+    </div></figure>
+    <p class="lead">Llena el formulario de arriba hacia abajo:</p>
+    <ol class="pasitos">
+      <li><span class="n">2</span><span><span class="en">ID</span>: un número que no hayas usado (1 para tu primera propiedad, 2 para la segunda…). El <span class="en">Slug</span> se llena solo.</span></li>
+      <li><span class="n">3</span><span><span class="en">Title</span> (título) y <span class="en">Description</span> (descripción) en español. Por ejemplo: "Casa con jardín en Coyoacán". El título y la descripción en inglés son opcionales.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/propiedad-1.webp" width="800" height="420" loading="lazy" alt="Formulario de propiedad nueva: ID, título y descripción.">
+      <span class="m" style="left:5.5%;top:42.9%">2</span><span class="m" style="left:5.5%;top:61.7%">3</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">4</span><span><span class="en">Type</span>: <span class="en">For sale</span> (venta) o <span class="en">For rent</span> (renta).</span></li>
+      <li><span class="n">5</span><span><span class="en">Price</span>: el precio, solo números. En renta, el precio es <b>mensual</b>. Elige la moneda: MXN (pesos) o USD (dólares).</span></li>
+      <li><span class="n">6</span><span><span class="en">Address/Neighborhood</span> (colonia o zona) y <span class="en">City</span> (ciudad).</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/propiedad-2.webp" width="800" height="250" loading="lazy" alt="Tipo, precio, moneda y ubicación de la propiedad.">
+      <span class="m" style="left:5.5%;top:26%">4</span><span class="m" style="left:35.6%;top:26%">5</span><span class="m" style="left:5.5%;top:82.8%">6</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">7</span><span>Características: elige la <b>categoría</b> (casa, departamento, terreno…) y llena <span class="en">Bedrooms</span> (recámaras), <span class="en">Bathrooms</span> (baños), <span class="en">Parking</span> (estacionamientos) y <span class="en">Area</span> (metros², obligatorio). Marca <span class="en">Featured property</span> para que salga destacada en tu página de inicio.</span></li>
+      <li><span class="n">8</span><span><b>Fotos:</b> da clic en <span class="en">Choose File</span> (elegir archivo) y sube tus fotos (JPG, PNG o WEBP, máximo 10 MB cada una). <b>Sin al menos una foto, la propiedad no se publica.</b></span></li>
+      <li><span class="n">9</span><span>Da clic en <b><span class="en">Create Property</span></b> (Crear propiedad). En unos minutos aparece en tu sitio.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/propiedad-3.webp" width="800" height="600" loading="lazy" alt="Características, fotos de la propiedad y botón Create Property.">
+      <span class="m" style="left:5.5%;top:3.2%">7</span><span class="m" style="left:6.8%;top:64.5%">8</span><span class="m" style="left:80.8%;top:90.5%">9</span>
+    </div></figure>
+  </section>
+
+  <!-- 9 -->
+  <section class="paso" id="paso-9">
+    <div class="paso__cabeza"><div class="paso__num">9</div><h2>Tus interesados<span class="paso__sub">Menú <span class="en">Leads</span></span></h2></div>
+    <p class="lead">Cada persona que te deja sus datos en tu sitio aparece aquí. <b>También te llega un correo</b> en ese momento.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Su nombre, correo, teléfono y lo que busca. Escríbele pronto: quien contesta primero, gana.</span></li>
+      <li><span class="n">2</span><span>Si te escribió por el chat, da clic en <b>"Ver la conversación"</b> para leer lo que platicó. <span class="en">Mark as read</span> lo marca como leído.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/leads.webp" width="800" height="360" loading="lazy" alt="Lista de interesados con sus datos y el link Ver la conversación.">
+      <span class="m" style="left:3.8%;top:25%">1</span><span class="m" style="left:72.9%;top:52.8%">2</span>
+    </div><figcaption>Datos de ejemplo.</figcaption></figure>
+  </section>
+
+  <!-- 10 -->
+  <section class="paso" id="paso-10">
+    <div class="paso__cabeza"><div class="paso__num">10</div><h2>Tu asistente con IA (chat)<span class="paso__sub">Atiende a tus visitantes las 24 horas</span></h2></div>
+    <p class="lead">En tu sitio aparece una burbuja de chat <span class="n" style="width:20px;height:20px;font-size:11px;vertical-align:-3px">1</span>. Tu asistente contesta con tus propiedades publicadas y, cuando alguien quiere que lo contacten, te pasa sus datos por correo y en <span class="en">Leads</span>.</p>
+    <div class="dos">
+      <figure><div class="foto">
+        <img src="/guia/img/sitio.webp" width="800" height="600" loading="lazy" alt="Sitio con la burbuja del chat abajo a la derecha.">
+        <span class="m" style="left:93.1%;top:90.8%">1</span>
+      </div><figcaption>La burbuja en tu sitio.</figcaption></figure>
+      <figure><div class="foto">
+        <img src="/guia/img/chat.webp" width="800" height="600" loading="lazy" alt="Chat abierto con el saludo del asistente.">
+      </div><figcaption>El chat abierto.</figcaption></figure>
+    </div>
+    <div class="nota">¿No ves <b>Asistente</b> ni <b>Conversaciones</b> en tu menú? Es porque el chat todavía no está activo en tu sitio: <b>se activa al suscribirte</b>.</div>
+    <p class="lead">Para configurarlo, entra al menú <b>Asistente</b>:</p>
+    <ol class="pasitos">
+      <li><span class="n">2</span><span><b>"Asistente prendido en mi sitio"</b>: con esta casilla lo prendes o lo apagas.</span></li>
+      <li><span class="n">3</span><span>Ponle <b>nombre</b> (por ejemplo, Sofía) y elige el <b>tono</b>: cercano o formal.</span></li>
+      <li><span class="n">4</span><span><b>"Sobre tu empresa"</b>: cuéntale qué haces, en qué zonas trabajas y qué ofreces.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/asistente-1.webp" width="800" height="500" loading="lazy" alt="Configuración del asistente: prenderlo, nombre, tono y sobre tu empresa.">
+      <span class="m" style="left:5.5%;top:17.4%">2</span><span class="m" style="left:5.5%;top:61.8%">3</span><span class="m" style="left:5.5%;top:91.2%">4</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">5</span><span><b>Preguntas frecuentes:</b> escribe las preguntas que más te hacen y su respuesta. Por ejemplo: "¿Aceptan crédito?".</span></li>
+      <li><span class="n">6</span><span>Llena <b>"Lo que no debe decir"</b> y tu <b>horario</b>, y da clic en <b>"Guardar"</b>.</span></li>
+      <li><span class="n">7</span><span>Con <b>"Probar mi asistente"</b> platicas con él tú mismo, sin gastar conversaciones.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/asistente-2.webp" width="800" height="600" loading="lazy" alt="Preguntas frecuentes, lo que no debe decir, horario y botones Guardar y Probar mi asistente.">
+      <span class="m" style="left:5.5%;top:4.3%">5</span><span class="m" style="left:3.1%;top:91%">6</span><span class="m" style="left:13.5%;top:91%">7</span>
+    </div></figure>
+    <div class="nota"><b>Importante:</b> lo que escribas aquí lo usa el asistente para contestar, y un visitante podría llegar a verlo. No pongas comisiones, datos de los dueños ni nada privado.</div>
+    <p class="lead">En el menú <b>Conversaciones</b> lees todo lo que platicó tu asistente con tus visitantes en los últimos 30 días.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Da clic en una conversación de la lista. Las que dicen <b>"Dejó sus datos"</b> también están en <span class="en">Leads</span>.</span></li>
+      <li><span class="n">2</span><span>A la derecha ves la plática completa.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/conversaciones.webp" width="800" height="540" loading="lazy" alt="Lista de conversaciones y una plática abierta.">
+      <span class="m" style="left:3.4%;top:61.7%">1</span><span class="m" style="left:41.9%;top:20%">2</span>
+    </div><figcaption>Datos de ejemplo.</figcaption></figure>
+  </section>
+
+  <!-- 11 -->
+  <section class="paso" id="paso-11">
+    <div class="paso__cabeza"><div class="paso__num">11</div><h2>Conecta tu IA<span class="paso__sub">Menú <b>Conectar mi IA</b> · con Claude o ChatGPT</span></h2></div>
+    <p class="lead">Conecta tu propia inteligencia artificial a tu sitio. Desde su chat puedes buscar, crear y editar tus propiedades, y ver quién te escribió, <b>solo platicando</b>.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Da clic en <b>"Generar mi dirección privada"</b>.</span></li>
+      <li><span class="n">2</span><span>Da clic en <b>"Copiar"</b>. <b>Cópiala en ese momento:</b> por seguridad no se vuelve a mostrar. No la compartas con nadie.</span></li>
+      <li><span class="n">3</span><span>Pégala en Claude o en ChatGPT (instrucciones abajo).</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/ia.webp" width="800" height="490" loading="lazy" alt="Página Conectar mi IA con la dirección privada e instrucciones.">
+    </div><figcaption>Así se ve cuando ya está conectada. Si se te pierde la dirección, usa "Generar una dirección nueva".</figcaption></figure>
+    <div class="columnas">
+      <div class="tarjeta">
+        <h3>En Claude</h3>
+        <ol>
+          <li>Abre <b>Configuración → Conectores</b>.</li>
+          <li>Elige <b>Agregar conector personalizado</b>.</li>
+          <li>Ponle un nombre (por ejemplo, "Mi sitio") y pega tu dirección privada.</li>
+          <li>Déjalo sin inicio de sesión y guárdalo.</li>
+          <li>En un chat nuevo, activa el conector y pídele lo que necesites.</li>
+        </ol>
+      </div>
+      <div class="tarjeta">
+        <h3>En ChatGPT</h3>
+        <ol>
+          <li>Abre <b>Configuración → Seguridad e inicio de sesión</b> y activa el <b>Modo desarrollador</b>.</li>
+          <li>Crea una app o conector nuevo con tu dirección privada, sin autenticación.</li>
+          <li>En un chat nuevo, elige esa herramienta y pídele lo que necesites.</li>
+        </ol>
+        <small>Los nombres de los menús de ChatGPT pueden cambiar.</small>
+      </div>
+    </div>
+    <div class="tarjeta" style="margin-bottom:18px">
+      <h3>Qué le puedes pedir</h3>
+      <ul>
+        <li>"¿Qué propiedades tengo en renta?"</li>
+        <li>"Baja el precio de la casa de Coyoacán a 4.2 millones."</li>
+        <li>"Sube un departamento en venta en la Roma: 2 recámaras, 85 m², 3.5 millones, con esta foto: https://…"</li>
+        <li>"¿Quién me escribió esta semana?"</li>
+      </ul>
+    </div>
+    <div class="tip"><b>Bueno saber:</b> tu IA te pide permiso antes de crear o cambiar algo. Para subir fotos desde tu computadora o celular, usa <span class="en">Properties</span>. Desde la IA no se pueden borrar propiedades. Cada cambio tarda 1 o 2 minutos en verse en tu sitio.</div>
+    <p class="lead" style="font-size:15px">Estas mismas instrucciones están en tu panel, en "Conectar mi IA".</p>
+  </section>
+
+  <!-- 12 -->
+  <section class="paso" id="paso-12">
+    <div class="paso__cabeza"><div class="paso__num">12</div><h2>Comparte tu sitio</h2></div>
+    <p class="lead">Tu sitio ya trabaja para ti. Ahora haz que lo vean:</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>En tu panel, da clic en <span class="en">View site</span> para ver cómo quedó.</span></li>
+      <li><span class="n">2</span><span>Pon la dirección de tu sitio en tu <b>estado de WhatsApp</b>, en la <b>bio de Instagram y Facebook</b> y en tu firma de correo.</span></li>
+      <li><span class="n">3</span><span>Cuando le mandes una propiedad a un cliente, mándale el link de esa propiedad en tu sitio.</span></li>
+      <li><span class="n">4</span><span>Revisa <span class="en">Leads</span> y tu correo todos los días.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guia/img/sitio.webp" width="800" height="600" loading="lazy" alt="Ejemplo de un sitio RexSite con diseño Signature.">
+    </div><figcaption>Así se ve un sitio RexSite (diseño Signature).</figcaption></figure>
+  </section>
+
+  <section class="final">
+    <h2>¿Dudas?</h2>
+    <p>Responde cualquier correo de RexSite y te ayudamos.</p>
+    <a class="boton" href="/guia/rexsite-guia-rapida.pdf" download>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      Descargar esta guía en PDF
+    </a>
+  </section>
+</div>
+</main>
+
+<footer class="pie">© RexSite · <a href="/">www.rexsite.ai</a></footer>
+
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Foto en grande">
+  <button class="visor__cerrar" type="button" aria-label="Cerrar">×</button>
+  <div class="visor__caja"></div>
+</div>
+
+<script>
+(function () {
+  var visor = document.getElementById('visor');
+  var caja = visor.querySelector('.visor__caja');
+  var botonCerrar = visor.querySelector('.visor__cerrar');
+  var origen = null;
+  document.querySelectorAll('.m').forEach(function (m) { m.setAttribute('aria-hidden', 'true'); });
+  function cerrar() {
+    if (!visor.classList.contains('abierto')) return;
+    visor.classList.remove('abierto');
+    caja.innerHTML = '';
+    document.body.style.overflow = '';
+    if (origen) { origen.focus(); origen = null; }
+  }
+  function abrir(foto) {
+    var copia = foto.cloneNode(true);
+    copia.classList.remove('foto--angosta');
+    copia.removeAttribute('tabindex');
+    copia.removeAttribute('role');
+    copia.removeAttribute('aria-label');
+    caja.innerHTML = '';
+    caja.appendChild(copia);
+    visor.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+    caja.scrollLeft = 0;
+    caja.scrollTop = 0;
+    if (caja.scrollWidth > caja.clientWidth + 10) {
+      var pista = document.createElement('p');
+      pista.className = 'visor__pista';
+      pista.textContent = 'Desliza de lado para ver toda la foto.';
+      caja.appendChild(pista);
+    }
+    origen = foto;
+    botonCerrar.focus();
+  }
+  document.querySelectorAll('main .foto').forEach(function (foto) {
+    foto.setAttribute('tabindex', '0');
+    foto.setAttribute('role', 'button');
+    foto.setAttribute('aria-label', 'Ver la foto en grande');
+    foto.addEventListener('click', function () { abrir(foto); });
+    foto.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(foto); }
+    });
+  });
+  visor.addEventListener('click', cerrar);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
+})();
+</script>
+</body>
+</html>
