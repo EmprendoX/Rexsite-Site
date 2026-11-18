@@ -121,6 +121,14 @@ table.dic td:first-child{width:36%;font-weight:500}
 .final h2{font-size:28px;margin-bottom:8px}
 .final p{color:var(--tx-2)}
 .final .boton{margin-top:10px}
+.portada__acciones{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:26px}
+.portada .portada__acciones .boton{margin-top:0}
+.portada__registro{color:#fff;font-weight:600;font-size:15px;text-underline-offset:3px}
+.portada__registro:hover{color:var(--blue-2)}
+.registro{background:var(--navy);border-radius:20px;padding:30px 24px;margin:0 auto 44px;max-width:640px;text-align:center}
+.registro h2{color:#fff;font-size:24px;margin-bottom:8px}
+.registro p{color:#B9CBE0;margin:0}
+.registro .boton{margin-top:18px;font-size:15px;padding:14px 22px;letter-spacing:.02em}
 .pie{background:var(--navy);color:#B9CBE0;font-size:13px;text-align:center;padding:22px var(--pad)}
 .pie a{color:#fff}
 
@@ -166,9 +174,12 @@ table.dic td:first-child{width:36%;font-weight:500}
     <span class="etiqueta">Guía para clientes</span>
     <h1>Guía rápida de tu sitio</h1>
     <p>De tu registro a tu primera propiedad publicada, paso a paso y con fotos.</p>
-    <a class="boton" href="#paso-1">Empezar
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-    </a>
+    <div class="portada__acciones">
+      <a class="boton" href="#paso-1">Ver los pasos
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </a>
+      <a class="portada__registro" href="/empezar.html">¿Aún no tienes tu sitio? Empieza tus 14 días gratis <span aria-hidden="true">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -506,6 +517,11 @@ table.dic td:first-child{width:36%;font-weight:500}
   </section>
 
   <section class="final">
+    <div class="registro">
+      <h2>¿Todavía no tienes tu sitio?</h2>
+      <p>14 días gratis. No necesitas tarjeta. Después, $499 MXN al mes. Cancela cuando quieras.</p>
+      <a class="boton" href="/empezar.html">EMPEZAR MIS 14 DÍAS GRATIS</a>
+    </div>
     <h2>¿Dudas?</h2>
     <p>Responde cualquier correo de RexSite y te ayudamos.</p>
     <a class="boton" href="/guia/rexsite-guia-rapida.pdf" download>
