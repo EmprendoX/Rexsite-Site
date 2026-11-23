@@ -19,3 +19,25 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
+
+# 23 nov 2026: la página vieja de Estados Unidos (/start, la de la prueba de
+# $49) manda a la oferta nueva (/start/plan). Temporal (302) para poder
+# quitarlo borrando estos bloques; Netlify pasa el ?fbclid/utm del anuncio.
+# Solo /start exacto: signup, thanks, call, plan, etc. no cambian.
+[[redirects]]
+  from = "/start"
+  to = "/start/plan"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/start/"
+  to = "/start/plan"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/start/index.html"
+  to = "/start/plan"
+  status = 302
+  force = true
