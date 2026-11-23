@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Gracias de la landing de Estados Unidos. Dos versiones, según lo que
-     contestó el dashboard (?prueba=, lo pone signup.html):
-       - prueba=sin_tarjeta: su prueba de 14 días sin tarjeta ya empezó (textos
-         T1 aprobados por Agustín el 22 oct 2026). El sitio se crea solo y le
-         llega un correo. Sin botón de Stripe y sin link al sitio: si lo abre
-         antes de que exista, su equipo puede "recordar" hasta por una hora
-         que no existe.
-       - cualquier otro caso (un registro de antes, o el dashboard no pudo
-         empezar la prueba): paso 2 de 2, activar la prueba en Stripe, como
-         antes. El "ya quedó, revisa tu correo" va en welcome.html, a donde
-         Stripe manda a la persona después de activar la prueba. -->
-<title>One Last Step — RexSite</title>
+<!-- Gracias de la landing de Estados Unidos. 23 nov 2026 (oferta nueva,
+     textos aprobados por Agustín): una sola versión, sitio gratis para
+     siempre, sin botón de Stripe ni precio de la prueba.
+       - prueba=sin_tarjeta (lo pone signup.html cuando el sistema crea el
+         sitio solo): "en unos minutos te llega un correo". Sin link al
+         sitio: si lo abre antes de que exista, su equipo puede "recordar"
+         hasta por una hora que no existe.
+       - cualquier otro caso (un registro de antes, o el sistema no pudo
+         crearlo solo): "recibimos tus datos, te escribimos pronto".
+     El píxel no cambió: Lead siempre y StartTrial con prueba=sin_tarjeta,
+     con los mismos números que manda el dashboard. -->
+<title>You're All Set — RexSite</title>
 <meta name="theme-color" content="#0A1D36">
 <meta name="robots" content="noindex">
 <link rel="icon" href="/start/assets/img/favicon.png" type="image/png">
@@ -23,18 +23,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/start/assets/css/styles.css?v=1">
-
-<script>
-// Qué versión de la página toca, antes de pintar nada (así no parpadea).
-(function () {
-  try {
-    if (new URLSearchParams(window.location.search).get('prueba') === 'sin_tarjeta') {
-      document.documentElement.className += ' sin-tarjeta';
-      document.title = 'Free Trial Started — RexSite';
-    }
-  } catch (e) { /* navegador muy viejo: la versión de Stripe */ }
-})();
-</script>
 
 <!-- Meta Pixel Code: pixel "Rexsite.ai USA", solo para la landing de
      Estados Unidos (la de español usa otro pixel). -->
@@ -86,8 +74,7 @@ fbq('track', 'PageView');
     });
   }
 })();
-// InitiateCheckout se dispara al hacer clic en el botón de pago (ver el
-// script al final), no al cargar.
+// Desde el 23 nov 2026 ya no hay botón de pago ni evento al hacer clic.
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
@@ -117,16 +104,9 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
   font-weight:700; overflow-wrap:anywhere;
 }
 
-/* El botón de activar es lo principal de la página. */
-.puente__pago .btn{ width:100%; }
 .puente__condiciones{ font-size:.92rem; color:var(--tx-2); margin-top:16px; }
 .puente .puente__condiciones{ margin-bottom:0; }
 .puente .puente__diseno{ font-size:.88rem; color:var(--tx-3); margin-top:28px; margin-bottom:0; }
-
-/* Las dos versiones de la página (ver el script del principio). */
-.solo-sin-tarjeta{ display:none; }
-.sin-tarjeta .solo-sin-tarjeta{ display:block; }
-.sin-tarjeta .solo-pago{ display:none; }
 </style>
 </head>
 <body>
@@ -135,11 +115,11 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
   <div>
     <img class="puente__logo" src="/start/assets/img/logo.png" alt="RexSite" width="730" height="220">
 
-    <!-- Prueba sin tarjeta: ya empezó (T1). La dirección va como texto, no
-         como link. Sin dirección (el sistema no respondió y los datos
-         quedaron en la copia de respaldo): "We received your information…". -->
-    <div class="solo-sin-tarjeta">
-      <span class="eyebrow">Free trial started</span>
+    <!-- La dirección va como texto, no como link. Sin dirección (el sistema
+         no respondió y los datos quedaron en la copia de respaldo): "We
+         received your information…". -->
+    <div>
+      <span class="eyebrow">Free website</span>
       <h1>You're all set! We're building your website.</h1>
       <p id="nt-dir" hidden>
         Your website address:<br>
@@ -148,33 +128,7 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
       <p id="nt-correo" hidden>In a few minutes you'll receive an email from hola@mail.rexsite.co with your website link and how to access your dashboard.</p>
       <p id="nt-recibido">We received your information. We'll email you shortly.</p>
       <p>Can't find it? Check your spam or promotions folder.</p>
-      <p class="puente__condiciones">Your 14-day free trial starts today. No credit card required. After your trial, it's $49/month.</p>
-    </div>
-
-    <!-- Activar la prueba en Stripe (registros de antes), como antes. -->
-    <div class="solo-pago">
-    <span class="eyebrow">Step 2 of 2</span>
-    <h1>One last step: activate your free trial.</h1>
-
-    <!-- ?dir=nombre.rexsite.ai muestra la dirección que quedó apartada. Sin
-         dirección (p. ej. cuando el sistema no respondió y los datos quedaron
-         en la copia de respaldo) se dice solo que recibimos los datos. -->
-    <p id="msg-dir" hidden>
-      Your website address is reserved:<br>
-      <span class="puente__dir" id="dir"></span>
-    </p>
-    <p id="msg-recibido">We received your information.</p>
-
-    <!-- PAGO: link de pago de Stripe en dólares (14 días gratis, después
-         $49 al mes; Stripe cobra $0 hoy). Al terminar, Stripe manda a
-         /start/welcome.html. Con ?dir= el script le agrega
-         ?client_reference_id=<dirección> (ver abajo). -->
-    <div class="puente__pago">
-      <a class="btn btn--lg" id="ir-a-activar" href="https://buy.stripe.com/8x27sEePYft3e59adt6sw03" rel="noopener">
-        <span>Activate My <span style="white-space:nowrap">14-Day</span> Free Trial</span> <span class="arw" aria-hidden="true">→</span>
-      </a>
-      <p class="puente__condiciones">You won't be charged today. 14-day free trial, then $49/month. Cancel anytime.</p>
-    </div>
+      <p class="puente__condiciones">Your website is free forever. No credit card required.</p>
     </div>
 
     <!-- ?diseno=signature|clasica: el diseño que eligió en el formulario. -->
@@ -191,26 +145,19 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
     var params = new URLSearchParams(window.location.search);
     var dir = (params.get('dir') || '').toLowerCase();
     if (params.get('respaldo') !== '1' && /^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?\.rexsite\.ai$/.test(dir)) {
-      // En pantallas angostas, que corte antes de ".rexsite.ai". Va en las dos
-      // versiones de la página (solo se ve una).
+      // En pantallas angostas, que corte antes de ".rexsite.ai".
       var corte = dir.lastIndexOf('.rexsite.ai');
-      ['dir', 'nt-dir-texto'].forEach(function (id) {
-        var el = document.getElementById(id);
-        el.appendChild(document.createTextNode(dir.slice(0, corte)));
-        el.appendChild(document.createElement('wbr'));
-        el.appendChild(document.createTextNode(dir.slice(corte)));
-      });
-      document.getElementById('msg-recibido').hidden = true;
-      document.getElementById('msg-dir').hidden = false;
-      document.getElementById('nt-recibido').hidden = true;
+      var el = document.getElementById('nt-dir-texto');
+      el.appendChild(document.createTextNode(dir.slice(0, corte)));
+      el.appendChild(document.createElement('wbr'));
+      el.appendChild(document.createTextNode(dir.slice(corte)));
       document.getElementById('nt-dir').hidden = false;
-      document.getElementById('nt-correo').hidden = false;
-      // El botón de Stripe lleva la dirección apartada (sin ".rexsite.ai"):
-      // al activar la prueba, Stripe se la pasa al dashboard y su sitio se
-      // reconoce aunque escriba otro correo. Stripe solo acepta letras,
-      // números y guiones, que es justo lo que permite la regla de arriba.
-      var activar = document.getElementById('ir-a-activar');
-      activar.href = activar.href.split('?')[0] + '?client_reference_id=' + encodeURIComponent(dir.slice(0, corte));
+      // "En unos minutos te llega un correo" solo si el sistema creó su
+      // sitio solo; si no, se queda "recibimos tus datos".
+      if (params.get('prueba') === 'sin_tarjeta') {
+        document.getElementById('nt-recibido').hidden = true;
+        document.getElementById('nt-correo').hidden = false;
+      }
       // Para mostrarla en welcome.html cuando vuelva de Stripe.
       try {
         window.localStorage.setItem('rexsite_usa_dir', JSON.stringify({ dir: dir, t: Date.now() }));
@@ -227,20 +174,6 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=Lead&noscript=1"
       document.getElementById('msg-diseno').hidden = false;
     }
   } catch (e) { /* navegador muy viejo: queda "We received your information." */ }
-})();
-
-(function () {
-  'use strict';
-  // Meta Pixel: el clic es lo que lleva al pago.
-  // Si un bloqueador impide cargar el pixel, fbq no existe y no hacemos nada:
-  // el enlace de pago nunca se ve afectado.
-  document.getElementById('ir-a-activar').addEventListener('click', function () {
-    if (typeof window.fbq !== 'function') return;
-    window.fbq('track', 'InitiateCheckout', {
-      content_name: '14-day trial',
-      content_category: 'RexSite subscription'
-    });
-  });
 })();
 </script>
 
