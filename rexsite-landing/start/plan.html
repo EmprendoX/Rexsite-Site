@@ -15,9 +15,16 @@
      al cuestionario de la llamada (/start/call.html?b=<cuál botón>). NO usar
      data-cta en ellos: main.js los mandaría al formulario del sitio.
      8 nov 2026: copy nuevo del hero (portada) que pegó Agustín; el resto
-     de la página no cambió. -->
+     de la página no cambió.
+     23 nov 2026: oferta nueva de Agustín. Sitio gratis para siempre (con
+     CRM), asistente con IA a $99/mes (hoy $70/mes de promoción), y Rexsite
+     Growth a $599/mes (antes $799) para un grupo inicial. Garantía nueva de
+     90 días. Chat con AI: precio normal $99/mes, hoy en promoción a $70/mes
+     (mensual, sin pago anual). "Add Rexsite AI" va al link de Stripe de
+     $70/mes; "See it live" va al demo con el chat prendido. El link de
+     Growth ($599) NO va aquí: se manda después de la llamada. -->
 <title>RexSite — Turn Your Ad Budget Into More Real Estate Deals.</title>
-<meta name="description" content="Get more buyers with a complete marketing system.">
+<meta name="description" content="Get your real estate website free. Add AI to handle your leads 24/7. Activate a complete marketing system when you're ready to grow.">
 <meta name="theme-color" content="#0A1D36">
 <link rel="icon" href="/start/assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/start/assets/img/favicon.png">
@@ -26,7 +33,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="RexSite">
 <meta property="og:title" content="Turn Your Ad Budget Into More Real Estate Deals.">
-<meta property="og:description" content="Get more buyers with a complete marketing system.">
+<meta property="og:description" content="Get your real estate website free. Add AI to handle your leads 24/7. Activate a complete marketing system when you're ready to grow.">
 <meta property="og:image" content="https://www.rexsite.ai/start/assets/img/hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -143,6 +150,85 @@
 .close .h-sub{ margin-top:26px; }
 .close__cta{ margin-top:22px; }
 .close__cta .lead{ margin-bottom:16px; }
+
+/* ── 23 nov 2026: oferta nueva ── */
+/* Portada: dos botones (sitio gratis y Growth) */
+.offer__btns{ display:grid; gap:12px; }
+/* Botón claro sobre fondo oscuro (portada y sección del chat) */
+.offer .btn--ghost, .s-dark .btn--ghost{ color:#fff; border-color:rgba(255,255,255,.38); }
+.offer .btn--ghost:hover, .s-dark .btn--ghost:hover{ border-color:#fff; box-shadow:none; }
+
+/* Introducción: el sitio es solo el principio */
+.intro{ max-width:820px; margin-inline:auto; text-align:center; }
+.intro .txt{ margin-top:20px; }
+.intro__growth{
+  margin-top:clamp(40px,4.5vw,58px); padding-top:clamp(36px,4vw,50px);
+  border-top:1px solid var(--line);
+}
+
+/* Las tres tarjetas: gratis, IA y Growth */
+.planes{
+  display:grid; gap:clamp(18px,2.2vw,26px); grid-template-columns:1fr;
+  margin-top:clamp(42px,5vw,62px); align-items:stretch;
+}
+@media (min-width:980px){ .planes{ grid-template-columns:repeat(3,1fr); } }
+.plan{
+  display:flex; flex-direction:column; position:relative; overflow:hidden;
+  padding:clamp(26px,2.6vw,34px); border-radius:var(--r-lg);
+  background:var(--paper); border:1px solid var(--line); box-shadow:var(--sh-md);
+}
+.plan__lema{
+  font-family:var(--f-display); font-weight:800; font-size:.74rem;
+  letter-spacing:.09em; text-transform:uppercase; color:var(--blue-deep);
+}
+.plan h3{ margin-top:12px; font-size:clamp(1.2rem,1.7vw,1.42rem); line-height:1.25; }
+.plan__precio{
+  margin-top:16px; font-family:var(--f-display); font-weight:800;
+  font-size:clamp(2rem,3vw,2.5rem); line-height:1; letter-spacing:-.03em; color:var(--navy);
+}
+.plan__precio small{ font-size:.95rem; font-weight:700; letter-spacing:0; color:var(--tx-3); }
+.plan__precio s{ font-size:.55em; font-weight:700; color:var(--tx-3); margin-right:8px; letter-spacing:0; }
+.plan__nota{ margin-top:10px; font-size:.92rem; color:var(--tx-3); }
+.plan .txt{ margin-top:18px; }
+.plan .txt p{ color:var(--tx-2); font-size:.99rem; }
+.plan .txt .fuerte{ color:var(--navy); font-size:1.02rem; }
+.plan__cta{ margin-top:auto; padding-top:26px; }
+.plan__cta .btn{ width:100%; }
+.plan .btn--ghost:hover{ border-color:var(--blue-2); color:var(--blue-deep); }
+.plan--growth{
+  background:linear-gradient(140deg,#0C2340,#081A30 60%,#06101F);
+  border-color:transparent; box-shadow:var(--sh-lg);
+}
+.plan--growth::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:4px;
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue-2),var(--green));
+}
+.plan--growth .plan__lema{ color:var(--blue-2); }
+.plan--growth h3, .plan--growth .plan__precio{ color:#fff; }
+.plan--growth .plan__precio small, .plan--growth .plan__precio s, .plan--growth .plan__nota{ color:#93ABC6; }
+.plan--growth .txt p{ color:#CBDCEF; }
+.plan--growth .txt .fuerte{ color:#fff; }
+
+/* Precio tachado dentro del título con degradado */
+.antes{
+  -webkit-text-fill-color:#5E6F84; color:#5E6F84;
+  text-decoration:line-through; text-decoration-color:#5E6F84;
+  font-size:.62em; margin-right:.2em;
+}
+/* "See it live": link chico al demo, debajo del botón de pago del chat. */
+.plan__demo{ display:block; margin-top:14px; text-align:center; font-size:.92rem; font-weight:600; color:var(--tx-2); text-decoration:underline; text-underline-offset:3px; }
+.plan__demo:hover{ text-decoration-thickness:2px; }
+.s-dark .plan__demo{ color:#D3E1F2; }
+.cta-block .plan__demo{ margin-top:0; text-align:left; }
+/* Chat con AI en promoción: sello, línea de la oferta y precio normal tachado. */
+.plan__sello{
+  display:inline-block; align-self:flex-start; margin-top:14px; padding:5px 12px; border-radius:999px;
+  font-family:var(--f-display); font-weight:800; font-size:.7rem; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink); background:var(--gold);
+}
+.plan__sello + .plan__precio{ margin-top:12px; }
+.plan__nota--oferta{ font-weight:700; font-size:.98rem; color:var(--navy); }
+.cta-block .fuerte s{ color:#93ABC6; font-weight:600; }
 </style>
 
 <!-- Meta Pixel Code: pixel "Rexsite.ai USA", el mismo de /start
@@ -193,23 +279,28 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
 
         <h1 class="rv rv-d1">Turn Your Ad Budget Into <span class="grad">More Real Estate Deals.</span></h1>
 
-        <h2 class="hero__h2 rv rv-d1">Get more buyers with a complete marketing system.</h2>
+        <h2 class="hero__h2 rv rv-d1">Get your real estate website free.</h2>
 
-        <p class="hero__lead rv rv-d2">Your professional real estate website, AI chat, automated email, and built-in CRM are all connected to the campaigns that bring buyers in.</p>
+        <p class="hero__lead rv rv-d2">Add AI to handle your leads 24/7. Activate a complete marketing system when you're ready to grow.</p>
 
         <p class="hero__sub hero__lineas rv rv-d2">
-          <span><strong>Your website, chat, and email can be ready in 5 minutes.</strong></span>
-          <span>Already running ads? <strong>We’ll help you get more from your current budget.</strong></span>
-          <span>Starting from scratch? <strong>We’ll build and manage your entire marketing system.</strong></span>
+          <span><strong>Free website with built-in CRM.</strong> No credit card required.</span>
+          <span><strong>An AI assistant</strong> that answers your leads 24/7.</span>
+          <span><strong>A complete system</strong> that brings you qualified buyers.</span>
         </p>
 
         <div class="offer rv rv-d3">
-          <p class="offer__top">Results guaranteed or your money back.</p>
-          <a class="btn btn--lg" data-growth href="/start/call.html?b=hero">
-            Book a Call
-            <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </a>
-          <p class="cta-note">See how it would work in your market with your ad budget.</p>
+          <p class="offer__top">Results in 90 days. Or we work for free until you get them.</p>
+          <div class="offer__btns">
+            <a class="btn btn--lg" data-cta href="/start/signup.html">
+              Get My Free Website
+              <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+            <a class="btn btn--lg btn--ghost" data-growth href="/start/call.html?b=hero">
+              See If My Market Qualifies
+              <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -217,9 +308,9 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
         <img src="/start/assets/img/hero.webp" width="900" height="1435" alt="Real estate agent presenting a RexSite website on a computer and a phone in front of a modern home." fetchpriority="high">
         <div class="float float--a" aria-hidden="true">
           <span class="ico">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
           </span>
-          Ready in 5 Minutes
+          Free Forever
         </div>
         <div class="float float--b" aria-hidden="true">
           <span class="ico ico--g">
@@ -265,8 +356,99 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
         </div>
       </article>
     </div>
+  </div>
+</section>
 
-    <h3 class="puente rv">There's a <span class="grad">Smarter Way.</span></h3>
+<!-- ══════════════════ EL SITIO ES SOLO EL PRINCIPIO ══════════════════
+     Copy de Agustín (23 nov 2026), tal cual. -->
+<section class="section s-paper">
+  <div class="wrap">
+    <div class="intro">
+      <h2 class="rv">Your professional real estate website <span class="grad">is just the beginning.</span></h2>
+      <div class="txt rv rv-d1">
+        <p class="lead">Give your business a professional image, showcase your properties, and keep everything organized in one place.</p>
+        <p class="lead">Add AI to answer questions, assist potential buyers, and follow up 24/7 — so you never miss an opportunity.</p>
+      </div>
+
+      <div class="intro__growth">
+        <h3 class="h-sub rv" style="margin-top:0">When you're ready to grow, we'll take care of your client acquisition.</h3>
+        <div class="txt rv rv-d1">
+          <p>Rexsite Growth is a complete system designed to attract qualified buyers, respond to inquiries instantly, and turn more leads into real sales opportunities.</p>
+          <p>We handle everything — from attracting potential clients to following up and continuously improving results.</p>
+          <p class="fuerte" style="margin-top:20px">You focus on what you do best: building relationships and closing deals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ LAS TRES TARJETAS ══════════════════
+     Gratis → registro (data-cta). IA → por ahora el demo con el chat
+     prendido (falta el link de pago). Growth → cuestionario (?b=tarjeta). -->
+<section class="section s-ivory" id="planes">
+  <div class="wrap wrap--wide">
+    <div class="shead shead--center">
+      <h2 class="rv">Start Free. <span class="grad">Grow When You're Ready.</span></h2>
+    </div>
+
+    <div class="planes">
+
+      <article class="plan rv">
+        <p class="plan__lema">Make a great first impression.</p>
+        <h3>Start Free</h3>
+        <p class="plan__precio">$0</p>
+        <div class="txt">
+          <p>Launch your professional real estate website with your branding, listings, built-in CRM, and contact tools.</p>
+          <p>Buyers can reach you by text message or email, and every inquiry is saved for you.</p>
+          <p class="fuerte">No credit card required.</p>
+        </div>
+        <div class="plan__cta">
+          <a class="btn" data-cta href="/start/signup.html">
+            Get My Free Website
+            <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="plan rv rv-d1">
+        <p class="plan__lema">Never leave a lead waiting.</p>
+        <h3>Add Your AI Assistant</h3>
+        <p class="plan__sello">Limited-Time Offer</p>
+        <p class="plan__precio"><s>$99</s>$70<small>/month</small></p>
+        <p class="plan__nota plan__nota--oferta">Get the yearly rate — without the yearly commitment.</p>
+        <div class="txt">
+          <p>Let AI answer questions about your properties, help visitors find what they're looking for, capture inquiries, and keep follow-up moving.</p>
+          <p class="fuerte">Your website saves every inquiry. Your AI assistant answers it — instantly.</p>
+        </div>
+        <div class="plan__cta">
+          <a class="btn btn--ghost" href="https://buy.stripe.com/9B6cMY8rA4Opgdh0CT6sw07" aria-label="Add Rexsite AI for US$70 a month (goes to secure checkout)">
+            Add Rexsite AI
+            <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="plan__demo" href="https://demo-usa.rexsite.ai" target="_blank" rel="noopener" aria-label="See it live (opens a demo website in a new tab)">See it live</a>
+        </div>
+      </article>
+
+      <article class="plan plan--growth rv rv-d2">
+        <p class="plan__lema">Close more deals.</p>
+        <h3>Activate Rexsite Growth</h3>
+        <p class="plan__precio"><s>$799</s>$599<small>/month</small></p>
+        <p class="plan__nota">Now: $599/month for a limited initial group of qualifying clients.</p>
+        <div class="txt">
+          <p>We build, manage, and optimize your buyer acquisition system.</p>
+          <p>Google Ads + Meta Ads + AI-powered lead handling + follow-up + attribution.</p>
+          <p class="fuerte">Your website and AI assistant are included.</p>
+          <p>Advertising budget is separate.</p>
+        </div>
+        <div class="plan__cta">
+          <a class="btn" data-growth href="/start/call.html?b=tarjeta">
+            See If My Market Qualifies
+            <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
   </div>
 </section>
 
@@ -296,9 +478,9 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
         <div class="txt rv rv-d1" style="margin-top:22px">
           <p class="lead">Upload your logo and cover image. Add your first properties.</p>
           <p>Your website gives buyers a clear, intuitive way to explore your listings, view photos, ask questions, and contact you.</p>
-          <p>Your chat and email are connected from the start.</p>
+          <p>Your contact tools and CRM are connected from the start.</p>
           <p class="fuerte" style="margin-top:20px">Your brand. Your properties. A professional first impression.</p>
-          <p class="muted" style="margin-top:14px">The five-minute setup gets your website, chat, and email ready. Campaign setup follows once your advertising accounts, budget, and campaign plan are agreed.</p>
+          <p class="muted" style="margin-top:14px">The five-minute setup gets your website and CRM ready. Campaign setup follows once your advertising accounts, budget, and campaign plan are agreed.</p>
         </div>
       </div>
 
@@ -316,16 +498,18 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ══════════════════ PRUEBA DEL SITIO + DISEÑOS ══════════════════
+<!-- ══════════════════ SITIO GRATIS + DISEÑOS ══════════════════
      Las dos tarjetas de diseño son las de /start (textos aprobados por
      Agustín el 20 oct 2026). Sus botones van al formulario que ya existe. -->
 <section class="section s-ivory" id="website">
   <div class="wrap wrap--wide">
     <div class="shead shead--center">
-      <h2 class="rv">Try the Website Free. <span class="grad">Keep It for US$49/Month.</span></h2>
+      <h2 class="rv">Your Website Is Free. <span class="grad">Forever.</span></h2>
       <div class="txt rv rv-d1">
-        <p class="lead">Start by exploring what the website can do for your business.</p>
-        <p>When you subscribe to Rexsite Growth, <strong>your website is included and personalized at no additional charge</strong>, along with enhanced AI chat configured for your properties and business, automated follow-up, and your integrated CRM.</p>
+        <h3 class="h-sub">Buyers Can Reach You From Day One.</h3>
+        <p class="lead">Every listing gives buyers an easy way to contact you — by text message, email, or your contact form.</p>
+        <p>Every inquiry is saved in your CRM, so you can follow up when you're ready.</p>
+        <p class="fuerte">Want every buyer answered instantly, 24/7? Add your AI assistant.</p>
       </div>
     </div>
 
@@ -385,7 +569,7 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
 
     <div class="cta-block cta-block--center dcta rv rv-d3">
       <a class="btn btn--lg" data-cta href="/start/signup.html">
-        Try the Website Free
+        Get My Free Website
         <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
     </div>
@@ -441,6 +625,14 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
           <p>Your automated email confirms receipt, responds, and follows up according to the sequence you configure.</p>
           <p>Buyers can also reach you through text message, WhatsApp or email.</p>
           <p class="fuerte" style="margin-top:18px">You receive the opportunity with the context you need to continue the conversation.</p>
+        </div>
+        <div class="cta-block rv rv-d2" style="margin-top:28px">
+          <p class="fuerte">Add your AI assistant for <s>$99</s> $70/month — limited-time offer.</p>
+          <a class="btn btn--ghost" href="https://buy.stripe.com/9B6cMY8rA4Opgdh0CT6sw07" aria-label="Add Rexsite AI for US$70 a month (goes to secure checkout)">
+            Add Rexsite AI
+            <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="plan__demo" href="https://demo-usa.rexsite.ai" target="_blank" rel="noopener" aria-label="See it live (opens a demo website in a new tab)">See it live</a>
         </div>
       </div>
 
@@ -610,11 +802,13 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
       <div class="gico rv" aria-hidden="true">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
       </div>
-      <h2 class="rv">Results Guaranteed. <span class="grad">Or Your Money Back.</span></h2>
+      <h2 class="rv">Your Growth. <span class="grad">Guaranteed.</span></h2>
       <div class="txt rv rv-d1">
-        <p class="lead">We help you get more qualified buyers and turn your ad budget into more opportunities to sell.</p>
-        <p>We’re confident in what we do, and we back it with a simple guarantee:</p>
-        <p class="fuerte" style="margin-top:18px">If we don’t deliver the results we promise, we’ll refund your Rexsite Growth fees. If you prefer, we’ll keep working for free until we do. The choice is yours.</p>
+        <p class="lead fuerte">Results in 90 days. Or we work for free until you get them.</p>
+        <p>We set clear goals together before launching your campaigns. If we haven't reached those goals within 90 days, we'll keep working for free until we do.</p>
+        <p class="muted">Your advertising budget is paid directly to Google and Meta and is not part of the guarantee.</p>
+        <p class="fuerte" style="margin-top:22px">More qualified buyers. More opportunities. More deals.</p>
+        <p>You focus on selling properties. We'll focus on bringing you the right buyers.</p>
       </div>
     </div>
   </div>
@@ -624,14 +818,15 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
 <section class="section s-ivory" id="growth">
   <div class="wrap wrap--wide">
     <div class="shead shead--center shead--ancho">
-      <h2 class="rv">Your Complete Marketing System. <span class="grad">Just US$999/Month.</span></h2>
+      <h2 class="rv">Your Complete Marketing System. <span class="grad"><s class="antes">US$799</s> US$599/Month.</span></h2>
+      <p class="lead rv rv-d1">For a limited initial group of qualifying clients.</p>
       <p class="lead fuerte rv rv-d1">Your real estate platform, automation, and coordinated advertising strategy in one subscription.</p>
     </div>
 
     <div class="vs__new precio rv rv-d2">
       <ul class="inc">
-        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Professional real estate website — included at no additional charge</li>
-        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Enhanced AI chat configured for your properties and business</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Professional real estate website with built-in CRM</li>
+        <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>AI assistant configured for your properties and business</li>
         <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Automated email responses, confirmations, and follow-up</li>
         <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>New-lead notifications</li>
         <li><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Built-in CRM for leads, clients, and contact history</li>
@@ -645,11 +840,11 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
       </ul>
 
       <div class="precio__pie">
-        <p class="price-line" style="margin-top:0">US$999/month + your advertising budget.</p>
+        <p class="price-line" style="margin-top:0">US$599/month + your advertising budget.</p>
         <p class="muted">One base price worldwide, payable in US dollars or the equivalent in your local currency where supported.</p>
         <h3>We Build It. We Manage It. We Optimize It.</h3>
         <a class="btn btn--lg" data-growth href="/start/call.html?b=precio">
-          Get Started With Rexsite Growth
+          See If My Market Qualifies
           <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </a>
       </div>
@@ -697,7 +892,7 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
     <div class="ftr__notes">
       <span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        Website included.
+        Start with a free website.
       </span>
       <span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -711,8 +906,8 @@ src="https://www.facebook.com/tr?id=1737083810729024&ev=PageView&noscript=1"
      main.js la necesita (id="mbar"): no quitarla. -->
 <div class="mbar" id="mbar">
   <div class="mbar__p">
-    <b>US$999/month</b>
-    <small>Website included.</small>
+    <b>Free website</b>
+    <small>Growth from US$599/month</small>
   </div>
   <a class="btn" data-growth href="/start/call.html?b=barra">Get Started</a>
 </div>

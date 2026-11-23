@@ -251,7 +251,7 @@ form:not(.con-pasos) .no-js-oculto{ display:none; }
             <h2 class="paso__t" tabindex="-1">Your Investment</h2>
 
             <fieldset class="preg" data-preg="presupuesto" data-msg="Please choose an option.">
-              <legend>Rexsite Growth is US$999/month, plus your ad budget. If it's a good fit for you, does that work for your budget?</legend>
+              <legend>Rexsite Growth is US$599/month, plus your ad budget. If it's a good fit for you, does that work for your budget?</legend>
               <div class="ops">
                 <label class="op"><input type="radio" name="presupuesto" value="Si" required> Yes, it fits my budget</label>
                 <label class="op"><input type="radio" name="presupuesto" value="Si, con dudas"> Possibly, but I have a few questions</label>
@@ -263,7 +263,7 @@ form:not(.con-pasos) .no-js-oculto{ display:none; }
 
             <fieldset class="preg" data-preg="anuncios" data-msg="Please choose an option.">
               <legend>How much could you invest per month in ads alone?</legend>
-              <p class="ayuda">This is paid directly to Google and Meta, on top of the US$999/month service.</p>
+              <p class="ayuda">This is paid directly to Google and Meta, on top of the US$599/month service.</p>
               <div class="ops">
                 <label class="op"><input type="radio" name="anuncios" value="Menos de $500" required> Less than $500</label>
                 <label class="op"><input type="radio" name="anuncios" value="$500 a $999"> $500 – $999</label>
@@ -373,10 +373,11 @@ form:not(.con-pasos) .no-js-oculto{ display:none; }
      para que Agustín lo lea en Netlify. ── */
   var BOTONES = {
     header: 'Get Started (arriba)',
-    hero: 'Get Started — US$999/month (inicio)',
+    hero: 'See If My Market Qualifies (inicio)',
+    tarjeta: 'See If My Market Qualifies (tarjeta de Growth)',
     mejorar: 'Improve My Campaigns (ya anuncia)',
     lanzar: 'Launch My Marketing System (empieza de cero)',
-    precio: 'Get Started With Rexsite Growth (precio)',
+    precio: 'See If My Market Qualifies (precio)',
     cierre: 'Start Growing With Rexsite (final)',
     barra: 'Get Started (barra del celular)'
   };
@@ -482,7 +483,7 @@ form:not(.con-pasos) .no-js-oculto{ display:none; }
     if (valor('necesidad') === 'Solo el sitio web') motivos.push('solo quiere el sitio web');
     if (valor('propiedades') === 'Todavia no') motivos.push('todavía no tiene propiedades');
     var p = valor('presupuesto');
-    if (p === 'No tiene ese presupuesto') motivos.push('no tiene el presupuesto de $999');
+    if (p === 'No tiene ese presupuesto') motivos.push('no tiene el presupuesto de $599');
     if (p === 'Busca pagar solo al cerrar') motivos.push('quiere pagar solo al cerrar');
     if (valor('anuncios') === 'Menos de $500') motivos.push('menos de $500 en anuncios');
     if (valor('cuando') === 'Solo investigando') motivos.push('solo está investigando');
