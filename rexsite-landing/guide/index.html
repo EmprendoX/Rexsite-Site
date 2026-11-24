@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Guide to Your Website — RexSite</title>
+<meta name="description" content="From sign-up to your first published listing, step by step, with screenshots.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/img/favicon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quick Guide to Your RexSite Website">
+<meta property="og:description" content="From sign-up to your first published listing, step by step, with screenshots.">
+<meta property="og:image" content="https://www.rexsite.ai/guide/img/share.jpg">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="420">
+<meta property="og:url" content="https://www.rexsite.ai/guide/">
+<meta property="og:site_name" content="RexSite">
+<meta property="og:locale" content="en_US">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#06101F; --navy:#0A1D36; --blue:#1878DE; --blue-2:#3FA0FF; --blue-deep:#0E4FA3; --sky:#E9F2FD;
+  --ivory:#F7F3EC; --ivory-2:#FBF8F3; --paper:#FFFFFF; --green:#12885A; --green-soft:#E6F6EE;
+  --tx:#0C1B2E; --tx-2:#46586E; --tx-3:#6B7C91; --line:#E4E8EE; --amber:#FFF7E6; --amber-line:#F3D08A;
+  --marca:#E11D48;
+  --sh-sm:0 1px 2px rgba(6,16,31,.06),0 2px 8px rgba(6,16,31,.04);
+  --sh-md:0 4px 12px rgba(6,16,31,.06),0 16px 40px rgba(6,16,31,.08);
+  --f-display:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-text:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --maxw:860px; --pad:clamp(16px,4.5vw,32px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--ivory-2);color:var(--tx);font-family:var(--f-text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--blue-deep)}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;margin:0;letter-spacing:-.02em}
+p{margin:0 0 12px}
+.envoltura{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+/* Barra de arriba */
+.barra{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.barra .envoltura{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.barra__logo img{height:30px;width:auto}
+.barra__links{display:flex;align-items:center;gap:8px}
+.barra__indice{font-size:14px;font-weight:600;color:var(--tx-2);text-decoration:none;padding:8px 10px;border-radius:999px}
+.barra__indice:hover{background:var(--sky);color:var(--blue-deep)}
+.boton{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(24,120,222,.25);white-space:nowrap}
+.boton:hover{background:var(--blue-deep)}
+.boton svg{flex:none}
+
+/* Portada */
+.portada{background:var(--navy);color:#fff;padding:56px 0 64px;position:relative;overflow:hidden}
+.portada::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(63,160,255,.35),rgba(63,160,255,0));pointer-events:none}
+.etiqueta{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--blue-2);margin-bottom:14px}
+.portada h1{font-size:clamp(34px,7vw,54px);font-weight:800;margin-bottom:14px}
+.portada p{font-size:clamp(16px,2.6vw,19px);color:#B9CBE0;max-width:560px;margin:0}
+.portada .boton{margin-top:26px;background:#fff;color:var(--navy);box-shadow:none}
+.portada .boton:hover{background:var(--sky)}
+
+.cajas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:-34px;position:relative;z-index:2}
+.caja{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--sh-sm)}
+.caja h3{font-size:17px;margin-bottom:10px}
+.caja ul{margin:0;padding-left:20px}
+.caja li{margin-bottom:6px;color:var(--tx-2)}
+.caja li b{color:var(--tx)}
+
+/* Índice */
+.indice{margin:40px 0 8px}
+.indice h2{font-size:22px;margin-bottom:14px}
+.indice ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.indice a{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px 12px;text-decoration:none;color:var(--tx);font-weight:500;font-size:15px;line-height:1.3;transition:border-color .15s,box-shadow .15s}
+.indice a:hover{border-color:var(--blue);box-shadow:var(--sh-sm)}
+.indice span{flex:none;width:28px;height:28px;border-radius:50%;background:var(--sky);color:var(--blue-deep);font-family:var(--f-display);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+
+/* Pasos */
+.paso{padding:44px 0 8px;border-top:1px solid var(--line);margin-top:36px}
+.paso__cabeza{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
+.paso__num{flex:none;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--f-display);font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(24,120,222,.28)}
+.paso h2{font-size:clamp(23px,4.2vw,30px);font-weight:800;padding-top:4px}
+.paso__sub{display:block;font-family:var(--f-text);font-size:14px;font-weight:500;color:var(--tx-3);letter-spacing:0;margin-top:6px}
+.lead{color:var(--tx-2)}
+ol.pasitos{list-style:none;margin:0 0 18px;padding:0}
+ol.pasitos li{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
+.en{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:#EEF2F7;border:1px solid var(--line);border-radius:5px;padding:1px 5px;white-space:nowrap;color:var(--navy)}
+
+/* Fotos */
+figure{margin:0 0 22px}
+.foto{position:relative;cursor:zoom-in;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:var(--sh-sm)}
+.foto:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.foto img{width:100%;height:auto;border-radius:11px}
+.foto--angosta{max-width:560px;margin-left:auto;margin-right:auto}
+.m{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);pointer-events:none}
+figcaption{font-size:13px;color:var(--tx-3);margin-top:8px;text-align:center}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.aviso-fotos{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--tx-3);margin:18px 0 0}
+
+/* Avisos */
+.nota,.tip{border-radius:12px;padding:14px 16px;margin:0 0 18px;font-size:15px}
+.nota{background:var(--amber);border:1px solid var(--amber-line)}
+.tip{background:var(--sky);border:1px solid #C8DEF8}
+
+table.dic{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px;margin-bottom:18px}
+table.dic td{border-bottom:1px solid var(--line);padding:11px 14px;vertical-align:top}
+table.dic tr:last-child td{border-bottom:0}
+table.dic td:first-child{width:36%;font-weight:500}
+
+.columnas{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.tarjeta{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.tarjeta h3{font-size:17px;margin-bottom:10px}
+.tarjeta ol,.tarjeta ul{margin:0;padding-left:20px}
+.tarjeta li{margin-bottom:6px}
+.tarjeta small{display:block;color:var(--tx-3);margin-top:8px}
+
+/* Final */
+.final{text-align:center;padding:56px 0 64px;margin-top:40px;border-top:1px solid var(--line)}
+.final h2{font-size:28px;margin-bottom:8px}
+.final p{color:var(--tx-2)}
+.final .boton{margin-top:10px}
+.portada__acciones{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:26px}
+.portada .portada__acciones .boton{margin-top:0}
+.portada__registro{color:#fff;font-weight:600;font-size:15px;text-underline-offset:3px}
+.portada__registro:hover{color:var(--blue-2)}
+.registro{background:var(--navy);border-radius:20px;padding:30px 24px;margin:0 auto 44px;max-width:640px;text-align:center}
+.registro h2{color:#fff;font-size:24px;margin-bottom:8px}
+.registro p{color:#B9CBE0;margin:0}
+.registro .boton{margin-top:18px;font-size:15px;padding:14px 22px;letter-spacing:.02em}
+.pie{background:var(--navy);color:#B9CBE0;font-size:13px;text-align:center;padding:22px var(--pad)}
+.pie a{color:#fff}
+
+/* Foto en grande */
+.visor{position:fixed;top:0;right:0;bottom:0;left:0;z-index:50;background:rgba(6,16,31,.86);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.visor.abierto{display:flex}
+.visor__caja{width:min(1100px,100%);max-height:100%;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.visor__caja .foto{cursor:zoom-out;box-shadow:none;width:max(100%,760px)}
+.visor__pista{position:sticky;left:0;width:calc(100vw - 20px);margin:10px 0 0;color:#fff;font-size:14px;text-align:center}
+.visor__cerrar{position:fixed;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:var(--navy);font-size:22px;line-height:1;cursor:pointer}
+
+@media (max-width:720px){
+  .cajas,.columnas,.dos{grid-template-columns:1fr}
+  .cajas{margin-top:-28px}
+  .indice ol{grid-template-columns:1fr 1fr}
+  .barra__indice{display:none}
+  .m{width:20px;height:20px;font-size:11px;border-width:1.5px}
+  .visor{padding:56px 10px 10px;align-items:flex-start}
+  .visor__caja .m{width:26px;height:26px;font-size:13px;border-width:2px}
+  .portada{padding:40px 0 58px}
+}
+@media (max-width:380px){ .indice ol{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="envoltura">
+    <a class="barra__logo" href="/start/plan" aria-label="RexSite"><img src="/assets/img/logo.png?v=2" alt="RexSite" width="730" height="220"></a>
+    <nav class="barra__links">
+      <a class="barra__indice" href="#contents">Contents</a>
+      <a class="boton" href="/guide/rexsite-quick-guide.pdf" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        PDF
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="portada">
+  <div class="envoltura">
+    <span class="etiqueta">Guide for clients</span>
+    <h1>Quick Guide to Your Website</h1>
+    <p>From sign-up to your first published listing, step by step, with screenshots.</p>
+    <div class="portada__acciones">
+      <a class="boton" href="#step-1">See the steps
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </a>
+      <a class="portada__registro" href="/start/signup.html">Don't have your website yet? Get it free <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="envoltura">
+  <div class="cajas">
+    <div class="caja">
+      <h3>What you'll get</h3>
+      <ul>
+        <li>Your website live, with your logo and contact details.</li>
+        <li>Your listings published, with photos and prices.</li>
+        <li>An AI assistant that answers your visitors (optional add-on).</li>
+        <li>Your own AI (Claude or ChatGPT) to manage your website just by chatting.</li>
+      </ul>
+    </div>
+    <div class="caja">
+      <h3>Before you start</h3>
+      <ul>
+        <li><b>A computer is easiest.</b> On your phone, tap <b>Menu</b> at the top of your admin panel to see every section.</li>
+        <li>Have your logo and your listing photos handy.</li>
+      </ul>
+    </div>
+  </div>
+
+  <nav class="indice" id="contents" aria-label="Contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#step-1"><span>1</span>Sign up</a></li>
+      <li><a href="#step-2"><span>2</span>Check your email</a></li>
+      <li><a href="#step-3"><span>3</span>Create your password</a></li>
+      <li><a href="#step-4"><span>4</span>Sign in to your panel</a></li>
+      <li><a href="#step-5"><span>5</span>Get to know your panel</a></li>
+      <li><a href="#step-6"><span>6</span>Your logo, colors and contact details</a></li>
+      <li><a href="#step-7"><span>7</span>Your "About" page</a></li>
+      <li><a href="#step-8"><span>8</span>Add your first listing</a></li>
+      <li><a href="#step-9"><span>9</span>Your leads</a></li>
+      <li><a href="#step-10"><span>10</span>Your AI assistant (chat)</a></li>
+      <li><a href="#step-11"><span>11</span>Connect your AI</a></li>
+      <li><a href="#step-12"><span>12</span>Share your website</a></li>
+    </ol>
+    <p class="aviso-fotos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6M8 11h6"/></svg>Tap any screenshot to see it larger.</p>
+  </nav>
+
+  <!-- 1 -->
+  <section class="paso" id="step-1">
+    <div class="paso__cabeza"><div class="paso__num">1</div><h2>Sign up<span class="paso__sub">At www.rexsite.ai/start · 2 minutes · no credit card needed</span></h2></div>
+    <p class="lead">Click <b>Get My Free Website</b>, then:</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span><b>Choose your website design:</b> Signature (refined and elegant) or Classic (in your brand colors). You can switch later at no cost.</span></li>
+      <li><span class="n">2</span><span><b>Type your real estate business name.</b></span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/signup-1.webp" width="800" height="460" loading="lazy" alt="Sign-up form: choose a design and type your business name.">
+      <span class="m" style="left:24.9%;top:35.7%">1</span><span class="m" style="left:24.9%;top:87.6%">2</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">3</span><span><b>Check your website address.</b> It's created from your business name, but you can change it.</span></li>
+      <li><span class="n">4</span><span><b>Your name.</b></span></li>
+      <li><span class="n">5</span><span><b>Your email.</b> Use an email you check often: that's where we'll send your welcome email.</span></li>
+      <li><span class="n">6</span><span><b>Your mobile number.</b></span></li>
+      <li><span class="n">7</span><span>If you see the <b>"Verify you are human"</b> box, check it.</span></li>
+      <li><span class="n">8</span><span>Click <b>CONTINUE</b>. That's it: your website is free forever and goes live in minutes.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/signup-2.webp" width="800" height="505" loading="lazy" alt="Sign-up form: website address, name, email, mobile number, verification box and Continue button.">
+      <span class="m" style="left:26.4%;top:4.0%">3</span><span class="m" style="left:24.9%;top:35.8%">4</span><span class="m" style="left:50.1%;top:35.8%">5</span><span class="m" style="left:24.9%;top:53.5%">6</span><span class="m" style="left:24.9%;top:70.5%">7</span><span class="m" style="left:24.9%;top:84.8%">8</span>
+    </div></figure>
+  </section>
+
+  <!-- 2 -->
+  <section class="paso" id="step-2">
+    <div class="paso__cabeza"><div class="paso__num">2</div><h2>Check your email<span class="paso__sub">It arrives within minutes</span></h2></div>
+    <p class="lead">We'll email you from <b>hola@mail.rexsite.co</b> with the subject <b>"Your [your business] website is live"</b>.</p>
+    <div class="nota"><b>Don't see it?</b> Check your <b>Spam</b> or <b>Promotions</b> folder. If it's there, mark it as "Not spam" so our next emails reach your inbox.</div>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Click <b>"Create My Password"</b>. This button works <b>once</b> and expires in <b>30 days</b>.</span></li>
+      <li><span class="n">2</span><span><b>Save this address:</b> it's your way into your admin panel from now on.</span></li>
+    </ol>
+    <figure><div class="foto foto--angosta">
+      <img src="/guide/img/email.webp" width="1280" height="1200" loading="lazy" alt="Welcome email with the Create My Password button and your panel address.">
+      <span class="m" style="left:8.2%;top:33.3%">1</span><span class="m" style="left:8.2%;top:74.0%">2</span>
+    </div><figcaption>The welcome email (with sample details).</figcaption></figure>
+  </section>
+
+  <!-- 3 -->
+  <section class="paso" id="step-3">
+    <div class="paso__cabeza"><div class="paso__num">3</div><h2>Create your password</h2></div>
+    <p class="lead">Clicking the button in the email opens the <b>"Create your password"</b> page.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Type a password with <b>at least 8 characters</b>.</span></li>
+      <li><span class="n">2</span><span>Type it again in <b>Confirm password</b>.</span></li>
+      <li><span class="n">3</span><span>Click <b>"Create my account"</b>. You'll see "All set" and a button to sign in to your website.</span></li>
+    </ol>
+    <div class="tip">If the button no longer works (you already used it, or 30 days have passed), <b>reply to the welcome email</b> and we'll send you a new one.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="paso" id="step-4">
+    <div class="paso__cabeza"><div class="paso__num">4</div><h2>Sign in to your panel<span class="paso__sub">yourwebsite.rexsite.ai/admin</span></h2></div>
+    <p class="lead">In your browser, type your website address followed by <b>/admin</b>. For example: <b style="white-space:nowrap">smith-realty.rexsite.ai/admin</b>. Bookmark it.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Your email.</span></li>
+      <li><span class="n">2</span><span>Your password.</span></li>
+      <li><span class="n">3</span><span>Click <b>"Sign in"</b>.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/sign-in.webp" width="800" height="250" loading="lazy" alt="Admin sign-in page with email and password.">
+      <span class="m" style="left:26.4%;top:44.8%">1</span><span class="m" style="left:26.4%;top:61.6%">2</span><span class="m" style="left:26.4%;top:78.4%">3</span>
+    </div></figure>
+    <p class="lead" style="font-size:15px">Forgot your password? Reply to any RexSite email and we'll send you a link to set a new one.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="paso" id="step-5">
+    <div class="paso__cabeza"><div class="paso__num">5</div><h2>Get to know your panel<span class="paso__sub">Manage your whole website from here</span></h2></div>
+    <figure><div class="foto">
+      <img src="/guide/img/panel.webp" width="800" height="440" loading="lazy" alt="Your panel home page, with the menu at the top.">
+      
+    </div></figure>
+    <p class="lead">The menu is at the top. Here's what each button does:</p>
+    <table class="dic">
+      <tr><td><span class="en">Dashboard</span></td><td>A summary of your website: how many listings you have, plus shortcuts.</td></tr>
+      <tr><td><span class="en">Settings</span></td><td>Your logo, colors and contact details. <a href="#step-6">Step 6</a></td></tr>
+      <tr><td><span class="en">About</span></td><td>Your photo, your story and your team. <a href="#step-7">Step 7</a></td></tr>
+      <tr><td><span class="en">Properties</span></td><td>Add, edit and delete listings. <a href="#step-8">Step 8</a></td></tr>
+      <tr><td><span class="en">Leads</span></td><td>People who contacted you through your website. <a href="#step-9">Step 9</a></td></tr>
+      <tr><td><span class="en">Assistant</span> · <span class="en">Conversations</span></td><td>Your website's AI chat, and what it talked about with your visitors. <a href="#step-10">Step 10</a></td></tr>
+      <tr><td><span class="en">Connect my AI</span></td><td>Use Claude or ChatGPT to manage your website by chatting. <a href="#step-11">Step 11</a></td></tr>
+      <tr><td><span class="en">View site</span> · <span class="en">Log out</span></td><td>See your website · sign out of your panel.</td></tr>
+    </table>
+  </section>
+
+  <!-- 6 -->
+  <section class="paso" id="step-6">
+    <div class="paso__cabeza"><div class="paso__num">6</div><h2>Your logo, colors and contact details<span class="paso__sub">Menu: <span class="en">Settings</span></span></h2></div>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span><b>Your logo:</b> drag it into the box, or click to choose it from your computer (PNG, SVG, JPG, WEBP or GIF, up to 10 MB). No logo? Your website shows your business name instead.</span></li>
+      <li><span class="n">2</span><span><b>Your colors:</b> click the color square to pick your main color (<b>Primary</b>) and your second color (<b>Secondary</b>).</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/settings-1.webp" width="800" height="540" loading="lazy" alt="Site settings: upload your logo and pick your colors.">
+      <span class="m" style="left:3.8%;top:59.8%">1</span><span class="m" style="left:3.8%;top:87.4%">2</span>
+    </div></figure>
+    <div class="tip">A bit further down is <b>Hero Image</b>: the <b>big photo</b> on your homepage. Use your best photo.</div>
+    <p class="lead">Further down, under <b>Broker Details</b>, enter <b>your contact details</b>. These are the ones your clients see on your website.</p>
+    <ol class="pasitos">
+      <li><span class="n">3</span><span><b>Broker Name</b> is your name. Also fill in <b>Phone</b>, <b>Email</b>, <b>City</b>, <b>Address</b> and <b>Slogan</b> (a short line about you).</span></li>
+      <li><span class="n">4</span><span><b>Mobile number for text messages:</b> <b>digits only</b>, starting with 1 and your area code, no + or spaces. Example: <b>13055551234</b>. Your website's <b>"Text us"</b> button sends messages to this number.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/settings-2.webp" width="800" height="385" loading="lazy" alt="Broker details: name, phone, mobile number for text messages, email, city, address and slogan.">
+      <span class="m" style="left:3.8%;top:33.2%">3</span><span class="m" style="left:3.8%;top:49.9%">4</span>
+    </div><figcaption>Sample details.</figcaption></figure>
+    <ol class="pasitos">
+      <li><span class="n">5</span><span>At the very bottom, click <b>Save Settings</b>. Your changes show on your website within a few minutes.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/settings-3.webp" width="800" height="95" loading="lazy" alt="Save Settings button.">
+      <span class="m" style="left:82.2%;top:56.8%">5</span>
+    </div></figure>
+    <p class="lead" style="font-size:15px"><b>Social Media</b> is optional: paste your Facebook, Instagram, TikTok or LinkedIn link and it will appear on your website.</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="paso" id="step-7">
+    <div class="paso__cabeza"><div class="paso__num">7</div><h2>Your "About" page<span class="paso__sub">Menu: <span class="en">About</span></span></h2></div>
+    <p class="lead">This is where you tell people who you are. It's what a client reads before trusting you with their home.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span><b>First, click English</b> at the top, next to Language. Your website is in English, and each language is saved separately.</span></li>
+      <li><span class="n">2</span><span><b>Your photo</b>, or your office's (<b>Agency photo</b>): click the box to upload it.</span></li>
+      <li><span class="n">3</span><span><b>Your title</b> (<b>Role</b>). For example: "Real Estate Agent".</span></li>
+      <li><span class="n">4</span><span>Further down, fill in <b>Bio (Who we are)</b>, <b>How we work</b>, <b>Why choose us</b> and <b>Team</b>. When you're done, click <b>Save (EN)</b>.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/about.webp" width="800" height="470" loading="lazy" alt="About page: English selected, agency photo and role.">
+      <span class="m" style="left:30.8%;top:25.3%">1</span><span class="m" style="left:3.8%;top:47.7%">2</span><span class="m" style="left:3.8%;top:83.8%">3</span>
+    </div></figure>
+  </section>
+
+  <!-- 8 -->
+  <section class="paso" id="step-8">
+    <div class="paso__cabeza"><div class="paso__num">8</div><h2>Add your first listing<span class="paso__sub">Menu: <span class="en">Properties</span></span></h2></div>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Click <b>+ Create Property</b>. This list is also where you edit or delete the listings you already have.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/properties.webp" width="800" height="330" loading="lazy" alt="Properties list with the Create Property button.">
+      <span class="m" style="left:79.2%;top:15.8%">1</span>
+    </div></figure>
+    <p class="lead">Fill out the form from top to bottom:</p>
+    <ol class="pasitos">
+      <li><span class="n">2</span><span><b>ID:</b> a number you haven't used yet (1 for your first listing, 2 for the second…). The <b>Slug</b> (the listing's web address) fills in by itself from the title.</span></li>
+      <li><span class="n">3</span><span><b>Title</b> and <b>Description</b>. For example: "Modern family home with pool in Coral Gables".</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/property-1.webp" width="800" height="430" loading="lazy" alt="New property form: ID, slug, title and description.">
+      <span class="m" style="left:3.8%;top:38.8%">2</span><span class="m" style="left:3.8%;top:57.4%">3</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">4</span><span><b>Type:</b> <b>For sale</b> or <b>For rent</b>.</span></li>
+      <li><span class="n">5</span><span><b>Price:</b> digits only, in US dollars. For rentals, it's the <b>monthly</b> rent.</span></li>
+      <li><span class="n">6</span><span><b>Address/Neighborhood</b> and <b>City</b>.</span></li>
+      <li><span class="n">7</span><span><b>Features:</b> choose the category (house, apartment, land…) and fill in <b>Bedrooms</b>, <b>Bathrooms</b>, <b>Parking</b> and <b>Area</b> (sq ft, required). Check <b>Featured property</b> to show it on your homepage.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/property-2.webp" width="800" height="520" loading="lazy" alt="Type, price in US dollars, location and features in square feet.">
+      <span class="m" style="left:3.8%;top:12.7%">4</span><span class="m" style="left:34.0%;top:12.7%">5</span><span class="m" style="left:3.8%;top:40.0%">6</span><span class="m" style="left:3.8%;top:67.3%">7</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">8</span><span><b>Photos:</b> click <b>Choose File</b> and upload your photos (JPG, PNG, WEBP or GIF, up to 10 MB each). <b>Without at least one photo, the listing isn't published.</b></span></li>
+      <li><span class="n">9</span><span>Click <b>Create Property</b>. It shows up on your website within a few minutes.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/property-3.webp" width="800" height="345" loading="lazy" alt="Property photos and the Create Property button.">
+      <span class="m" style="left:4.5%;top:42.3%">8</span><span class="m" style="left:80.6%;top:88.1%">9</span>
+    </div></figure>
+  </section>
+
+  <!-- 9 -->
+  <section class="paso" id="step-9">
+    <div class="paso__cabeza"><div class="paso__num">9</div><h2>Your leads<span class="paso__sub">Menu: <span class="en">Leads</span></span></h2></div>
+    <p class="lead">Everyone who leaves their details on your website shows up here. <b>You also get an email</b> right away.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Their name, email, phone and what they're looking for. <b>Reply fast: whoever answers first wins.</b></span></li>
+      <li><span class="n">2</span><span>If they wrote through the chat, click <b>"View the conversation"</b> to read what they said. Click <b>Mark as read</b> after you reply.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/leads.webp" width="800" height="260" loading="lazy" alt="Leads list with contact details and the View the conversation link.">
+      <span class="m" style="left:3.5%;top:46.5%">1</span><span class="m" style="left:68.8%;top:76.5%">2</span>
+    </div><figcaption>Sample details.</figcaption></figure>
+  </section>
+
+  <!-- 10 -->
+  <section class="paso" id="step-10">
+    <div class="paso__cabeza"><div class="paso__num">10</div><h2>Your AI assistant (chat)<span class="paso__sub">Answers your visitors 24/7</span></h2></div>
+    <p class="lead">A chat bubble <span class="n" style="width:20px;height:20px;font-size:11px;vertical-align:-3px">1</span> appears on your website. Your assistant answers using your published listings and, when someone wants to be contacted, sends you their details by email and in <b>Leads</b>.</p>
+    <div class="dos">
+      <figure><div class="foto">
+      <img src="/guide/img/site.webp" width="800" height="600" loading="lazy" alt="Website with the chat bubble at the bottom right.">
+      <span class="m" style="left:92.2%;top:89.7%">1</span>
+    </div><figcaption>The bubble on your website.</figcaption></figure>
+      <figure><div class="foto">
+      <img src="/guide/img/chat.webp" width="800" height="600" loading="lazy" alt="Open chat with the assistant's greeting.">
+      
+    </div><figcaption>The chat, open.</figcaption></figure>
+    </div>
+    <div class="nota"><b>Don't see Assistant and Conversations in your menu?</b> Your AI assistant isn't active yet. It's an optional add-on: add Rexsite AI at <a href="/start/plan#planes">www.rexsite.ai/start/plan</a>, and we'll let you know as soon as it's active.</div>
+    <p class="lead">To set it up, open the <b>Assistant</b> menu:</p>
+    <ol class="pasitos">
+      <li><span class="n">2</span><span><b>"Assistant turned on for my website":</b> this box turns it on or off.</span></li>
+      <li><span class="n">3</span><span><b>Give it a name</b> (for example, Maya) and choose the <b>tone</b>: Friendly or Formal.</span></li>
+      <li><span class="n">4</span><span><b>"About your business":</b> tell it what you do, which areas you cover and what you offer.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/assistant-1.webp" width="800" height="530" loading="lazy" alt="Assistant settings: turn it on, name, tone and about your business.">
+      <span class="m" style="left:36.0%;top:23.4%">2</span><span class="m" style="left:3.8%;top:61.9%">3</span><span class="m" style="left:3.8%;top:89.6%">4</span>
+    </div></figure>
+    <ol class="pasitos">
+      <li><span class="n">5</span><span><b>Frequently asked questions:</b> write the questions you get most often, with their answers. For example: "Do you help with relocation?"</span></li>
+      <li><span class="n">6</span><span>Fill in <b>"What it must not say"</b> and your <b>Business hours</b>, then click <b>"Save"</b>.</span></li>
+      <li><span class="n">7</span><span>With <b>"Test my assistant"</b> you can chat with it yourself, without using up conversations.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/assistant-2.webp" width="800" height="450" loading="lazy" alt="Frequently asked questions, what it must not say, business hours, Save and Test my assistant.">
+      <span class="m" style="left:3.8%;top:5.8%">5</span><span class="m" style="left:3.1%;top:91.1%">6</span><span class="m" style="left:11.4%;top:91.1%">7</span>
+    </div></figure>
+    <div class="nota"><b>Important:</b> your assistant uses what you write here to answer, and a visitor could end up seeing it. Don't include commissions, owners' details or anything private.</div>
+    <p class="lead">In the <b>Conversations</b> menu you can read everything your assistant talked about with your visitors in the last 30 days.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Click a conversation in the list. The ones marked <b>"Left their details"</b> are also in <b>Leads</b>.</span></li>
+      <li><span class="n">2</span><span>On the right, you see the whole conversation.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/conversations.webp" width="800" height="500" loading="lazy" alt="Conversations list and one conversation open.">
+      <span class="m" style="left:3.4%;top:37.4%">1</span><span class="m" style="left:41.8%;top:26.0%">2</span>
+    </div><figcaption>Sample details.</figcaption></figure>
+  </section>
+
+  <!-- 11 -->
+  <section class="paso" id="step-11">
+    <div class="paso__cabeza"><div class="paso__num">11</div><h2>Connect your AI<span class="paso__sub">Menu: <span class="en">Connect my AI</span> · with Claude or ChatGPT</span></h2></div>
+    <p class="lead">Connect your own AI to your website. From its chat you can search, create and edit your listings, and see who contacted you, <b>just by chatting</b>.</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>Click <b>"Create my private link"</b>.</span></li>
+      <li><span class="n">2</span><span>Click <b>"Copy"</b>. <b>Copy it right away:</b> for security, it won't be shown again. Don't share it with anyone.</span></li>
+      <li><span class="n">3</span><span>Paste it into Claude or ChatGPT (instructions below).</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/ai.webp" width="800" height="510" loading="lazy" alt="Connect my AI page with the Create my private link button and instructions.">
+      <span class="m" style="left:3.8%;top:47.5%">1</span>
+    </div></figure>
+    <div class="tip">Lost your link? Use <b>"Create a new link"</b>.</div>
+    <div class="columnas">
+      <div class="tarjeta">
+        <h3>In Claude</h3>
+        <ol>
+          <li>Open <b>Settings → Connectors</b>.</li>
+          <li>Choose <b>Add custom connector</b>.</li>
+          <li>Give it a name (for example, "My website") and paste your private link.</li>
+          <li>Leave authentication blank and save it.</li>
+          <li>In a new chat, turn on the connector and ask for what you need.</li>
+        </ol>
+      </div>
+      <div class="tarjeta">
+        <h3>In ChatGPT</h3>
+        <ol>
+          <li>Open <b>Settings → Security and login</b> and turn on <b>Developer mode</b>.</li>
+          <li>Create a new app or connector with your private link, without authentication.</li>
+          <li>In a new chat, pick that tool and ask for what you need.</li>
+        </ol>
+        <small>ChatGPT's menu names may change.</small>
+      </div>
+    </div>
+    <div class="tarjeta" style="margin-bottom:18px">
+      <h3>What you can ask</h3>
+      <ul>
+        <li>"What listings do I have for rent?"</li>
+        <li>"Lower the price of the Coral Gables home to $2.3 million."</li>
+        <li>"Add a 2-bedroom condo for sale in Brickell: 1,100 sq ft, $650,000, with this photo: https://…"</li>
+        <li>"Who contacted me this week?"</li>
+      </ul>
+    </div>
+    <div class="tip"><b>Good to know:</b> your AI asks for your OK before it creates or changes anything. To upload photos from your computer or phone, use <b>Properties</b>. You can't delete listings from your AI. Each change takes 1 or 2 minutes to show on your website.</div>
+    <p class="lead" style="font-size:15px">These same instructions are in your panel, under "Connect my AI".</p>
+  </section>
+
+  <!-- 12 -->
+  <section class="paso" id="step-12">
+    <div class="paso__cabeza"><div class="paso__num">12</div><h2>Share your website</h2></div>
+    <p class="lead">Your website is already working for you. Now get it seen:</p>
+    <ol class="pasitos">
+      <li><span class="n">1</span><span>In your panel, click <b>View site</b> to see how it looks.</span></li>
+      <li><span class="n">2</span><span>Put your website address in your <b>Instagram</b> and <b>Facebook</b> bio, your <b>email signature</b> and your <b>Google Business Profile</b>.</span></li>
+      <li><span class="n">3</span><span>When you send a listing to a client, send them the link to that listing on your website.</span></li>
+      <li><span class="n">4</span><span>Check <b>Leads</b> and your email every day.</span></li>
+    </ol>
+    <figure><div class="foto">
+      <img src="/guide/img/site.webp" width="800" height="600" loading="lazy" alt="Example of a RexSite website with the Signature design.">
+      
+    </div><figcaption>This is what a RexSite website looks like (Signature design).</figcaption></figure>
+  </section>
+
+  <section class="final">
+    <div class="registro">
+      <h2>Don't have your website yet?</h2>
+      <p>Free forever. No credit card required.</p>
+      <a class="boton" href="/start/signup.html">GET MY FREE WEBSITE</a>
+    </div>
+    <h2>Questions?</h2>
+    <p>Reply to any RexSite email and we'll help.</p>
+    <a class="boton" href="/guide/rexsite-quick-guide.pdf" download>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      Download this guide as a PDF
+    </a>
+  </section>
+</div>
+</main>
+
+<footer class="pie">© RexSite · <a href="/start/plan">www.rexsite.ai</a></footer>
+
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Larger photo">
+  <button class="visor__cerrar" type="button" aria-label="Close">×</button>
+  <div class="visor__caja"></div>
+</div>
+
+<script>
+(function () {
+  var visor = document.getElementById('visor');
+  var caja = visor.querySelector('.visor__caja');
+  var botonCerrar = visor.querySelector('.visor__cerrar');
+  var origen = null;
+  document.querySelectorAll('.m').forEach(function (m) { m.setAttribute('aria-hidden', 'true'); });
+  function cerrar() {
+    if (!visor.classList.contains('abierto')) return;
+    visor.classList.remove('abierto');
+    caja.innerHTML = '';
+    document.body.style.overflow = '';
+    if (origen) { origen.focus(); origen = null; }
+  }
+  function abrir(foto) {
+    var copia = foto.cloneNode(true);
+    copia.classList.remove('foto--angosta');
+    copia.removeAttribute('tabindex');
+    copia.removeAttribute('role');
+    copia.removeAttribute('aria-label');
+    caja.innerHTML = '';
+    caja.appendChild(copia);
+    visor.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+    caja.scrollLeft = 0;
+    caja.scrollTop = 0;
+    if (caja.scrollWidth > caja.clientWidth + 10) {
+      var pista = document.createElement('p');
+      pista.className = 'visor__pista';
+      pista.textContent = 'Swipe sideways to see the whole photo.';
+      caja.appendChild(pista);
+    }
+    origen = foto;
+    botonCerrar.focus();
+  }
+  document.querySelectorAll('main .foto').forEach(function (foto) {
+    foto.setAttribute('tabindex', '0');
+    foto.setAttribute('role', 'button');
+    foto.setAttribute('aria-label', 'View the photo larger');
+    foto.addEventListener('click', function () { abrir(foto); });
+    foto.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(foto); }
+    });
+  });
+  visor.addEventListener('click', cerrar);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
+})();
+</script>
+</body>
+</html>
